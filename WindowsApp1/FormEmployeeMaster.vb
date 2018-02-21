@@ -3,7 +3,14 @@
 
     Private Sub lstbxCurrentEmpList_Click(sender As Object, e As EventArgs) Handles lstbxCurrentEmpList.Click
         If lstbxCurrentEmpList.Items.Count > 0 Then
-            btnModEmpInfo.Enabled = True
+            Dim rCurrentRow As KIPayrollDataSet.EmployeeMasterRow
+            rCurrentRow = Me.KIPayrollDataSet.EmployeeMaster.FindByEmpID(Me.txtEmpID1.Text)
+
+            If rCurrentRow.EmpStatus1 = "Active" Then
+                btnModEmpInfo.Enabled = True
+            ElseIf rCurrentRow.EmpStatus1 = "Inactive" Then
+                btnModEmpInfo.Enabled = False
+            End If
         End If
     End Sub
 

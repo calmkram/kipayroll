@@ -1119,6 +1119,8 @@ Partial Public Class KIPayrollDataSet
         
         Private columnEmpStatus As Global.System.Data.DataColumn
         
+        Private columnEmpStatus1 As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Sub New()
@@ -1243,6 +1245,14 @@ Partial Public Class KIPayrollDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public ReadOnly Property EmpStatus1Column() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnEmpStatus1
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -1279,9 +1289,9 @@ Partial Public Class KIPayrollDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Overloads Function AddEmployeeMasterRow(ByVal EmpID As String, ByVal EmpName As String, ByVal HomeAddress As String, ByVal City As String, ByVal PinCode As String, ByVal DOB As Date, ByVal DOJ As Date, ByVal BasicSalary As Decimal, ByVal EffDate As Date, ByVal PendingAdvBalance As Decimal, ByVal EmpStatus As Boolean) As EmployeeMasterRow
+        Public Overloads Function AddEmployeeMasterRow(ByVal EmpID As String, ByVal EmpName As String, ByVal HomeAddress As String, ByVal City As String, ByVal PinCode As String, ByVal DOB As Date, ByVal DOJ As Date, ByVal BasicSalary As Decimal, ByVal EffDate As Date, ByVal PendingAdvBalance As Decimal, ByVal EmpStatus As Boolean, ByVal EmpStatus1 As String) As EmployeeMasterRow
             Dim rowEmployeeMasterRow As EmployeeMasterRow = CType(Me.NewRow,EmployeeMasterRow)
-            Dim columnValuesArray() As Object = New Object() {EmpID, EmpName, HomeAddress, City, PinCode, DOB, DOJ, BasicSalary, EffDate, PendingAdvBalance, EmpStatus}
+            Dim columnValuesArray() As Object = New Object() {EmpID, EmpName, HomeAddress, City, PinCode, DOB, DOJ, BasicSalary, EffDate, PendingAdvBalance, EmpStatus, EmpStatus1}
             rowEmployeeMasterRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowEmployeeMasterRow)
             Return rowEmployeeMasterRow
@@ -1321,6 +1331,7 @@ Partial Public Class KIPayrollDataSet
             Me.columnEffDate = MyBase.Columns("EffDate")
             Me.columnPendingAdvBalance = MyBase.Columns("PendingAdvBalance")
             Me.columnEmpStatus = MyBase.Columns("EmpStatus")
+            Me.columnEmpStatus1 = MyBase.Columns("EmpStatus1")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1348,6 +1359,8 @@ Partial Public Class KIPayrollDataSet
             MyBase.Columns.Add(Me.columnPendingAdvBalance)
             Me.columnEmpStatus = New Global.System.Data.DataColumn("EmpStatus", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnEmpStatus)
+            Me.columnEmpStatus1 = New Global.System.Data.DataColumn("EmpStatus1", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnEmpStatus1)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnEmpID}, true))
             Me.columnEmpID.AllowDBNull = false
             Me.columnEmpID.Unique = true
@@ -1356,6 +1369,8 @@ Partial Public Class KIPayrollDataSet
             Me.columnHomeAddress.MaxLength = 536870910
             Me.columnCity.MaxLength = 50
             Me.columnPinCode.MaxLength = 6
+            Me.columnEmpStatus1.Caption = "EmpStatus"
+            Me.columnEmpStatus1.MaxLength = 255
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2876,6 +2891,21 @@ Partial Public Class KIPayrollDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Property EmpStatus1() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableEmployeeMaster.EmpStatus1Column),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'EmpStatus1' in table 'EmployeeMaster' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableEmployeeMaster.EmpStatus1Column) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Function IsEmpNameNull() As Boolean
             Return Me.IsNull(Me.tableEmployeeMaster.EmpNameColumn)
         End Function
@@ -2992,6 +3022,18 @@ Partial Public Class KIPayrollDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Sub SetEmpStatusNull()
             Me(Me.tableEmployeeMaster.EmpStatusColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Function IsEmpStatus1Null() As Boolean
+            Return Me.IsNull(Me.tableEmployeeMaster.EmpStatus1Column)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Sub SetEmpStatus1Null()
+            Me(Me.tableEmployeeMaster.EmpStatus1Column) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -4937,7 +4979,7 @@ Namespace KIPayrollDataSetTableAdapters
             tableMapping.ColumnMappings.Add("BasicSalary", "BasicSalary")
             tableMapping.ColumnMappings.Add("EffDate", "EffDate")
             tableMapping.ColumnMappings.Add("PendingAdvBalance", "PendingAdvBalance")
-            tableMapping.ColumnMappings.Add("EmpStatus", "EmpStatus")
+            tableMapping.ColumnMappings.Add("EmpStatus", "EmpStatus1")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
@@ -4967,7 +5009,7 @@ Namespace KIPayrollDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PendingAdvBalance", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PendingAdvBalance", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PendingAdvBalance", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PendingAdvBalance", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_EmpStatus", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmpStatus", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_EmpStatus", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmpStatus", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_EmpStatus", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmpStatus", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.InsertCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO `EmployeeMaster` (`EmpID`, `EmpName`, `HomeAddress`, `City`, `PinCode"& _ 
@@ -4984,7 +5026,7 @@ Namespace KIPayrollDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("BasicSalary", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "BasicSalary", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("EffDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EffDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PendingAdvBalance", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PendingAdvBalance", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("EmpStatus", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmpStatus", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("EmpStatus", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmpStatus", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE `EmployeeMaster` SET `EmpID` = ?, `EmpName` = ?, `HomeAddress` = ?, `City`"& _ 
@@ -5008,7 +5050,7 @@ Namespace KIPayrollDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("BasicSalary", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "BasicSalary", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("EffDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EffDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PendingAdvBalance", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PendingAdvBalance", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("EmpStatus", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmpStatus", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("EmpStatus", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmpStatus", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_EmpID", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmpID", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_EmpName", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmpName", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_EmpName", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmpName", Global.System.Data.DataRowVersion.Original, false, Nothing))
@@ -5027,7 +5069,7 @@ Namespace KIPayrollDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_PendingAdvBalance", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PendingAdvBalance", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_PendingAdvBalance", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PendingAdvBalance", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_EmpStatus", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmpStatus", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_EmpStatus", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmpStatus", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_EmpStatus", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmpStatus", Global.System.Data.DataRowVersion.Original, false, Nothing))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -5108,7 +5150,7 @@ Namespace KIPayrollDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_EmpID As String, ByVal Original_EmpName As String, ByVal Original_City As String, ByVal Original_PinCode As String, ByVal Original_DOB As Global.System.Nullable(Of Date), ByVal Original_DOJ As Global.System.Nullable(Of Date), ByVal Original_BasicSalary As Global.System.Nullable(Of Decimal), ByVal Original_EffDate As Global.System.Nullable(Of Date), ByVal Original_PendingAdvBalance As Global.System.Nullable(Of Decimal), ByVal Original_EmpStatus As Boolean) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_EmpID As String, ByVal Original_EmpName As String, ByVal Original_City As String, ByVal Original_PinCode As String, ByVal Original_DOB As Global.System.Nullable(Of Date), ByVal Original_DOJ As Global.System.Nullable(Of Date), ByVal Original_BasicSalary As Global.System.Nullable(Of Decimal), ByVal Original_EffDate As Global.System.Nullable(Of Date), ByVal Original_PendingAdvBalance As Global.System.Nullable(Of Decimal), ByVal Original_EmpStatus As String) As Integer
             If (Original_EmpID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_EmpID")
             Else
@@ -5170,8 +5212,13 @@ Namespace KIPayrollDataSetTableAdapters
                 Me.Adapter.DeleteCommand.Parameters(15).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(16).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.DeleteCommand.Parameters(17).Value = CType(0,Object)
-            Me.Adapter.DeleteCommand.Parameters(18).Value = CType(Original_EmpStatus,Boolean)
+            If (Original_EmpStatus Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(18).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(Original_EmpStatus,String)
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -5191,7 +5238,7 @@ Namespace KIPayrollDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal EmpID As String, ByVal EmpName As String, ByVal HomeAddress As String, ByVal City As String, ByVal PinCode As String, ByVal DOB As Global.System.Nullable(Of Date), ByVal DOJ As Global.System.Nullable(Of Date), ByVal BasicSalary As Global.System.Nullable(Of Decimal), ByVal EffDate As Global.System.Nullable(Of Date), ByVal PendingAdvBalance As Global.System.Nullable(Of Decimal), ByVal EmpStatus As Boolean) As Integer
+        Public Overloads Overridable Function Insert(ByVal EmpID As String, ByVal EmpName As String, ByVal HomeAddress As String, ByVal City As String, ByVal PinCode As String, ByVal DOB As Global.System.Nullable(Of Date), ByVal DOJ As Global.System.Nullable(Of Date), ByVal BasicSalary As Global.System.Nullable(Of Decimal), ByVal EffDate As Global.System.Nullable(Of Date), ByVal PendingAdvBalance As Global.System.Nullable(Of Decimal), ByVal EmpStatus As String) As Integer
             If (EmpID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("EmpID")
             Else
@@ -5242,7 +5289,11 @@ Namespace KIPayrollDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(9).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.InsertCommand.Parameters(10).Value = CType(EmpStatus,Boolean)
+            If (EmpStatus Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(10).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(10).Value = CType(EmpStatus,String)
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -5273,7 +5324,7 @@ Namespace KIPayrollDataSetTableAdapters
                     ByVal BasicSalary As Global.System.Nullable(Of Decimal),  _
                     ByVal EffDate As Global.System.Nullable(Of Date),  _
                     ByVal PendingAdvBalance As Global.System.Nullable(Of Decimal),  _
-                    ByVal EmpStatus As Boolean,  _
+                    ByVal EmpStatus As String,  _
                     ByVal Original_EmpID As String,  _
                     ByVal Original_EmpName As String,  _
                     ByVal Original_City As String,  _
@@ -5283,7 +5334,7 @@ Namespace KIPayrollDataSetTableAdapters
                     ByVal Original_BasicSalary As Global.System.Nullable(Of Decimal),  _
                     ByVal Original_EffDate As Global.System.Nullable(Of Date),  _
                     ByVal Original_PendingAdvBalance As Global.System.Nullable(Of Decimal),  _
-                    ByVal Original_EmpStatus As Boolean) As Integer
+                    ByVal Original_EmpStatus As String) As Integer
             If (EmpID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("EmpID")
             Else
@@ -5334,7 +5385,11 @@ Namespace KIPayrollDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(EmpStatus,Boolean)
+            If (EmpStatus Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(EmpStatus,String)
+            End If
             If (Original_EmpID Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_EmpID")
             Else
@@ -5396,8 +5451,13 @@ Namespace KIPayrollDataSetTableAdapters
                 Me.Adapter.UpdateCommand.Parameters(26).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(27).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.UpdateCommand.Parameters(28).Value = CType(0,Object)
-            Me.Adapter.UpdateCommand.Parameters(29).Value = CType(Original_EmpStatus,Boolean)
+            If (Original_EmpStatus Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(29).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(Original_EmpStatus,String)
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -5427,7 +5487,7 @@ Namespace KIPayrollDataSetTableAdapters
                     ByVal BasicSalary As Global.System.Nullable(Of Decimal),  _
                     ByVal EffDate As Global.System.Nullable(Of Date),  _
                     ByVal PendingAdvBalance As Global.System.Nullable(Of Decimal),  _
-                    ByVal EmpStatus As Boolean,  _
+                    ByVal EmpStatus As String,  _
                     ByVal Original_EmpID As String,  _
                     ByVal Original_EmpName As String,  _
                     ByVal Original_City As String,  _
@@ -5437,7 +5497,7 @@ Namespace KIPayrollDataSetTableAdapters
                     ByVal Original_BasicSalary As Global.System.Nullable(Of Decimal),  _
                     ByVal Original_EffDate As Global.System.Nullable(Of Date),  _
                     ByVal Original_PendingAdvBalance As Global.System.Nullable(Of Decimal),  _
-                    ByVal Original_EmpStatus As Boolean) As Integer
+                    ByVal Original_EmpStatus As String) As Integer
             Return Me.Update(Original_EmpID, EmpName, HomeAddress, City, PinCode, DOB, DOJ, BasicSalary, EffDate, PendingAdvBalance, EmpStatus, Original_EmpID, Original_EmpName, Original_City, Original_PinCode, Original_DOB, Original_DOJ, Original_BasicSalary, Original_EffDate, Original_PendingAdvBalance, Original_EmpStatus)
         End Function
         

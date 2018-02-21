@@ -142,7 +142,8 @@ Partial Class EmpMaster
         '
         'txtEmpStatus
         '
-        Me.txtEmpStatus.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.EmployeeMasterBindingSource, "EmpStatus", True))
+        Me.txtEmpStatus.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.EmployeeMasterBindingSource, "EmpStatus1", True))
+        Me.txtEmpStatus.Enabled = False
         Me.txtEmpStatus.Location = New System.Drawing.Point(539, 130)
         Me.txtEmpStatus.Name = "txtEmpStatus"
         Me.txtEmpStatus.Size = New System.Drawing.Size(60, 20)
