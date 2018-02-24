@@ -1,4 +1,6 @@
-﻿Public Class AppMainWindow
+﻿Imports System.ComponentModel
+
+Public Class AppMainWindow
     Private Sub AttendanceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AttendanceToolStripMenuItem.Click
         Attendance.MdiParent = AppMainWindow.ActiveForm
         Attendance.Show()
@@ -31,6 +33,10 @@
 
     Private Sub AppMainWindow_Load(sender As Object, e As EventArgs) Handles Me.Load
 
+    End Sub
+
+    Private Sub AppMainWindow_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        ' add code to copy database from the Debug or Release folders back into the main project folder
     End Sub
 
     Public Function DisablePrintMenuItem()

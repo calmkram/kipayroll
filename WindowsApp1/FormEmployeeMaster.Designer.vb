@@ -31,16 +31,18 @@ Partial Class EmpMaster
         Me.txtEmpAddress = New System.Windows.Forms.TextBox()
         Me.lblEmpAddress = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtBasicSalary = New System.Windows.Forms.MaskedTextBox()
+        Me.dtpDOD = New System.Windows.Forms.DateTimePicker()
+        Me.lblDOD = New System.Windows.Forms.Label()
         Me.txtEmpStatus = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.txtEmpID1 = New System.Windows.Forms.MaskedTextBox()
+        Me.txtEmpID = New System.Windows.Forms.MaskedTextBox()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.dtpSalaryEffDate = New System.Windows.Forms.DateTimePicker()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.dtpDOJ = New System.Windows.Forms.DateTimePicker()
         Me.dtpDOB = New System.Windows.Forms.DateTimePicker()
-        Me.txtBasicSalary = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -53,6 +55,8 @@ Partial Class EmpMaster
         Me.btnAddEmpInfo = New System.Windows.Forms.Button()
         Me.btnModEmpInfo = New System.Windows.Forms.Button()
         Me.EmployeeMasterTableAdapter = New WindowsApp1.KIPayrollDataSetTableAdapters.EmployeeMasterTableAdapter()
+        Me.btnClose = New System.Windows.Forms.Button()
+        Me.btnUpdateEmpResign = New System.Windows.Forms.Button()
         CType(Me.EmployeeMasterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.KIPayrollDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -116,16 +120,18 @@ Partial Class EmpMaster
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.txtBasicSalary)
+        Me.GroupBox1.Controls.Add(Me.dtpDOD)
+        Me.GroupBox1.Controls.Add(Me.lblDOD)
         Me.GroupBox1.Controls.Add(Me.txtEmpStatus)
         Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.txtEmpID1)
+        Me.GroupBox1.Controls.Add(Me.txtEmpID)
         Me.GroupBox1.Controls.Add(Me.btnCancel)
         Me.GroupBox1.Controls.Add(Me.btnSave)
         Me.GroupBox1.Controls.Add(Me.dtpSalaryEffDate)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.dtpDOJ)
         Me.GroupBox1.Controls.Add(Me.dtpDOB)
-        Me.GroupBox1.Controls.Add(Me.txtBasicSalary)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label3)
@@ -140,11 +146,43 @@ Partial Class EmpMaster
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Employee Information"
         '
+        'txtBasicSalary
+        '
+        Me.txtBasicSalary.BeepOnError = True
+        Me.txtBasicSalary.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.EmployeeMasterBindingSource, "BasicSalary", True))
+        Me.txtBasicSalary.Enabled = False
+        Me.txtBasicSalary.HidePromptOnLeave = True
+        Me.txtBasicSalary.Location = New System.Drawing.Point(539, 92)
+        Me.txtBasicSalary.Name = "txtBasicSalary"
+        Me.txtBasicSalary.Size = New System.Drawing.Size(100, 20)
+        Me.txtBasicSalary.TabIndex = 26
+        '
+        'dtpDOD
+        '
+        Me.dtpDOD.CustomFormat = "dd-MMM-yyyy"
+        Me.dtpDOD.DataBindings.Add(New System.Windows.Forms.Binding("Value", Me.EmployeeMasterBindingSource, "DateOfDeparture", True))
+        Me.dtpDOD.Enabled = False
+        Me.dtpDOD.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpDOD.Location = New System.Drawing.Point(539, 60)
+        Me.dtpDOD.Name = "dtpDOD"
+        Me.dtpDOD.Size = New System.Drawing.Size(100, 20)
+        Me.dtpDOD.TabIndex = 24
+        Me.dtpDOD.Value = New Date(2018, 2, 16, 0, 0, 0, 0)
+        '
+        'lblDOD
+        '
+        Me.lblDOD.AutoSize = True
+        Me.lblDOD.Location = New System.Drawing.Point(417, 63)
+        Me.lblDOD.Name = "lblDOD"
+        Me.lblDOD.Size = New System.Drawing.Size(95, 13)
+        Me.lblDOD.TabIndex = 25
+        Me.lblDOD.Text = "Date of Departure:"
+        '
         'txtEmpStatus
         '
-        Me.txtEmpStatus.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.EmployeeMasterBindingSource, "EmpStatus1", True))
+        Me.txtEmpStatus.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.EmployeeMasterBindingSource, "EmpStatus", True))
         Me.txtEmpStatus.Enabled = False
-        Me.txtEmpStatus.Location = New System.Drawing.Point(539, 130)
+        Me.txtEmpStatus.Location = New System.Drawing.Point(539, 165)
         Me.txtEmpStatus.Name = "txtEmpStatus"
         Me.txtEmpStatus.Size = New System.Drawing.Size(60, 20)
         Me.txtEmpStatus.TabIndex = 23
@@ -152,25 +190,25 @@ Partial Class EmpMaster
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(417, 133)
+        Me.Label7.Location = New System.Drawing.Point(417, 168)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(89, 13)
         Me.Label7.TabIndex = 22
         Me.Label7.Text = "Employee Status:"
         '
-        'txtEmpID1
+        'txtEmpID
         '
-        Me.txtEmpID1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.EmployeeMasterBindingSource, "EmpID", True))
-        Me.txtEmpID1.Enabled = False
-        Me.txtEmpID1.Location = New System.Drawing.Point(145, 24)
-        Me.txtEmpID1.Mask = "KI-###"
-        Me.txtEmpID1.Name = "txtEmpID1"
-        Me.txtEmpID1.Size = New System.Drawing.Size(77, 20)
-        Me.txtEmpID1.TabIndex = 20
+        Me.txtEmpID.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.EmployeeMasterBindingSource, "EmpID", True))
+        Me.txtEmpID.Enabled = False
+        Me.txtEmpID.Location = New System.Drawing.Point(145, 24)
+        Me.txtEmpID.Mask = "KI-###"
+        Me.txtEmpID.Name = "txtEmpID"
+        Me.txtEmpID.Size = New System.Drawing.Size(77, 20)
+        Me.txtEmpID.TabIndex = 20
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(539, 256)
+        Me.btnCancel.Location = New System.Drawing.Point(564, 262)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 10
@@ -180,7 +218,7 @@ Partial Class EmpMaster
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(430, 256)
+        Me.btnSave.Location = New System.Drawing.Point(455, 262)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 9
@@ -194,7 +232,7 @@ Partial Class EmpMaster
         Me.dtpSalaryEffDate.DataBindings.Add(New System.Windows.Forms.Binding("Value", Me.EmployeeMasterBindingSource, "EffDate", True, System.Windows.Forms.DataSourceUpdateMode.OnValidation, Nothing, "d"))
         Me.dtpSalaryEffDate.Enabled = False
         Me.dtpSalaryEffDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpSalaryEffDate.Location = New System.Drawing.Point(539, 94)
+        Me.dtpSalaryEffDate.Location = New System.Drawing.Point(539, 129)
         Me.dtpSalaryEffDate.Name = "dtpSalaryEffDate"
         Me.dtpSalaryEffDate.Size = New System.Drawing.Size(100, 20)
         Me.dtpSalaryEffDate.TabIndex = 8
@@ -203,7 +241,7 @@ Partial Class EmpMaster
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(417, 97)
+        Me.Label6.Location = New System.Drawing.Point(417, 132)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(110, 13)
         Me.Label6.TabIndex = 19
@@ -212,7 +250,7 @@ Partial Class EmpMaster
         'dtpDOJ
         '
         Me.dtpDOJ.CustomFormat = "dd-MMM-yyyy"
-        Me.dtpDOJ.DataBindings.Add(New System.Windows.Forms.Binding("Value", Me.EmployeeMasterBindingSource, "DOJ", True, System.Windows.Forms.DataSourceUpdateMode.OnValidation, Nothing, "d"))
+        Me.dtpDOJ.DataBindings.Add(New System.Windows.Forms.Binding("Value", Me.EmployeeMasterBindingSource, "DateOfJoining", True))
         Me.dtpDOJ.Enabled = False
         Me.dtpDOJ.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpDOJ.Location = New System.Drawing.Point(539, 27)
@@ -224,7 +262,7 @@ Partial Class EmpMaster
         'dtpDOB
         '
         Me.dtpDOB.CustomFormat = "dd-MMM-yyyy"
-        Me.dtpDOB.DataBindings.Add(New System.Windows.Forms.Binding("Value", Me.EmployeeMasterBindingSource, "DOB", True, System.Windows.Forms.DataSourceUpdateMode.OnValidation, Nothing, "d"))
+        Me.dtpDOB.DataBindings.Add(New System.Windows.Forms.Binding("Value", Me.EmployeeMasterBindingSource, "DateOfBirth", True))
         Me.dtpDOB.Enabled = False
         Me.dtpDOB.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpDOB.Location = New System.Drawing.Point(145, 256)
@@ -233,19 +271,10 @@ Partial Class EmpMaster
         Me.dtpDOB.TabIndex = 5
         Me.dtpDOB.Value = New Date(2018, 2, 16, 0, 0, 0, 0)
         '
-        'txtBasicSalary
-        '
-        Me.txtBasicSalary.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.EmployeeMasterBindingSource, "BasicSalary", True, System.Windows.Forms.DataSourceUpdateMode.OnValidation, Nothing, "C2"))
-        Me.txtBasicSalary.Enabled = False
-        Me.txtBasicSalary.Location = New System.Drawing.Point(539, 57)
-        Me.txtBasicSalary.Name = "txtBasicSalary"
-        Me.txtBasicSalary.Size = New System.Drawing.Size(100, 20)
-        Me.txtBasicSalary.TabIndex = 7
-        '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(417, 60)
+        Me.Label5.Location = New System.Drawing.Point(417, 95)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(68, 13)
         Me.Label5.TabIndex = 15
@@ -326,7 +355,7 @@ Partial Class EmpMaster
         '
         'btnAddEmpInfo
         '
-        Me.btnAddEmpInfo.Location = New System.Drawing.Point(157, 325)
+        Me.btnAddEmpInfo.Location = New System.Drawing.Point(38, 325)
         Me.btnAddEmpInfo.Name = "btnAddEmpInfo"
         Me.btnAddEmpInfo.Size = New System.Drawing.Size(147, 23)
         Me.btnAddEmpInfo.TabIndex = 12
@@ -336,7 +365,7 @@ Partial Class EmpMaster
         'btnModEmpInfo
         '
         Me.btnModEmpInfo.Enabled = False
-        Me.btnModEmpInfo.Location = New System.Drawing.Point(383, 325)
+        Me.btnModEmpInfo.Location = New System.Drawing.Point(294, 325)
         Me.btnModEmpInfo.Name = "btnModEmpInfo"
         Me.btnModEmpInfo.Size = New System.Drawing.Size(147, 23)
         Me.btnModEmpInfo.TabIndex = 13
@@ -347,11 +376,31 @@ Partial Class EmpMaster
         '
         Me.EmployeeMasterTableAdapter.ClearBeforeFill = True
         '
+        'btnClose
+        '
+        Me.btnClose.Location = New System.Drawing.Point(825, 325)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(75, 23)
+        Me.btnClose.TabIndex = 14
+        Me.btnClose.Text = "Close"
+        Me.btnClose.UseVisualStyleBackColor = True
+        '
+        'btnUpdateEmpResign
+        '
+        Me.btnUpdateEmpResign.Location = New System.Drawing.Point(550, 325)
+        Me.btnUpdateEmpResign.Name = "btnUpdateEmpResign"
+        Me.btnUpdateEmpResign.Size = New System.Drawing.Size(166, 23)
+        Me.btnUpdateEmpResign.TabIndex = 15
+        Me.btnUpdateEmpResign.Text = "Update Employee Resignation"
+        Me.btnUpdateEmpResign.UseVisualStyleBackColor = True
+        '
         'EmpMaster
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(986, 368)
+        Me.Controls.Add(Me.btnUpdateEmpResign)
+        Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnModEmpInfo)
         Me.Controls.Add(Me.btnAddEmpInfo)
         Me.Controls.Add(Me.lblCurrentEmpList)
@@ -383,7 +432,6 @@ Partial Class EmpMaster
     Friend WithEvents Label6 As Label
     Friend WithEvents dtpDOJ As DateTimePicker
     Friend WithEvents dtpDOB As DateTimePicker
-    Friend WithEvents txtBasicSalary As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
@@ -400,7 +448,12 @@ Partial Class EmpMaster
     Friend WithEvents KIPayrollDataSet As KIPayrollDataSet
     Friend WithEvents EmployeeMasterBindingSource As BindingSource
     Friend WithEvents EmployeeMasterTableAdapter As KIPayrollDataSetTableAdapters.EmployeeMasterTableAdapter
-    Friend WithEvents txtEmpID1 As MaskedTextBox
+    Friend WithEvents txtEmpID As MaskedTextBox
     Friend WithEvents txtEmpStatus As TextBox
     Friend WithEvents Label7 As Label
+    Friend WithEvents btnClose As Button
+    Friend WithEvents dtpDOD As DateTimePicker
+    Friend WithEvents lblDOD As Label
+    Friend WithEvents btnUpdateEmpResign As Button
+    Friend WithEvents txtBasicSalary As MaskedTextBox
 End Class
