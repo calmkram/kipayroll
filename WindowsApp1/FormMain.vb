@@ -1,6 +1,8 @@
 ﻿Imports System.ComponentModel
 
 Public Class AppMainWindow
+    Public p_sConnectionString As String
+
     Private Sub AttendanceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AttendanceToolStripMenuItem.Click
         Attendance.MdiParent = AppMainWindow.ActiveForm
         Attendance.Show()
@@ -32,7 +34,7 @@ Public Class AppMainWindow
     End Sub
 
     Private Sub AppMainWindow_Load(sender As Object, e As EventArgs) Handles Me.Load
-
+        p_sConnectionString = My.Settings.KIPayrollConnectionString
     End Sub
 
     Private Sub AppMainWindow_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing

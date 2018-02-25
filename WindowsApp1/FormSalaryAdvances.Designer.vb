@@ -26,41 +26,48 @@ Partial Class SalaryAdvances
         Me.lstbxEmpList = New System.Windows.Forms.ListBox()
         Me.lblSelectEmp = New System.Windows.Forms.Label()
         Me.grpbxAddSalAdvInfo = New System.Windows.Forms.GroupBox()
-        Me.txtPendAdvDue = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtPaybackAmt = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.txtPaybackAmt = New System.Windows.Forms.MaskedTextBox()
+        Me.txtAdvanceAmt = New System.Windows.Forms.MaskedTextBox()
+        Me.cmbEmpName = New System.Windows.Forms.ComboBox()
+        Me.txtAdvStatus = New System.Windows.Forms.TextBox()
+        Me.lblAdvStatus = New System.Windows.Forms.Label()
+        Me.lblPaybackAmt = New System.Windows.Forms.Label()
         Me.cmbPaybackDuration = New System.Windows.Forms.ComboBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.txtAdvanceAmt = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblPaybackDur = New System.Windows.Forms.Label()
+        Me.lblAdvAmt = New System.Windows.Forms.Label()
+        Me.lblAdvReason = New System.Windows.Forms.Label()
         Me.txtAdvanceReason = New System.Windows.Forms.TextBox()
         Me.lblEmpName = New System.Windows.Forms.Label()
-        Me.txtEmpName = New System.Windows.Forms.TextBox()
         Me.lblEmpID = New System.Windows.Forms.Label()
         Me.txtEmpID = New System.Windows.Forms.TextBox()
         Me.btnAddSalAdvance = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnViewSalAdvInfo = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.grpbxViewSalAdvInfo = New System.Windows.Forms.GroupBox()
+        Me.btnCancelView = New System.Windows.Forms.Button()
+        Me.lblViewAdvPaid = New System.Windows.Forms.Label()
+        Me.txtViewAdvStatus = New System.Windows.Forms.TextBox()
+        Me.lblViewAdvStatus = New System.Windows.Forms.Label()
+        Me.chkViewAdvPaidBack = New System.Windows.Forms.CheckBox()
         Me.lblLine = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
+        Me.lblSelectSalAdvToView = New System.Windows.Forms.Label()
         Me.cmbSalAdvListForEmp = New System.Windows.Forms.ComboBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.txtViewAdvDue = New System.Windows.Forms.TextBox()
+        Me.lblViewAdvDue = New System.Windows.Forms.Label()
+        Me.txtViewPaybackAmt = New System.Windows.Forms.TextBox()
+        Me.lblViewPaybackAmt = New System.Windows.Forms.Label()
+        Me.cmbViewPaybackDur = New System.Windows.Forms.ComboBox()
+        Me.lblViewPaybackDur = New System.Windows.Forms.Label()
+        Me.txtViewAdvAmt = New System.Windows.Forms.TextBox()
+        Me.lblViewAdvAmt = New System.Windows.Forms.Label()
+        Me.lblViewAdvReason = New System.Windows.Forms.Label()
+        Me.txtViewAdvReason = New System.Windows.Forms.TextBox()
+        Me.lblViewEmpName = New System.Windows.Forms.Label()
+        Me.txtViewEmpName = New System.Windows.Forms.TextBox()
+        Me.lblViewEmpID = New System.Windows.Forms.Label()
+        Me.txtViewEmpID = New System.Windows.Forms.TextBox()
         Me.KIPayrollDataSet = New WindowsApp1.KIPayrollDataSet()
         Me.SalaryAdvancesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.SalaryAdvancesTableAdapter = New WindowsApp1.KIPayrollDataSetTableAdapters.SalaryAdvancesTableAdapter()
@@ -78,9 +85,9 @@ Partial Class SalaryAdvances
         '
         Me.lstbxEmpList.FormattingEnabled = True
         Me.lstbxEmpList.Location = New System.Drawing.Point(16, 42)
-        Me.lstbxEmpList.MaximumSize = New System.Drawing.Size(150, 205)
+        Me.lstbxEmpList.MaximumSize = New System.Drawing.Size(150, 225)
         Me.lstbxEmpList.Name = "lstbxEmpList"
-        Me.lstbxEmpList.Size = New System.Drawing.Size(145, 199)
+        Me.lstbxEmpList.Size = New System.Drawing.Size(145, 212)
         Me.lstbxEmpList.TabIndex = 0
         '
         'lblSelectEmp
@@ -89,24 +96,26 @@ Partial Class SalaryAdvances
         Me.lblSelectEmp.Location = New System.Drawing.Point(13, 13)
         Me.lblSelectEmp.MaximumSize = New System.Drawing.Size(180, 0)
         Me.lblSelectEmp.Name = "lblSelectEmp"
-        Me.lblSelectEmp.Size = New System.Drawing.Size(150, 26)
+        Me.lblSelectEmp.Size = New System.Drawing.Size(159, 26)
         Me.lblSelectEmp.TabIndex = 1
-        Me.lblSelectEmp.Text = "Select Employee to View Outstanding Salary Advances:"
+        Me.lblSelectEmp.Text = "Select Employee to View Salary Advances Issued:"
         '
         'grpbxAddSalAdvInfo
         '
-        Me.grpbxAddSalAdvInfo.Controls.Add(Me.txtPendAdvDue)
-        Me.grpbxAddSalAdvInfo.Controls.Add(Me.Label8)
+        Me.grpbxAddSalAdvInfo.Controls.Add(Me.btnCancel)
+        Me.grpbxAddSalAdvInfo.Controls.Add(Me.btnSave)
         Me.grpbxAddSalAdvInfo.Controls.Add(Me.txtPaybackAmt)
-        Me.grpbxAddSalAdvInfo.Controls.Add(Me.Label7)
-        Me.grpbxAddSalAdvInfo.Controls.Add(Me.cmbPaybackDuration)
-        Me.grpbxAddSalAdvInfo.Controls.Add(Me.Label6)
         Me.grpbxAddSalAdvInfo.Controls.Add(Me.txtAdvanceAmt)
-        Me.grpbxAddSalAdvInfo.Controls.Add(Me.Label5)
-        Me.grpbxAddSalAdvInfo.Controls.Add(Me.Label4)
+        Me.grpbxAddSalAdvInfo.Controls.Add(Me.cmbEmpName)
+        Me.grpbxAddSalAdvInfo.Controls.Add(Me.txtAdvStatus)
+        Me.grpbxAddSalAdvInfo.Controls.Add(Me.lblAdvStatus)
+        Me.grpbxAddSalAdvInfo.Controls.Add(Me.lblPaybackAmt)
+        Me.grpbxAddSalAdvInfo.Controls.Add(Me.cmbPaybackDuration)
+        Me.grpbxAddSalAdvInfo.Controls.Add(Me.lblPaybackDur)
+        Me.grpbxAddSalAdvInfo.Controls.Add(Me.lblAdvAmt)
+        Me.grpbxAddSalAdvInfo.Controls.Add(Me.lblAdvReason)
         Me.grpbxAddSalAdvInfo.Controls.Add(Me.txtAdvanceReason)
         Me.grpbxAddSalAdvInfo.Controls.Add(Me.lblEmpName)
-        Me.grpbxAddSalAdvInfo.Controls.Add(Me.txtEmpName)
         Me.grpbxAddSalAdvInfo.Controls.Add(Me.lblEmpID)
         Me.grpbxAddSalAdvInfo.Controls.Add(Me.txtEmpID)
         Me.grpbxAddSalAdvInfo.Location = New System.Drawing.Point(190, 13)
@@ -117,85 +126,116 @@ Partial Class SalaryAdvances
         Me.grpbxAddSalAdvInfo.Text = "Salary Advance Information:"
         Me.grpbxAddSalAdvInfo.Visible = False
         '
-        'txtPendAdvDue
+        'btnCancel
         '
-        Me.txtPendAdvDue.Location = New System.Drawing.Point(171, 198)
-        Me.txtPendAdvDue.Name = "txtPendAdvDue"
-        Me.txtPendAdvDue.Size = New System.Drawing.Size(77, 20)
-        Me.txtPendAdvDue.TabIndex = 13
+        Me.btnCancel.Location = New System.Drawing.Point(369, 195)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancel.TabIndex = 40
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'Label8
+        'btnSave
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(18, 201)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(103, 13)
-        Me.Label8.TabIndex = 12
-        Me.Label8.Text = "Total Advance Due:"
+        Me.btnSave.Location = New System.Drawing.Point(369, 164)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.TabIndex = 39
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
         'txtPaybackAmt
         '
-        Me.txtPaybackAmt.Location = New System.Drawing.Point(171, 163)
+        Me.txtPaybackAmt.Enabled = False
+        Me.txtPaybackAmt.Location = New System.Drawing.Point(171, 164)
         Me.txtPaybackAmt.Name = "txtPaybackAmt"
         Me.txtPaybackAmt.Size = New System.Drawing.Size(77, 20)
-        Me.txtPaybackAmt.TabIndex = 11
+        Me.txtPaybackAmt.TabIndex = 38
         '
-        'Label7
+        'txtAdvanceAmt
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(18, 167)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(142, 13)
-        Me.Label7.TabIndex = 10
-        Me.Label7.Text = "Payback Amount per Month:"
+        Me.txtAdvanceAmt.Location = New System.Drawing.Point(171, 96)
+        Me.txtAdvanceAmt.Name = "txtAdvanceAmt"
+        Me.txtAdvanceAmt.Size = New System.Drawing.Size(77, 20)
+        Me.txtAdvanceAmt.TabIndex = 37
+        '
+        'cmbEmpName
+        '
+        Me.cmbEmpName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbEmpName.FormattingEnabled = True
+        Me.cmbEmpName.Location = New System.Drawing.Point(308, 28)
+        Me.cmbEmpName.Name = "cmbEmpName"
+        Me.cmbEmpName.Size = New System.Drawing.Size(136, 21)
+        Me.cmbEmpName.TabIndex = 36
+        '
+        'txtAdvStatus
+        '
+        Me.txtAdvStatus.Enabled = False
+        Me.txtAdvStatus.Location = New System.Drawing.Point(171, 195)
+        Me.txtAdvStatus.Name = "txtAdvStatus"
+        Me.txtAdvStatus.Size = New System.Drawing.Size(77, 20)
+        Me.txtAdvStatus.TabIndex = 35
+        '
+        'lblAdvStatus
+        '
+        Me.lblAdvStatus.AutoSize = True
+        Me.lblAdvStatus.Location = New System.Drawing.Point(18, 199)
+        Me.lblAdvStatus.Name = "lblAdvStatus"
+        Me.lblAdvStatus.Size = New System.Drawing.Size(86, 13)
+        Me.lblAdvStatus.TabIndex = 34
+        Me.lblAdvStatus.Text = "Advance Status:"
+        '
+        'lblPaybackAmt
+        '
+        Me.lblPaybackAmt.AutoSize = True
+        Me.lblPaybackAmt.Location = New System.Drawing.Point(18, 167)
+        Me.lblPaybackAmt.Name = "lblPaybackAmt"
+        Me.lblPaybackAmt.Size = New System.Drawing.Size(142, 13)
+        Me.lblPaybackAmt.TabIndex = 10
+        Me.lblPaybackAmt.Text = "Payback Amount per Month:"
         '
         'cmbPaybackDuration
         '
+        Me.cmbPaybackDuration.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPaybackDuration.FormattingEnabled = True
+        Me.cmbPaybackDuration.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"})
         Me.cmbPaybackDuration.Location = New System.Drawing.Point(171, 129)
         Me.cmbPaybackDuration.Name = "cmbPaybackDuration"
         Me.cmbPaybackDuration.Size = New System.Drawing.Size(77, 21)
         Me.cmbPaybackDuration.TabIndex = 9
         '
-        'Label6
+        'lblPaybackDur
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(18, 133)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(95, 13)
-        Me.Label6.TabIndex = 8
-        Me.Label6.Text = "Payback Duration:"
+        Me.lblPaybackDur.AutoSize = True
+        Me.lblPaybackDur.Location = New System.Drawing.Point(18, 133)
+        Me.lblPaybackDur.Name = "lblPaybackDur"
+        Me.lblPaybackDur.Size = New System.Drawing.Size(95, 13)
+        Me.lblPaybackDur.TabIndex = 8
+        Me.lblPaybackDur.Text = "Payback Duration:"
         '
-        'txtAdvanceAmt
+        'lblAdvAmt
         '
-        Me.txtAdvanceAmt.Location = New System.Drawing.Point(171, 95)
-        Me.txtAdvanceAmt.Name = "txtAdvanceAmt"
-        Me.txtAdvanceAmt.Size = New System.Drawing.Size(77, 20)
-        Me.txtAdvanceAmt.TabIndex = 7
+        Me.lblAdvAmt.AutoSize = True
+        Me.lblAdvAmt.Location = New System.Drawing.Point(18, 99)
+        Me.lblAdvAmt.Name = "lblAdvAmt"
+        Me.lblAdvAmt.Size = New System.Drawing.Size(92, 13)
+        Me.lblAdvAmt.TabIndex = 6
+        Me.lblAdvAmt.Text = "Advance Amount:"
         '
-        'Label5
+        'lblAdvReason
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(18, 99)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(92, 13)
-        Me.Label5.TabIndex = 6
-        Me.Label5.Text = "Advance Amount:"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(18, 65)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(93, 13)
-        Me.Label4.TabIndex = 5
-        Me.Label4.Text = "Advance Reason:"
+        Me.lblAdvReason.AutoSize = True
+        Me.lblAdvReason.Location = New System.Drawing.Point(18, 65)
+        Me.lblAdvReason.Name = "lblAdvReason"
+        Me.lblAdvReason.Size = New System.Drawing.Size(93, 13)
+        Me.lblAdvReason.TabIndex = 5
+        Me.lblAdvReason.Text = "Advance Reason:"
         '
         'txtAdvanceReason
         '
         Me.txtAdvanceReason.Location = New System.Drawing.Point(171, 61)
         Me.txtAdvanceReason.Name = "txtAdvanceReason"
-        Me.txtAdvanceReason.Size = New System.Drawing.Size(275, 20)
+        Me.txtAdvanceReason.Size = New System.Drawing.Size(273, 20)
         Me.txtAdvanceReason.TabIndex = 4
         '
         'lblEmpName
@@ -206,13 +246,6 @@ Partial Class SalaryAdvances
         Me.lblEmpName.Size = New System.Drawing.Size(87, 13)
         Me.lblEmpName.TabIndex = 3
         Me.lblEmpName.Text = "Employee Name:"
-        '
-        'txtEmpName
-        '
-        Me.txtEmpName.Location = New System.Drawing.Point(308, 27)
-        Me.txtEmpName.Name = "txtEmpName"
-        Me.txtEmpName.Size = New System.Drawing.Size(138, 20)
-        Me.txtEmpName.TabIndex = 2
         '
         'lblEmpID
         '
@@ -225,32 +258,34 @@ Partial Class SalaryAdvances
         '
         'txtEmpID
         '
-        Me.txtEmpID.Location = New System.Drawing.Point(94, 27)
+        Me.txtEmpID.Enabled = False
+        Me.txtEmpID.Location = New System.Drawing.Point(94, 28)
         Me.txtEmpID.Name = "txtEmpID"
         Me.txtEmpID.Size = New System.Drawing.Size(76, 20)
         Me.txtEmpID.TabIndex = 0
         '
         'btnAddSalAdvance
         '
-        Me.btnAddSalAdvance.Location = New System.Drawing.Point(99, 266)
+        Me.btnAddSalAdvance.Location = New System.Drawing.Point(85, 271)
         Me.btnAddSalAdvance.Name = "btnAddSalAdvance"
-        Me.btnAddSalAdvance.Size = New System.Drawing.Size(141, 23)
+        Me.btnAddSalAdvance.Size = New System.Drawing.Size(155, 23)
         Me.btnAddSalAdvance.TabIndex = 3
-        Me.btnAddSalAdvance.Text = "Add New Salary Advance"
+        Me.btnAddSalAdvance.Text = "Issue New Salary Advance"
         Me.btnAddSalAdvance.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnViewSalAdvInfo
         '
-        Me.Button2.Location = New System.Drawing.Point(342, 266)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 4
-        Me.Button2.Text = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnViewSalAdvInfo.Enabled = False
+        Me.btnViewSalAdvInfo.Location = New System.Drawing.Point(302, 271)
+        Me.btnViewSalAdvInfo.Name = "btnViewSalAdvInfo"
+        Me.btnViewSalAdvInfo.Size = New System.Drawing.Size(154, 23)
+        Me.btnViewSalAdvInfo.TabIndex = 4
+        Me.btnViewSalAdvInfo.Text = "View Salary Advance Info"
+        Me.btnViewSalAdvInfo.UseVisualStyleBackColor = True
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(519, 265)
+        Me.btnClose.Location = New System.Drawing.Point(518, 270)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 5
@@ -259,29 +294,82 @@ Partial Class SalaryAdvances
         '
         'grpbxViewSalAdvInfo
         '
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.btnCancelView)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.lblViewAdvPaid)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.txtViewAdvStatus)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.lblViewAdvStatus)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.chkViewAdvPaidBack)
         Me.grpbxViewSalAdvInfo.Controls.Add(Me.lblLine)
-        Me.grpbxViewSalAdvInfo.Controls.Add(Me.Label13)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.lblSelectSalAdvToView)
         Me.grpbxViewSalAdvInfo.Controls.Add(Me.cmbSalAdvListForEmp)
-        Me.grpbxViewSalAdvInfo.Controls.Add(Me.TextBox1)
-        Me.grpbxViewSalAdvInfo.Controls.Add(Me.Label1)
-        Me.grpbxViewSalAdvInfo.Controls.Add(Me.TextBox2)
-        Me.grpbxViewSalAdvInfo.Controls.Add(Me.Label2)
-        Me.grpbxViewSalAdvInfo.Controls.Add(Me.ComboBox1)
-        Me.grpbxViewSalAdvInfo.Controls.Add(Me.Label3)
-        Me.grpbxViewSalAdvInfo.Controls.Add(Me.TextBox3)
-        Me.grpbxViewSalAdvInfo.Controls.Add(Me.Label9)
-        Me.grpbxViewSalAdvInfo.Controls.Add(Me.Label10)
-        Me.grpbxViewSalAdvInfo.Controls.Add(Me.TextBox4)
-        Me.grpbxViewSalAdvInfo.Controls.Add(Me.Label11)
-        Me.grpbxViewSalAdvInfo.Controls.Add(Me.TextBox5)
-        Me.grpbxViewSalAdvInfo.Controls.Add(Me.Label12)
-        Me.grpbxViewSalAdvInfo.Controls.Add(Me.TextBox6)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.txtViewAdvDue)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.lblViewAdvDue)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.txtViewPaybackAmt)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.lblViewPaybackAmt)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.cmbViewPaybackDur)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.lblViewPaybackDur)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.txtViewAdvAmt)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.lblViewAdvAmt)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.lblViewAdvReason)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.txtViewAdvReason)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.lblViewEmpName)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.txtViewEmpName)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.lblViewEmpID)
+        Me.grpbxViewSalAdvInfo.Controls.Add(Me.txtViewEmpID)
         Me.grpbxViewSalAdvInfo.Location = New System.Drawing.Point(190, 308)
         Me.grpbxViewSalAdvInfo.Name = "grpbxViewSalAdvInfo"
-        Me.grpbxViewSalAdvInfo.Size = New System.Drawing.Size(464, 271)
+        Me.grpbxViewSalAdvInfo.Size = New System.Drawing.Size(464, 254)
         Me.grpbxViewSalAdvInfo.TabIndex = 6
         Me.grpbxViewSalAdvInfo.TabStop = False
         Me.grpbxViewSalAdvInfo.Text = "Salary Advance Information:"
+        '
+        'btnCancelView
+        '
+        Me.btnCancelView.Location = New System.Drawing.Point(362, 215)
+        Me.btnCancelView.Name = "btnCancelView"
+        Me.btnCancelView.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancelView.TabIndex = 35
+        Me.btnCancelView.Text = "Cancel View"
+        Me.btnCancelView.UseVisualStyleBackColor = True
+        '
+        'lblViewAdvPaid
+        '
+        Me.lblViewAdvPaid.AutoSize = True
+        Me.lblViewAdvPaid.Location = New System.Drawing.Point(252, 137)
+        Me.lblViewAdvPaid.Name = "lblViewAdvPaid"
+        Me.lblViewAdvPaid.Size = New System.Drawing.Size(108, 13)
+        Me.lblViewAdvPaid.TabIndex = 34
+        Me.lblViewAdvPaid.Text = "Advance Paid Back?"
+        Me.lblViewAdvPaid.Visible = False
+        '
+        'txtViewAdvStatus
+        '
+        Me.txtViewAdvStatus.Location = New System.Drawing.Point(362, 162)
+        Me.txtViewAdvStatus.Name = "txtViewAdvStatus"
+        Me.txtViewAdvStatus.Size = New System.Drawing.Size(83, 20)
+        Me.txtViewAdvStatus.TabIndex = 33
+        Me.txtViewAdvStatus.Visible = False
+        '
+        'lblViewAdvStatus
+        '
+        Me.lblViewAdvStatus.AutoSize = True
+        Me.lblViewAdvStatus.Location = New System.Drawing.Point(252, 166)
+        Me.lblViewAdvStatus.Name = "lblViewAdvStatus"
+        Me.lblViewAdvStatus.Size = New System.Drawing.Size(86, 13)
+        Me.lblViewAdvStatus.TabIndex = 32
+        Me.lblViewAdvStatus.Text = "Advance Status:"
+        Me.lblViewAdvStatus.Visible = False
+        '
+        'chkViewAdvPaidBack
+        '
+        Me.chkViewAdvPaidBack.AutoSize = True
+        Me.chkViewAdvPaidBack.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkViewAdvPaidBack.Location = New System.Drawing.Point(362, 137)
+        Me.chkViewAdvPaidBack.Name = "chkViewAdvPaidBack"
+        Me.chkViewAdvPaidBack.Size = New System.Drawing.Size(15, 14)
+        Me.chkViewAdvPaidBack.TabIndex = 31
+        Me.chkViewAdvPaidBack.UseVisualStyleBackColor = True
+        Me.chkViewAdvPaidBack.Visible = False
         '
         'lblLine
         '
@@ -293,15 +381,15 @@ Partial Class SalaryAdvances
         Me.lblLine.Size = New System.Drawing.Size(450, 3)
         Me.lblLine.TabIndex = 30
         '
-        'Label13
+        'lblSelectSalAdvToView
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(6, 23)
-        Me.Label13.MaximumSize = New System.Drawing.Size(150, 0)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(148, 26)
-        Me.Label13.TabIndex = 29
-        Me.Label13.Text = "Select Salary Advance Info to View:"
+        Me.lblSelectSalAdvToView.AutoSize = True
+        Me.lblSelectSalAdvToView.Location = New System.Drawing.Point(6, 23)
+        Me.lblSelectSalAdvToView.MaximumSize = New System.Drawing.Size(150, 0)
+        Me.lblSelectSalAdvToView.Name = "lblSelectSalAdvToView"
+        Me.lblSelectSalAdvToView.Size = New System.Drawing.Size(148, 26)
+        Me.lblSelectSalAdvToView.TabIndex = 29
+        Me.lblSelectSalAdvToView.Text = "Select Salary Advance Info to View:"
         '
         'cmbSalAdvListForEmp
         '
@@ -312,132 +400,133 @@ Partial Class SalaryAdvances
         Me.cmbSalAdvListForEmp.Size = New System.Drawing.Size(253, 21)
         Me.cmbSalAdvListForEmp.TabIndex = 28
         '
-        'TextBox1
+        'txtViewAdvDue
         '
-        Me.TextBox1.Location = New System.Drawing.Point(171, 239)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(77, 20)
-        Me.TextBox1.TabIndex = 27
-        Me.TextBox1.Visible = False
+        Me.txtViewAdvDue.Location = New System.Drawing.Point(152, 223)
+        Me.txtViewAdvDue.Name = "txtViewAdvDue"
+        Me.txtViewAdvDue.Size = New System.Drawing.Size(77, 20)
+        Me.txtViewAdvDue.TabIndex = 27
+        Me.txtViewAdvDue.Visible = False
         '
-        'Label1
+        'lblViewAdvDue
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(18, 242)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(103, 13)
-        Me.Label1.TabIndex = 26
-        Me.Label1.Text = "Total Advance Due:"
-        Me.Label1.Visible = False
+        Me.lblViewAdvDue.AutoSize = True
+        Me.lblViewAdvDue.Location = New System.Drawing.Point(6, 226)
+        Me.lblViewAdvDue.Name = "lblViewAdvDue"
+        Me.lblViewAdvDue.Size = New System.Drawing.Size(103, 13)
+        Me.lblViewAdvDue.TabIndex = 26
+        Me.lblViewAdvDue.Text = "Total Advance Due:"
+        Me.lblViewAdvDue.Visible = False
         '
-        'TextBox2
+        'txtViewPaybackAmt
         '
-        Me.TextBox2.Location = New System.Drawing.Point(171, 204)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(77, 20)
-        Me.TextBox2.TabIndex = 25
-        Me.TextBox2.Visible = False
+        Me.txtViewPaybackAmt.Location = New System.Drawing.Point(152, 193)
+        Me.txtViewPaybackAmt.Name = "txtViewPaybackAmt"
+        Me.txtViewPaybackAmt.Size = New System.Drawing.Size(77, 20)
+        Me.txtViewPaybackAmt.TabIndex = 25
+        Me.txtViewPaybackAmt.Visible = False
         '
-        'Label2
+        'lblViewPaybackAmt
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(18, 208)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(142, 13)
-        Me.Label2.TabIndex = 24
-        Me.Label2.Text = "Payback Amount per Month:"
-        Me.Label2.Visible = False
+        Me.lblViewPaybackAmt.AutoSize = True
+        Me.lblViewPaybackAmt.Location = New System.Drawing.Point(6, 197)
+        Me.lblViewPaybackAmt.Name = "lblViewPaybackAmt"
+        Me.lblViewPaybackAmt.Size = New System.Drawing.Size(142, 13)
+        Me.lblViewPaybackAmt.TabIndex = 24
+        Me.lblViewPaybackAmt.Text = "Payback Amount per Month:"
+        Me.lblViewPaybackAmt.Visible = False
         '
-        'ComboBox1
+        'cmbViewPaybackDur
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(171, 170)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(77, 21)
-        Me.ComboBox1.TabIndex = 23
-        Me.ComboBox1.Visible = False
+        Me.cmbViewPaybackDur.FormattingEnabled = True
+        Me.cmbViewPaybackDur.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"})
+        Me.cmbViewPaybackDur.Location = New System.Drawing.Point(152, 162)
+        Me.cmbViewPaybackDur.Name = "cmbViewPaybackDur"
+        Me.cmbViewPaybackDur.Size = New System.Drawing.Size(77, 21)
+        Me.cmbViewPaybackDur.TabIndex = 23
+        Me.cmbViewPaybackDur.Visible = False
         '
-        'Label3
+        'lblViewPaybackDur
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(18, 174)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(95, 13)
-        Me.Label3.TabIndex = 22
-        Me.Label3.Text = "Payback Duration:"
-        Me.Label3.Visible = False
+        Me.lblViewPaybackDur.AutoSize = True
+        Me.lblViewPaybackDur.Location = New System.Drawing.Point(6, 166)
+        Me.lblViewPaybackDur.Name = "lblViewPaybackDur"
+        Me.lblViewPaybackDur.Size = New System.Drawing.Size(95, 13)
+        Me.lblViewPaybackDur.TabIndex = 22
+        Me.lblViewPaybackDur.Text = "Payback Duration:"
+        Me.lblViewPaybackDur.Visible = False
         '
-        'TextBox3
+        'txtViewAdvAmt
         '
-        Me.TextBox3.Location = New System.Drawing.Point(171, 136)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(77, 20)
-        Me.TextBox3.TabIndex = 21
-        Me.TextBox3.Visible = False
+        Me.txtViewAdvAmt.Location = New System.Drawing.Point(152, 133)
+        Me.txtViewAdvAmt.Name = "txtViewAdvAmt"
+        Me.txtViewAdvAmt.Size = New System.Drawing.Size(77, 20)
+        Me.txtViewAdvAmt.TabIndex = 21
+        Me.txtViewAdvAmt.Visible = False
         '
-        'Label9
+        'lblViewAdvAmt
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(18, 140)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(92, 13)
-        Me.Label9.TabIndex = 20
-        Me.Label9.Text = "Advance Amount:"
-        Me.Label9.Visible = False
+        Me.lblViewAdvAmt.AutoSize = True
+        Me.lblViewAdvAmt.Location = New System.Drawing.Point(6, 137)
+        Me.lblViewAdvAmt.Name = "lblViewAdvAmt"
+        Me.lblViewAdvAmt.Size = New System.Drawing.Size(92, 13)
+        Me.lblViewAdvAmt.TabIndex = 20
+        Me.lblViewAdvAmt.Text = "Advance Amount:"
+        Me.lblViewAdvAmt.Visible = False
         '
-        'Label10
+        'lblViewAdvReason
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(18, 106)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(93, 13)
-        Me.Label10.TabIndex = 19
-        Me.Label10.Text = "Advance Reason:"
-        Me.Label10.Visible = False
+        Me.lblViewAdvReason.AutoSize = True
+        Me.lblViewAdvReason.Location = New System.Drawing.Point(6, 106)
+        Me.lblViewAdvReason.Name = "lblViewAdvReason"
+        Me.lblViewAdvReason.Size = New System.Drawing.Size(93, 13)
+        Me.lblViewAdvReason.TabIndex = 19
+        Me.lblViewAdvReason.Text = "Advance Reason:"
+        Me.lblViewAdvReason.Visible = False
         '
-        'TextBox4
+        'txtViewAdvReason
         '
-        Me.TextBox4.Location = New System.Drawing.Point(171, 102)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(275, 20)
-        Me.TextBox4.TabIndex = 18
-        Me.TextBox4.Visible = False
+        Me.txtViewAdvReason.Location = New System.Drawing.Point(152, 103)
+        Me.txtViewAdvReason.Name = "txtViewAdvReason"
+        Me.txtViewAdvReason.Size = New System.Drawing.Size(293, 20)
+        Me.txtViewAdvReason.TabIndex = 18
+        Me.txtViewAdvReason.Visible = False
         '
-        'Label11
+        'lblViewEmpName
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(215, 72)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(87, 13)
-        Me.Label11.TabIndex = 17
-        Me.Label11.Text = "Employee Name:"
-        Me.Label11.Visible = False
+        Me.lblViewEmpName.AutoSize = True
+        Me.lblViewEmpName.Location = New System.Drawing.Point(215, 72)
+        Me.lblViewEmpName.Name = "lblViewEmpName"
+        Me.lblViewEmpName.Size = New System.Drawing.Size(87, 13)
+        Me.lblViewEmpName.TabIndex = 17
+        Me.lblViewEmpName.Text = "Employee Name:"
+        Me.lblViewEmpName.Visible = False
         '
-        'TextBox5
+        'txtViewEmpName
         '
-        Me.TextBox5.Location = New System.Drawing.Point(308, 68)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(138, 20)
-        Me.TextBox5.TabIndex = 16
-        Me.TextBox5.Visible = False
+        Me.txtViewEmpName.Location = New System.Drawing.Point(308, 68)
+        Me.txtViewEmpName.Name = "txtViewEmpName"
+        Me.txtViewEmpName.Size = New System.Drawing.Size(138, 20)
+        Me.txtViewEmpName.TabIndex = 16
+        Me.txtViewEmpName.Visible = False
         '
-        'Label12
+        'lblViewEmpID
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(18, 72)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(70, 13)
-        Me.Label12.TabIndex = 15
-        Me.Label12.Text = "Employee ID:"
-        Me.Label12.Visible = False
+        Me.lblViewEmpID.AutoSize = True
+        Me.lblViewEmpID.Location = New System.Drawing.Point(6, 72)
+        Me.lblViewEmpID.Name = "lblViewEmpID"
+        Me.lblViewEmpID.Size = New System.Drawing.Size(70, 13)
+        Me.lblViewEmpID.TabIndex = 15
+        Me.lblViewEmpID.Text = "Employee ID:"
+        Me.lblViewEmpID.Visible = False
         '
-        'TextBox6
+        'txtViewEmpID
         '
-        Me.TextBox6.Location = New System.Drawing.Point(94, 68)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(76, 20)
-        Me.TextBox6.TabIndex = 14
-        Me.TextBox6.Visible = False
+        Me.txtViewEmpID.Location = New System.Drawing.Point(94, 68)
+        Me.txtViewEmpID.Name = "txtViewEmpID"
+        Me.txtViewEmpID.Size = New System.Drawing.Size(76, 20)
+        Me.txtViewEmpID.TabIndex = 14
+        Me.txtViewEmpID.Visible = False
         '
         'KIPayrollDataSet
         '
@@ -476,10 +565,10 @@ Partial Class SalaryAdvances
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(990, 677)
+        Me.ClientSize = New System.Drawing.Size(690, 573)
         Me.Controls.Add(Me.grpbxViewSalAdvInfo)
         Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnViewSalAdvInfo)
         Me.Controls.Add(Me.btnAddSalAdvance)
         Me.Controls.Add(Me.grpbxAddSalAdvInfo)
         Me.Controls.Add(Me.lblSelectEmp)
@@ -507,39 +596,46 @@ Partial Class SalaryAdvances
     Friend WithEvents RetrieveEmpNameBindingSource As BindingSource
     Friend WithEvents RetrieveEmpNameTableAdapter As KIPayrollDataSetTableAdapters.RetrieveEmpNameTableAdapter
     Friend WithEvents grpbxAddSalAdvInfo As GroupBox
-    Friend WithEvents txtPaybackAmt As TextBox
-    Friend WithEvents Label7 As Label
+    Friend WithEvents lblPaybackAmt As Label
     Friend WithEvents cmbPaybackDuration As ComboBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents txtAdvanceAmt As TextBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label4 As Label
+    Friend WithEvents lblPaybackDur As Label
+    Friend WithEvents lblAdvAmt As Label
+    Friend WithEvents lblAdvReason As Label
     Friend WithEvents txtAdvanceReason As TextBox
     Friend WithEvents lblEmpName As Label
-    Friend WithEvents txtEmpName As TextBox
     Friend WithEvents lblEmpID As Label
     Friend WithEvents txtEmpID As TextBox
     Friend WithEvents btnAddSalAdvance As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnViewSalAdvInfo As Button
     Friend WithEvents btnClose As Button
-    Friend WithEvents txtPendAdvDue As TextBox
-    Friend WithEvents Label8 As Label
     Friend WithEvents grpbxViewSalAdvInfo As GroupBox
-    Friend WithEvents Label13 As Label
+    Friend WithEvents lblSelectSalAdvToView As Label
     Friend WithEvents cmbSalAdvListForEmp As ComboBox
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents Label3 As Label
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents Label9 As Label
-    Friend WithEvents Label10 As Label
-    Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents Label11 As Label
-    Friend WithEvents TextBox5 As TextBox
-    Friend WithEvents Label12 As Label
-    Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents txtViewAdvDue As TextBox
+    Friend WithEvents lblViewAdvDue As Label
+    Friend WithEvents txtViewPaybackAmt As TextBox
+    Friend WithEvents lblViewPaybackAmt As Label
+    Friend WithEvents cmbViewPaybackDur As ComboBox
+    Friend WithEvents lblViewPaybackDur As Label
+    Friend WithEvents txtViewAdvAmt As TextBox
+    Friend WithEvents lblViewAdvAmt As Label
+    Friend WithEvents lblViewAdvReason As Label
+    Friend WithEvents txtViewAdvReason As TextBox
+    Friend WithEvents lblViewEmpName As Label
+    Friend WithEvents txtViewEmpName As TextBox
+    Friend WithEvents lblViewEmpID As Label
+    Friend WithEvents txtViewEmpID As TextBox
     Friend WithEvents lblLine As Label
+    Friend WithEvents txtViewAdvStatus As TextBox
+    Friend WithEvents lblViewAdvStatus As Label
+    Friend WithEvents chkViewAdvPaidBack As CheckBox
+    Friend WithEvents txtAdvStatus As TextBox
+    Friend WithEvents lblAdvStatus As Label
+    Friend WithEvents lblViewAdvPaid As Label
+    Friend WithEvents cmbEmpName As ComboBox
+    Friend WithEvents txtPaybackAmt As MaskedTextBox
+    Friend WithEvents txtAdvanceAmt As MaskedTextBox
+    Friend WithEvents btnCancel As Button
+    Friend WithEvents btnSave As Button
+    Friend WithEvents btnCancelView As Button
 End Class
