@@ -111,6 +111,8 @@
             dtpDOD.Format = DateTimePickerFormat.Custom
             dtpDOD.CustomFormat = "dd-MMM-yyyy"
         End If
+        lstbxCurrentEmpList.SelectedIndex = -1
+        btnModEmpInfo.Enabled = False
     End Sub
 
     Private Sub EmpMaster_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing

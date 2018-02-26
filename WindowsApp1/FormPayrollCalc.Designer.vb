@@ -28,8 +28,10 @@ Partial Class PayrollCalc
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(930, 631)
         Me.Name = "PayrollCalc"
+        Me.ShowInTaskbar = False
         Me.Text = "Payroll Calculation"
         Me.ResumeLayout(False)
 

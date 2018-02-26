@@ -574,6 +574,7 @@ Partial Class SalaryAdvances
         Me.Controls.Add(Me.lblSelectEmp)
         Me.Controls.Add(Me.lstbxEmpList)
         Me.Name = "SalaryAdvances"
+        Me.ShowInTaskbar = False
         Me.Text = "Manage Salary Advances"
         Me.grpbxAddSalAdvInfo.ResumeLayout(False)
         Me.grpbxAddSalAdvInfo.PerformLayout()

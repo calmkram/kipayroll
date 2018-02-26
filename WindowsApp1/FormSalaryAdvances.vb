@@ -176,6 +176,10 @@
         lblSelectEmp.Visible = True
         lstbxEmpList.Visible = True
 
+        grpbxAddSalAdvInfo.Visible = False
+        grpbxViewSalAdvInfo.Visible = True
+
+        btnAddSalAdvance.Enabled = True
         btnViewSalAdvInfo.Enabled = False
     End Sub
 
