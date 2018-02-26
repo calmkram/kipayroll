@@ -57,6 +57,7 @@ Partial Class EmpMaster
         Me.EmployeeMasterTableAdapter = New WindowsApp1.KIPayrollDataSetTableAdapters.EmployeeMasterTableAdapter()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnUpdateEmpResign = New System.Windows.Forms.Button()
+        Me.EmpInfoArchiveTableAdapter = New WindowsApp1.KIPayrollDataSetTableAdapters.EmpInfoArchiveTableAdapter()
         CType(Me.EmployeeMasterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.KIPayrollDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -394,6 +395,10 @@ Partial Class EmpMaster
         Me.btnUpdateEmpResign.Text = "Update Employee Resignation"
         Me.btnUpdateEmpResign.UseVisualStyleBackColor = True
         '
+        'EmpInfoArchiveTableAdapter
+        '
+        Me.EmpInfoArchiveTableAdapter.ClearBeforeFill = True
+        '
         'EmpMaster
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -456,4 +461,5 @@ Partial Class EmpMaster
     Friend WithEvents lblDOD As Label
     Friend WithEvents btnUpdateEmpResign As Button
     Friend WithEvents txtBasicSalary As MaskedTextBox
+    Friend WithEvents EmpInfoArchiveTableAdapter As KIPayrollDataSetTableAdapters.EmpInfoArchiveTableAdapter
 End Class
