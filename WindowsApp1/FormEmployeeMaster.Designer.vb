@@ -204,7 +204,7 @@ Partial Class EmpMaster
         Me.txtEmpID.Location = New System.Drawing.Point(145, 24)
         Me.txtEmpID.Mask = "KI-###"
         Me.txtEmpID.Name = "txtEmpID"
-        Me.txtEmpID.Size = New System.Drawing.Size(77, 20)
+        Me.txtEmpID.Size = New System.Drawing.Size(51, 20)
         Me.txtEmpID.TabIndex = 20
         '
         'btnCancel
