@@ -23,6 +23,14 @@ Partial Class PayrollCalc
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpSalAbstract = New System.Windows.Forms.GroupBox()
+        Me.txtTotalESIEmplContr = New System.Windows.Forms.TextBox()
+        Me.txtTotalSalPaid = New System.Windows.Forms.TextBox()
+        Me.txtTotalAmt = New System.Windows.Forms.TextBox()
+        Me.txtTotalProfTax = New System.Windows.Forms.TextBox()
+        Me.txtTotalAdvDedn = New System.Windows.Forms.TextBox()
+        Me.txtTotalESIDedn = New System.Windows.Forms.TextBox()
+        Me.txtTotalNetPay = New System.Windows.Forms.TextBox()
+        Me.txtTotalGrossPay = New System.Windows.Forms.TextBox()
         Me.txtNumDaysInMonth = New System.Windows.Forms.TextBox()
         Me.lblNumDaysInMonth = New System.Windows.Forms.Label()
         Me.lblLine = New System.Windows.Forms.Label()
@@ -47,14 +55,6 @@ Partial Class PayrollCalc
         Me.lblPayrollForMonth = New System.Windows.Forms.Label()
         Me.cmbPayrollForMonth = New System.Windows.Forms.ComboBox()
         Me.btnGeneratePayroll = New System.Windows.Forms.Button()
-        Me.txtTotalGrossPay = New System.Windows.Forms.TextBox()
-        Me.txtTotalNetPay = New System.Windows.Forms.TextBox()
-        Me.txtTotalESIDedn = New System.Windows.Forms.TextBox()
-        Me.txtTotalAdvDedn = New System.Windows.Forms.TextBox()
-        Me.txtTotalProfTax = New System.Windows.Forms.TextBox()
-        Me.txtTotalAmt = New System.Windows.Forms.TextBox()
-        Me.txtTotalSalPaid = New System.Windows.Forms.TextBox()
-        Me.txtTotalESIEmplContr = New System.Windows.Forms.TextBox()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.SalaryCalculationTableAdapter = New KIPayroll.KIPayrollDataSetTableAdapters.SalaryCalculationTableAdapter()
@@ -106,6 +106,86 @@ Partial Class PayrollCalc
         Me.grpSalAbstract.TabStop = False
         Me.grpSalAbstract.Text = "Salary Abstract"
         Me.grpSalAbstract.Visible = False
+        '
+        'txtTotalESIEmplContr
+        '
+        Me.txtTotalESIEmplContr.BackColor = System.Drawing.Color.LightBlue
+        Me.txtTotalESIEmplContr.Enabled = False
+        Me.txtTotalESIEmplContr.Location = New System.Drawing.Point(1149, 18)
+        Me.txtTotalESIEmplContr.Name = "txtTotalESIEmplContr"
+        Me.txtTotalESIEmplContr.Size = New System.Drawing.Size(60, 20)
+        Me.txtTotalESIEmplContr.TabIndex = 40
+        Me.txtTotalESIEmplContr.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtTotalSalPaid
+        '
+        Me.txtTotalSalPaid.BackColor = System.Drawing.Color.LightBlue
+        Me.txtTotalSalPaid.Enabled = False
+        Me.txtTotalSalPaid.Location = New System.Drawing.Point(1081, 18)
+        Me.txtTotalSalPaid.Name = "txtTotalSalPaid"
+        Me.txtTotalSalPaid.Size = New System.Drawing.Size(60, 20)
+        Me.txtTotalSalPaid.TabIndex = 39
+        Me.txtTotalSalPaid.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtTotalAmt
+        '
+        Me.txtTotalAmt.BackColor = System.Drawing.Color.LightBlue
+        Me.txtTotalAmt.Enabled = False
+        Me.txtTotalAmt.Location = New System.Drawing.Point(1015, 18)
+        Me.txtTotalAmt.Name = "txtTotalAmt"
+        Me.txtTotalAmt.Size = New System.Drawing.Size(60, 20)
+        Me.txtTotalAmt.TabIndex = 38
+        Me.txtTotalAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtTotalProfTax
+        '
+        Me.txtTotalProfTax.BackColor = System.Drawing.Color.LightBlue
+        Me.txtTotalProfTax.Enabled = False
+        Me.txtTotalProfTax.Location = New System.Drawing.Point(959, 18)
+        Me.txtTotalProfTax.Name = "txtTotalProfTax"
+        Me.txtTotalProfTax.Size = New System.Drawing.Size(50, 20)
+        Me.txtTotalProfTax.TabIndex = 37
+        Me.txtTotalProfTax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtTotalAdvDedn
+        '
+        Me.txtTotalAdvDedn.BackColor = System.Drawing.Color.LightBlue
+        Me.txtTotalAdvDedn.Enabled = False
+        Me.txtTotalAdvDedn.Location = New System.Drawing.Point(886, 18)
+        Me.txtTotalAdvDedn.Name = "txtTotalAdvDedn"
+        Me.txtTotalAdvDedn.Size = New System.Drawing.Size(50, 20)
+        Me.txtTotalAdvDedn.TabIndex = 36
+        Me.txtTotalAdvDedn.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtTotalESIDedn
+        '
+        Me.txtTotalESIDedn.BackColor = System.Drawing.Color.LightBlue
+        Me.txtTotalESIDedn.Enabled = False
+        Me.txtTotalESIDedn.Location = New System.Drawing.Point(821, 18)
+        Me.txtTotalESIDedn.Name = "txtTotalESIDedn"
+        Me.txtTotalESIDedn.Size = New System.Drawing.Size(56, 20)
+        Me.txtTotalESIDedn.TabIndex = 35
+        Me.txtTotalESIDedn.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtTotalNetPay
+        '
+        Me.txtTotalNetPay.BackColor = System.Drawing.Color.LightBlue
+        Me.txtTotalNetPay.Enabled = False
+        Me.txtTotalNetPay.Location = New System.Drawing.Point(753, 18)
+        Me.txtTotalNetPay.Name = "txtTotalNetPay"
+        Me.txtTotalNetPay.Size = New System.Drawing.Size(60, 20)
+        Me.txtTotalNetPay.TabIndex = 34
+        Me.txtTotalNetPay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtTotalGrossPay
+        '
+        Me.txtTotalGrossPay.BackColor = System.Drawing.Color.LightBlue
+        Me.txtTotalGrossPay.Enabled = False
+        Me.txtTotalGrossPay.Location = New System.Drawing.Point(553, 18)
+        Me.txtTotalGrossPay.Name = "txtTotalGrossPay"
+        Me.txtTotalGrossPay.Size = New System.Drawing.Size(60, 20)
+        Me.txtTotalGrossPay.TabIndex = 33
+        Me.txtTotalGrossPay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtNumDaysInMonth
         '
@@ -323,89 +403,9 @@ Partial Class PayrollCalc
         Me.btnGeneratePayroll.Text = "Generate Payroll"
         Me.btnGeneratePayroll.UseVisualStyleBackColor = True
         '
-        'txtTotalGrossPay
-        '
-        Me.txtTotalGrossPay.BackColor = System.Drawing.Color.LightBlue
-        Me.txtTotalGrossPay.Enabled = False
-        Me.txtTotalGrossPay.Location = New System.Drawing.Point(553, 18)
-        Me.txtTotalGrossPay.Name = "txtTotalGrossPay"
-        Me.txtTotalGrossPay.Size = New System.Drawing.Size(60, 20)
-        Me.txtTotalGrossPay.TabIndex = 33
-        Me.txtTotalGrossPay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtTotalNetPay
-        '
-        Me.txtTotalNetPay.BackColor = System.Drawing.Color.LightBlue
-        Me.txtTotalNetPay.Enabled = False
-        Me.txtTotalNetPay.Location = New System.Drawing.Point(753, 18)
-        Me.txtTotalNetPay.Name = "txtTotalNetPay"
-        Me.txtTotalNetPay.Size = New System.Drawing.Size(60, 20)
-        Me.txtTotalNetPay.TabIndex = 34
-        Me.txtTotalNetPay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtTotalESIDedn
-        '
-        Me.txtTotalESIDedn.BackColor = System.Drawing.Color.LightBlue
-        Me.txtTotalESIDedn.Enabled = False
-        Me.txtTotalESIDedn.Location = New System.Drawing.Point(821, 18)
-        Me.txtTotalESIDedn.Name = "txtTotalESIDedn"
-        Me.txtTotalESIDedn.Size = New System.Drawing.Size(56, 20)
-        Me.txtTotalESIDedn.TabIndex = 35
-        Me.txtTotalESIDedn.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtTotalAdvDedn
-        '
-        Me.txtTotalAdvDedn.BackColor = System.Drawing.Color.LightBlue
-        Me.txtTotalAdvDedn.Enabled = False
-        Me.txtTotalAdvDedn.Location = New System.Drawing.Point(886, 18)
-        Me.txtTotalAdvDedn.Name = "txtTotalAdvDedn"
-        Me.txtTotalAdvDedn.Size = New System.Drawing.Size(50, 20)
-        Me.txtTotalAdvDedn.TabIndex = 36
-        Me.txtTotalAdvDedn.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtTotalProfTax
-        '
-        Me.txtTotalProfTax.BackColor = System.Drawing.Color.LightBlue
-        Me.txtTotalProfTax.Enabled = False
-        Me.txtTotalProfTax.Location = New System.Drawing.Point(959, 18)
-        Me.txtTotalProfTax.Name = "txtTotalProfTax"
-        Me.txtTotalProfTax.Size = New System.Drawing.Size(50, 20)
-        Me.txtTotalProfTax.TabIndex = 37
-        Me.txtTotalProfTax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtTotalAmt
-        '
-        Me.txtTotalAmt.BackColor = System.Drawing.Color.LightBlue
-        Me.txtTotalAmt.Enabled = False
-        Me.txtTotalAmt.Location = New System.Drawing.Point(1015, 18)
-        Me.txtTotalAmt.Name = "txtTotalAmt"
-        Me.txtTotalAmt.Size = New System.Drawing.Size(60, 20)
-        Me.txtTotalAmt.TabIndex = 38
-        Me.txtTotalAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtTotalSalPaid
-        '
-        Me.txtTotalSalPaid.BackColor = System.Drawing.Color.LightBlue
-        Me.txtTotalSalPaid.Enabled = False
-        Me.txtTotalSalPaid.Location = New System.Drawing.Point(1081, 18)
-        Me.txtTotalSalPaid.Name = "txtTotalSalPaid"
-        Me.txtTotalSalPaid.Size = New System.Drawing.Size(60, 20)
-        Me.txtTotalSalPaid.TabIndex = 39
-        Me.txtTotalSalPaid.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtTotalESIEmplContr
-        '
-        Me.txtTotalESIEmplContr.BackColor = System.Drawing.Color.LightBlue
-        Me.txtTotalESIEmplContr.Enabled = False
-        Me.txtTotalESIEmplContr.Location = New System.Drawing.Point(1149, 18)
-        Me.txtTotalESIEmplContr.Name = "txtTotalESIEmplContr"
-        Me.txtTotalESIEmplContr.Size = New System.Drawing.Size(60, 20)
-        Me.txtTotalESIEmplContr.TabIndex = 40
-        Me.txtTotalESIEmplContr.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(431, 10)
+        Me.btnSave.Location = New System.Drawing.Point(500, 10)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 4
@@ -414,7 +414,7 @@ Partial Class PayrollCalc
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(526, 10)
+        Me.btnCancel.Location = New System.Drawing.Point(595, 10)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 5
@@ -444,7 +444,7 @@ Partial Class PayrollCalc
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(630, 9)
+        Me.btnClose.Location = New System.Drawing.Point(411, 10)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 6

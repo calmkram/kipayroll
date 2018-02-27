@@ -1146,9 +1146,9 @@ Partial Public Class KIPayrollDataSet
         
         Private columnAdvPaybackAmtPerMth As Global.System.Data.DataColumn
         
-        Private columnAdvPaidBack As Global.System.Data.DataColumn
-        
         Private columnAdvPaybackStatus As Global.System.Data.DataColumn
+        
+        Private columnAdvPaybkRemMonths As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
@@ -1243,17 +1243,17 @@ Partial Public Class KIPayrollDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public ReadOnly Property AdvPaidBackColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property AdvPaybackStatusColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnAdvPaidBack
+                Return Me.columnAdvPaybackStatus
             End Get
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public ReadOnly Property AdvPaybackStatusColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property AdvPaybkRemMonthsColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnAdvPaybackStatus
+                Return Me.columnAdvPaybkRemMonths
             End Get
         End Property
         
@@ -1294,9 +1294,9 @@ Partial Public Class KIPayrollDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Overloads Function AddSalaryAdvancesRow(ByVal EmpID As String, ByVal AdvDate As Date, ByVal AdvReason As String, ByVal AdvAmount As Decimal, ByVal AdvPaybackMonths As Integer, ByVal AdvPaybackAmtPerMth As Decimal, ByVal AdvPaidBack As Boolean, ByVal AdvPaybackStatus As String) As SalaryAdvancesRow
+        Public Overloads Function AddSalaryAdvancesRow(ByVal EmpID As String, ByVal AdvDate As Date, ByVal AdvReason As String, ByVal AdvAmount As Decimal, ByVal AdvPaybackMonths As Integer, ByVal AdvPaybackAmtPerMth As Decimal, ByVal AdvPaybackStatus As String, ByVal AdvPaybkRemMonths As Integer) As SalaryAdvancesRow
             Dim rowSalaryAdvancesRow As SalaryAdvancesRow = CType(Me.NewRow,SalaryAdvancesRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, EmpID, AdvDate, AdvReason, AdvAmount, AdvPaybackMonths, AdvPaybackAmtPerMth, AdvPaidBack, AdvPaybackStatus}
+            Dim columnValuesArray() As Object = New Object() {Nothing, EmpID, AdvDate, AdvReason, AdvAmount, AdvPaybackMonths, AdvPaybackAmtPerMth, AdvPaybackStatus, AdvPaybkRemMonths}
             rowSalaryAdvancesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowSalaryAdvancesRow)
             Return rowSalaryAdvancesRow
@@ -1332,8 +1332,8 @@ Partial Public Class KIPayrollDataSet
             Me.columnAdvAmount = MyBase.Columns("AdvAmount")
             Me.columnAdvPaybackMonths = MyBase.Columns("AdvPaybackMonths")
             Me.columnAdvPaybackAmtPerMth = MyBase.Columns("AdvPaybackAmtPerMth")
-            Me.columnAdvPaidBack = MyBase.Columns("AdvPaidBack")
             Me.columnAdvPaybackStatus = MyBase.Columns("AdvPaybackStatus")
+            Me.columnAdvPaybkRemMonths = MyBase.Columns("AdvPaybkRemMonths")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1353,10 +1353,10 @@ Partial Public Class KIPayrollDataSet
             MyBase.Columns.Add(Me.columnAdvPaybackMonths)
             Me.columnAdvPaybackAmtPerMth = New Global.System.Data.DataColumn("AdvPaybackAmtPerMth", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnAdvPaybackAmtPerMth)
-            Me.columnAdvPaidBack = New Global.System.Data.DataColumn("AdvPaidBack", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnAdvPaidBack)
             Me.columnAdvPaybackStatus = New Global.System.Data.DataColumn("AdvPaybackStatus", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnAdvPaybackStatus)
+            Me.columnAdvPaybkRemMonths = New Global.System.Data.DataColumn("AdvPaybkRemMonths", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAdvPaybkRemMonths)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnID}, true))
             Me.columnID.AutoIncrement = true
             Me.columnID.AutoIncrementSeed = -1
@@ -3159,21 +3159,6 @@ Partial Public Class KIPayrollDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property AdvPaidBack() As Boolean
-            Get
-                Try 
-                    Return CType(Me(Me.tableSalaryAdvances.AdvPaidBackColumn),Boolean)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'AdvPaidBack' in table 'SalaryAdvances' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableSalaryAdvances.AdvPaidBackColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Property AdvPaybackStatus() As String
             Get
                 Try 
@@ -3184,6 +3169,21 @@ Partial Public Class KIPayrollDataSet
             End Get
             Set
                 Me(Me.tableSalaryAdvances.AdvPaybackStatusColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Property AdvPaybkRemMonths() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tableSalaryAdvances.AdvPaybkRemMonthsColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AdvPaybkRemMonths' in table 'SalaryAdvances' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableSalaryAdvances.AdvPaybkRemMonthsColumn) = value
             End Set
         End Property
         
@@ -3261,18 +3261,6 @@ Partial Public Class KIPayrollDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Function IsAdvPaidBackNull() As Boolean
-            Return Me.IsNull(Me.tableSalaryAdvances.AdvPaidBackColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Sub SetAdvPaidBackNull()
-            Me(Me.tableSalaryAdvances.AdvPaidBackColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Function IsAdvPaybackStatusNull() As Boolean
             Return Me.IsNull(Me.tableSalaryAdvances.AdvPaybackStatusColumn)
         End Function
@@ -3281,6 +3269,18 @@ Partial Public Class KIPayrollDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Sub SetAdvPaybackStatusNull()
             Me(Me.tableSalaryAdvances.AdvPaybackStatusColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Function IsAdvPaybkRemMonthsNull() As Boolean
+            Return Me.IsNull(Me.tableSalaryAdvances.AdvPaybkRemMonthsColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Sub SetAdvPaybkRemMonthsNull()
+            Me(Me.tableSalaryAdvances.AdvPaybkRemMonthsColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -5464,8 +5464,8 @@ Namespace KIPayrollDataSetTableAdapters
             tableMapping.ColumnMappings.Add("AdvAmount", "AdvAmount")
             tableMapping.ColumnMappings.Add("AdvPaybackMonths", "AdvPaybackMonths")
             tableMapping.ColumnMappings.Add("AdvPaybackAmtPerMth", "AdvPaybackAmtPerMth")
-            tableMapping.ColumnMappings.Add("AdvPaidBack", "AdvPaidBack")
             tableMapping.ColumnMappings.Add("AdvPaybackStatus", "AdvPaybackStatus")
+            tableMapping.ColumnMappings.Add("AdvPaybkRemMonths", "AdvPaybkRemMonths")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
@@ -5473,9 +5473,9 @@ Namespace KIPayrollDataSetTableAdapters
                 "R (`EmpID` = ?)) AND ((? = 1 AND `AdvDate` IS NULL) OR (`AdvDate` = ?)) AND ((? "& _ 
                 "= 1 AND `AdvAmount` IS NULL) OR (`AdvAmount` = ?)) AND ((? = 1 AND `AdvPaybackMo"& _ 
                 "nths` IS NULL) OR (`AdvPaybackMonths` = ?)) AND ((? = 1 AND `AdvPaybackAmtPerMth"& _ 
-                "` IS NULL) OR (`AdvPaybackAmtPerMth` = ?)) AND ((? = 1 AND `AdvPaidBack` IS NULL"& _ 
-                ") OR (`AdvPaidBack` = ?)) AND ((? = 1 AND `AdvPaybackStatus` IS NULL) OR (`AdvPa"& _ 
-                "ybackStatus` = ?)))"
+                "` IS NULL) OR (`AdvPaybackAmtPerMth` = ?)) AND ((? = 1 AND `AdvPaybackStatus` IS"& _ 
+                " NULL) OR (`AdvPaybackStatus` = ?)) AND ((? = 1 AND `AdvPaybkRemMonths` IS NULL)"& _ 
+                " OR (`AdvPaybkRemMonths` = ?)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_EmpID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmpID", Global.System.Data.DataRowVersion.Original, true, Nothing))
@@ -5488,15 +5488,15 @@ Namespace KIPayrollDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_AdvPaybackMonths", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybackMonths", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_AdvPaybackAmtPerMth", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybackAmtPerMth", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_AdvPaybackAmtPerMth", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybackAmtPerMth", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_AdvPaidBack", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaidBack", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_AdvPaidBack", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaidBack", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_AdvPaybackStatus", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybackStatus", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_AdvPaybackStatus", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybackStatus", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_AdvPaybkRemMonths", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybkRemMonths", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_AdvPaybkRemMonths", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybkRemMonths", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.InsertCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO `SalaryAdvances` (`EmpID`, `AdvDate`, `AdvReason`, `AdvAmount`, `AdvP"& _ 
-                "aybackMonths`, `AdvPaybackAmtPerMth`, `AdvPaidBack`, `AdvPaybackStatus`) VALUES "& _ 
-                "(?, ?, ?, ?, ?, ?, ?, ?)"
+                "aybackMonths`, `AdvPaybackAmtPerMth`, `AdvPaybackStatus`, `AdvPaybkRemMonths`) V"& _ 
+                "ALUES (?, ?, ?, ?, ?, ?, ?, ?)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("EmpID", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmpID", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("AdvDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -5504,19 +5504,19 @@ Namespace KIPayrollDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("AdvAmount", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvAmount", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("AdvPaybackMonths", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybackMonths", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("AdvPaybackAmtPerMth", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybackAmtPerMth", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("AdvPaidBack", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaidBack", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("AdvPaybackStatus", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybackStatus", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("AdvPaybkRemMonths", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybkRemMonths", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE `SalaryAdvances` SET `EmpID` = ?, `AdvDate` = ?, `AdvReason` = ?, `AdvAmou"& _ 
-                "nt` = ?, `AdvPaybackMonths` = ?, `AdvPaybackAmtPerMth` = ?, `AdvPaidBack` = ?, `"& _ 
-                "AdvPaybackStatus` = ? WHERE ((`ID` = ?) AND ((? = 1 AND `EmpID` IS NULL) OR (`Em"& _ 
-                "pID` = ?)) AND ((? = 1 AND `AdvDate` IS NULL) OR (`AdvDate` = ?)) AND ((? = 1 AN"& _ 
-                "D `AdvAmount` IS NULL) OR (`AdvAmount` = ?)) AND ((? = 1 AND `AdvPaybackMonths` "& _ 
-                "IS NULL) OR (`AdvPaybackMonths` = ?)) AND ((? = 1 AND `AdvPaybackAmtPerMth` IS N"& _ 
-                "ULL) OR (`AdvPaybackAmtPerMth` = ?)) AND ((? = 1 AND `AdvPaidBack` IS NULL) OR ("& _ 
-                "`AdvPaidBack` = ?)) AND ((? = 1 AND `AdvPaybackStatus` IS NULL) OR (`AdvPaybackS"& _ 
-                "tatus` = ?)))"
+                "nt` = ?, `AdvPaybackMonths` = ?, `AdvPaybackAmtPerMth` = ?, `AdvPaybackStatus` ="& _ 
+                " ?, `AdvPaybkRemMonths` = ? WHERE ((`ID` = ?) AND ((? = 1 AND `EmpID` IS NULL) O"& _ 
+                "R (`EmpID` = ?)) AND ((? = 1 AND `AdvDate` IS NULL) OR (`AdvDate` = ?)) AND ((? "& _ 
+                "= 1 AND `AdvAmount` IS NULL) OR (`AdvAmount` = ?)) AND ((? = 1 AND `AdvPaybackMo"& _ 
+                "nths` IS NULL) OR (`AdvPaybackMonths` = ?)) AND ((? = 1 AND `AdvPaybackAmtPerMth"& _ 
+                "` IS NULL) OR (`AdvPaybackAmtPerMth` = ?)) AND ((? = 1 AND `AdvPaybackStatus` IS"& _ 
+                " NULL) OR (`AdvPaybackStatus` = ?)) AND ((? = 1 AND `AdvPaybkRemMonths` IS NULL)"& _ 
+                " OR (`AdvPaybkRemMonths` = ?)))"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("EmpID", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmpID", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("AdvDate", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvDate", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -5524,8 +5524,8 @@ Namespace KIPayrollDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("AdvAmount", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvAmount", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("AdvPaybackMonths", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybackMonths", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("AdvPaybackAmtPerMth", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybackAmtPerMth", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("AdvPaidBack", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaidBack", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("AdvPaybackStatus", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybackStatus", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("AdvPaybkRemMonths", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybkRemMonths", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "ID", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_EmpID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmpID", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_EmpID", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "EmpID", Global.System.Data.DataRowVersion.Original, false, Nothing))
@@ -5537,10 +5537,10 @@ Namespace KIPayrollDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_AdvPaybackMonths", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybackMonths", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_AdvPaybackAmtPerMth", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybackAmtPerMth", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_AdvPaybackAmtPerMth", Global.System.Data.OleDb.OleDbType.Currency, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybackAmtPerMth", Global.System.Data.DataRowVersion.Original, false, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_AdvPaidBack", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaidBack", Global.System.Data.DataRowVersion.Original, true, Nothing))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_AdvPaidBack", Global.System.Data.OleDb.OleDbType.[Boolean], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaidBack", Global.System.Data.DataRowVersion.Original, false, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_AdvPaybackStatus", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybackStatus", Global.System.Data.DataRowVersion.Original, true, Nothing))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_AdvPaybackStatus", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybackStatus", Global.System.Data.DataRowVersion.Original, false, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("IsNull_AdvPaybkRemMonths", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybkRemMonths", Global.System.Data.DataRowVersion.Original, true, Nothing))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_AdvPaybkRemMonths", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "AdvPaybkRemMonths", Global.System.Data.DataRowVersion.Original, false, Nothing))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -5557,7 +5557,7 @@ Namespace KIPayrollDataSetTableAdapters
             Me._commandCollection(0) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT ID, EmpID, AdvDate, AdvReason, AdvAmount, AdvPaybackMonths, AdvPaybackAmtP"& _ 
-                "erMth, AdvPaidBack, AdvPaybackStatus FROM SalaryAdvances"
+                "erMth, AdvPaybackStatus, AdvPaybkRemMonths FROM SalaryAdvances"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -5617,7 +5617,7 @@ Namespace KIPayrollDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_ID As Integer, ByVal Original_EmpID As String, ByVal Original_AdvDate As Global.System.Nullable(Of Date), ByVal Original_AdvAmount As Global.System.Nullable(Of Decimal), ByVal Original_AdvPaybackMonths As Global.System.Nullable(Of Integer), ByVal Original_AdvPaybackAmtPerMth As Global.System.Nullable(Of Decimal), ByVal Original_AdvPaidBack As Boolean, ByVal Original_AdvPaybackStatus As String) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_ID As Integer, ByVal Original_EmpID As String, ByVal Original_AdvDate As Global.System.Nullable(Of Date), ByVal Original_AdvAmount As Global.System.Nullable(Of Decimal), ByVal Original_AdvPaybackMonths As Global.System.Nullable(Of Integer), ByVal Original_AdvPaybackAmtPerMth As Global.System.Nullable(Of Decimal), ByVal Original_AdvPaybackStatus As String, ByVal Original_AdvPaybkRemMonths As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_ID,Integer)
             If (Original_EmpID Is Nothing) Then
                 Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
@@ -5654,14 +5654,19 @@ Namespace KIPayrollDataSetTableAdapters
                 Me.Adapter.DeleteCommand.Parameters(9).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(10).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.DeleteCommand.Parameters(11).Value = CType(0,Object)
-            Me.Adapter.DeleteCommand.Parameters(12).Value = CType(Original_AdvPaidBack,Boolean)
             If (Original_AdvPaybackStatus Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(12).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(12).Value = CType(Original_AdvPaybackStatus,String)
+            End If
+            If (Original_AdvPaybkRemMonths.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(Original_AdvPaybkRemMonths.Value,Integer)
+            Else
                 Me.Adapter.DeleteCommand.Parameters(13).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(14).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(Original_AdvPaybackStatus,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -5682,7 +5687,7 @@ Namespace KIPayrollDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal EmpID As String, ByVal AdvDate As Global.System.Nullable(Of Date), ByVal AdvReason As String, ByVal AdvAmount As Global.System.Nullable(Of Decimal), ByVal AdvPaybackMonths As Global.System.Nullable(Of Integer), ByVal AdvPaybackAmtPerMth As Global.System.Nullable(Of Decimal), ByVal AdvPaidBack As Boolean, ByVal AdvPaybackStatus As String) As Integer
+        Public Overloads Overridable Function Insert(ByVal EmpID As String, ByVal AdvDate As Global.System.Nullable(Of Date), ByVal AdvReason As String, ByVal AdvAmount As Global.System.Nullable(Of Decimal), ByVal AdvPaybackMonths As Global.System.Nullable(Of Integer), ByVal AdvPaybackAmtPerMth As Global.System.Nullable(Of Decimal), ByVal AdvPaybackStatus As String, ByVal AdvPaybkRemMonths As Global.System.Nullable(Of Integer)) As Integer
             If (EmpID Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -5713,11 +5718,15 @@ Namespace KIPayrollDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.InsertCommand.Parameters(6).Value = CType(AdvPaidBack,Boolean)
             If (AdvPaybackStatus Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(6).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(7).Value = CType(AdvPaybackStatus,String)
+                Me.Adapter.InsertCommand.Parameters(6).Value = CType(AdvPaybackStatus,String)
+            End If
+            If (AdvPaybkRemMonths.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(7).Value = CType(AdvPaybkRemMonths.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -5745,16 +5754,16 @@ Namespace KIPayrollDataSetTableAdapters
                     ByVal AdvAmount As Global.System.Nullable(Of Decimal),  _
                     ByVal AdvPaybackMonths As Global.System.Nullable(Of Integer),  _
                     ByVal AdvPaybackAmtPerMth As Global.System.Nullable(Of Decimal),  _
-                    ByVal AdvPaidBack As Boolean,  _
                     ByVal AdvPaybackStatus As String,  _
+                    ByVal AdvPaybkRemMonths As Global.System.Nullable(Of Integer),  _
                     ByVal Original_ID As Integer,  _
                     ByVal Original_EmpID As String,  _
                     ByVal Original_AdvDate As Global.System.Nullable(Of Date),  _
                     ByVal Original_AdvAmount As Global.System.Nullable(Of Decimal),  _
                     ByVal Original_AdvPaybackMonths As Global.System.Nullable(Of Integer),  _
                     ByVal Original_AdvPaybackAmtPerMth As Global.System.Nullable(Of Decimal),  _
-                    ByVal Original_AdvPaidBack As Boolean,  _
-                    ByVal Original_AdvPaybackStatus As String) As Integer
+                    ByVal Original_AdvPaybackStatus As String,  _
+                    ByVal Original_AdvPaybkRemMonths As Global.System.Nullable(Of Integer)) As Integer
             If (EmpID Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(0).Value = Global.System.DBNull.Value
             Else
@@ -5785,11 +5794,15 @@ Namespace KIPayrollDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(AdvPaidBack,Boolean)
             If (AdvPaybackStatus Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(AdvPaybackStatus,String)
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(AdvPaybackStatus,String)
+            End If
+            If (AdvPaybkRemMonths.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(AdvPaybkRemMonths.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
             End If
             Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Original_ID,Integer)
             If (Original_EmpID Is Nothing) Then
@@ -5827,14 +5840,19 @@ Namespace KIPayrollDataSetTableAdapters
                 Me.Adapter.UpdateCommand.Parameters(17).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.UpdateCommand.Parameters(19).Value = CType(0,Object)
-            Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_AdvPaidBack,Boolean)
             If (Original_AdvPaybackStatus Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_AdvPaybackStatus,String)
+            End If
+            If (Original_AdvPaybkRemMonths.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_AdvPaybkRemMonths.Value,Integer)
+            Else
                 Me.Adapter.UpdateCommand.Parameters(21).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(22).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_AdvPaybackStatus,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _

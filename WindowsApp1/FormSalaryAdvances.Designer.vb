@@ -47,10 +47,8 @@ Partial Class SalaryAdvances
         Me.btnClose = New System.Windows.Forms.Button()
         Me.grpbxViewSalAdvInfo = New System.Windows.Forms.GroupBox()
         Me.btnCancelView = New System.Windows.Forms.Button()
-        Me.lblViewAdvPaid = New System.Windows.Forms.Label()
         Me.txtViewAdvStatus = New System.Windows.Forms.TextBox()
         Me.lblViewAdvStatus = New System.Windows.Forms.Label()
-        Me.chkViewAdvPaidBack = New System.Windows.Forms.CheckBox()
         Me.lblLine = New System.Windows.Forms.Label()
         Me.lblSelectSalAdvToView = New System.Windows.Forms.Label()
         Me.cmbSalAdvListForEmp = New System.Windows.Forms.ComboBox()
@@ -295,10 +293,8 @@ Partial Class SalaryAdvances
         'grpbxViewSalAdvInfo
         '
         Me.grpbxViewSalAdvInfo.Controls.Add(Me.btnCancelView)
-        Me.grpbxViewSalAdvInfo.Controls.Add(Me.lblViewAdvPaid)
         Me.grpbxViewSalAdvInfo.Controls.Add(Me.txtViewAdvStatus)
         Me.grpbxViewSalAdvInfo.Controls.Add(Me.lblViewAdvStatus)
-        Me.grpbxViewSalAdvInfo.Controls.Add(Me.chkViewAdvPaidBack)
         Me.grpbxViewSalAdvInfo.Controls.Add(Me.lblLine)
         Me.grpbxViewSalAdvInfo.Controls.Add(Me.lblSelectSalAdvToView)
         Me.grpbxViewSalAdvInfo.Controls.Add(Me.cmbSalAdvListForEmp)
@@ -332,19 +328,9 @@ Partial Class SalaryAdvances
         Me.btnCancelView.Text = "Cancel View"
         Me.btnCancelView.UseVisualStyleBackColor = True
         '
-        'lblViewAdvPaid
-        '
-        Me.lblViewAdvPaid.AutoSize = True
-        Me.lblViewAdvPaid.Location = New System.Drawing.Point(252, 137)
-        Me.lblViewAdvPaid.Name = "lblViewAdvPaid"
-        Me.lblViewAdvPaid.Size = New System.Drawing.Size(108, 13)
-        Me.lblViewAdvPaid.TabIndex = 34
-        Me.lblViewAdvPaid.Text = "Advance Paid Back?"
-        Me.lblViewAdvPaid.Visible = False
-        '
         'txtViewAdvStatus
         '
-        Me.txtViewAdvStatus.Location = New System.Drawing.Point(362, 162)
+        Me.txtViewAdvStatus.Location = New System.Drawing.Point(361, 134)
         Me.txtViewAdvStatus.Name = "txtViewAdvStatus"
         Me.txtViewAdvStatus.Size = New System.Drawing.Size(83, 20)
         Me.txtViewAdvStatus.TabIndex = 33
@@ -353,23 +339,12 @@ Partial Class SalaryAdvances
         'lblViewAdvStatus
         '
         Me.lblViewAdvStatus.AutoSize = True
-        Me.lblViewAdvStatus.Location = New System.Drawing.Point(252, 166)
+        Me.lblViewAdvStatus.Location = New System.Drawing.Point(251, 138)
         Me.lblViewAdvStatus.Name = "lblViewAdvStatus"
         Me.lblViewAdvStatus.Size = New System.Drawing.Size(86, 13)
         Me.lblViewAdvStatus.TabIndex = 32
         Me.lblViewAdvStatus.Text = "Advance Status:"
         Me.lblViewAdvStatus.Visible = False
-        '
-        'chkViewAdvPaidBack
-        '
-        Me.chkViewAdvPaidBack.AutoSize = True
-        Me.chkViewAdvPaidBack.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.chkViewAdvPaidBack.Location = New System.Drawing.Point(362, 137)
-        Me.chkViewAdvPaidBack.Name = "chkViewAdvPaidBack"
-        Me.chkViewAdvPaidBack.Size = New System.Drawing.Size(15, 14)
-        Me.chkViewAdvPaidBack.TabIndex = 31
-        Me.chkViewAdvPaidBack.UseVisualStyleBackColor = True
-        Me.chkViewAdvPaidBack.Visible = False
         '
         'lblLine
         '
@@ -629,10 +604,8 @@ Partial Class SalaryAdvances
     Friend WithEvents lblLine As Label
     Friend WithEvents txtViewAdvStatus As TextBox
     Friend WithEvents lblViewAdvStatus As Label
-    Friend WithEvents chkViewAdvPaidBack As CheckBox
     Friend WithEvents txtAdvStatus As TextBox
     Friend WithEvents lblAdvStatus As Label
-    Friend WithEvents lblViewAdvPaid As Label
     Friend WithEvents cmbEmpName As ComboBox
     Friend WithEvents txtPaybackAmt As MaskedTextBox
     Friend WithEvents txtAdvanceAmt As MaskedTextBox

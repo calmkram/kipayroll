@@ -87,7 +87,6 @@
         txtViewAdvAmt.Text = Format(rDisplayRow.AdvAmount, "c")
         txtViewPaybackAmt.Text = Format(rDisplayRow.AdvPaybackAmtPerMth, "c")
         cmbViewPaybackDur.SelectedIndex = cmbPaybackDuration.FindString(rDisplayRow.AdvPaybackMonths.ToString)
-        chkViewAdvPaidBack.Checked = rDisplayRow.AdvPaidBack
         txtViewAdvStatus.Text = rDisplayRow.AdvPaybackStatus
 
         lblViewEmpID.Visible = True
@@ -98,8 +97,6 @@
         txtViewAdvReason.Visible = True
         lblViewAdvAmt.Visible = True
         txtViewAdvAmt.Visible = True
-        lblViewAdvPaid.Visible = True
-        chkViewAdvPaidBack.Visible = True
         lblViewPaybackAmt.Visible = True
         txtViewPaybackAmt.Visible = True
         lblViewPaybackDur.Visible = True
@@ -113,7 +110,6 @@
         txtViewEmpName.Enabled = False
         txtViewAdvReason.Enabled = False
         txtViewAdvAmt.Enabled = False
-        chkViewAdvPaidBack.Enabled = False
         txtViewPaybackAmt.Enabled = False
         cmbViewPaybackDur.Enabled = False
         txtViewAdvStatus.Enabled = False
@@ -140,7 +136,7 @@
 
         txtAdvStatus.Text = "Issued"
 
-        Me.SalaryAdvancesTableAdapter.Insert(txtEmpID.Text, Today(), txtAdvanceReason.Text, CDbl(txtAdvanceAmt.Text), cmbPaybackDuration.SelectedItem.ToString, CDbl(txtPaybackAmt.Text), False, txtAdvStatus.Text)
+        Me.SalaryAdvancesTableAdapter.Insert(txtEmpID.Text, Today(), txtAdvanceReason.Text, CDbl(txtAdvanceAmt.Text), cmbPaybackDuration.SelectedItem.ToString, CDbl(txtPaybackAmt.Text), txtAdvStatus.Text, cmbPaybackDuration.SelectedItem.ToString)
         Me.SalaryAdvancesTableAdapter.Fill(Me.KIPayrollDataSet.SalaryAdvances)
         AppMainWindow.StatusBarLabel1.Text = "New Salary Advance issued and saved successfully!"
 
