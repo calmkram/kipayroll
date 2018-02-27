@@ -68,12 +68,12 @@ Partial Class SalaryAdvances
         Me.txtViewEmpName = New System.Windows.Forms.TextBox()
         Me.lblViewEmpID = New System.Windows.Forms.Label()
         Me.txtViewEmpID = New System.Windows.Forms.TextBox()
-        Me.KIPayrollDataSet = New WindowsApp1.KIPayrollDataSet()
+        Me.KIPayrollDataSet = New KIPayroll.KIPayrollDataSet()
         Me.SalaryAdvancesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.SalaryAdvancesTableAdapter = New WindowsApp1.KIPayrollDataSetTableAdapters.SalaryAdvancesTableAdapter()
-        Me.TableAdapterManager = New WindowsApp1.KIPayrollDataSetTableAdapters.TableAdapterManager()
+        Me.SalaryAdvancesTableAdapter = New KIPayroll.KIPayrollDataSetTableAdapters.SalaryAdvancesTableAdapter()
+        Me.TableAdapterManager = New KIPayroll.KIPayrollDataSetTableAdapters.TableAdapterManager()
         Me.RetrieveEmpNameBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.RetrieveEmpNameTableAdapter = New WindowsApp1.KIPayrollDataSetTableAdapters.RetrieveEmpNameTableAdapter()
+        Me.RetrieveEmpNameTableAdapter = New KIPayroll.KIPayrollDataSetTableAdapters.RetrieveEmpNameTableAdapter()
         Me.grpbxAddSalAdvInfo.SuspendLayout()
         Me.grpbxViewSalAdvInfo.SuspendLayout()
         CType(Me.KIPayrollDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -550,7 +550,7 @@ Partial Class SalaryAdvances
         Me.TableAdapterManager.EmployeeMasterTableAdapter = Nothing
         Me.TableAdapterManager.SalaryAdvancesTableAdapter = Me.SalaryAdvancesTableAdapter
         Me.TableAdapterManager.SalaryCalculationTableAdapter = Nothing
-        Me.TableAdapterManager.UpdateOrder = WindowsApp1.KIPayrollDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager.UpdateOrder = KIPayroll.KIPayrollDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
         'RetrieveEmpNameBindingSource
         '

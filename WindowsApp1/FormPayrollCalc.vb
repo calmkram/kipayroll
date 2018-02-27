@@ -1,10 +1,30 @@
 ﻿Public Class PayrollCalc
+    Private iEmpIndex As Integer, iYLocation As Integer, iSalPaidXLocation As Integer, iESIEmplContrXLocation As Integer
+    Private iEmpIDXLocation As Integer, iEmpNameXLocation As Integer, iPresentXLocation As Integer, iAbsentXLocation As Integer
+    Private iOTHrsXLocation As Integer, iOTDaysXLocation As Integer, iTotalDaysXLocation As Integer, iBasicSalaryXLocation As Integer
+    Private iGrossPayXLocation As Integer, iAttdBonusXLocation As Integer, iNSBFXLocation As Integer, iNetPayXLocation As Integer
+    Private iESIDednXLocation As Integer, iSalAdvDednXLocation As Integer, iProfTaxXLocation As Integer, iSalToPayXLocation As Integer
+    Private txtEmpIDs() As TextBox, txtEmpNames() As TextBox, txtPresent() As TextBox, txtAbsent() As TextBox, txtOTHours() As TextBox
+    Private txtOTDays() As TextBox, txtTotalDays() As TextBox, txtESIEmployerContrib() As TextBox, txtBasicSalary() As TextBox
+    Private txtGrossPay() As TextBox, txtAttdBonus() As TextBox, txtNSBFAllow() As TextBox, txtNetPay() As TextBox, txtESIDedn() As TextBox
+    Private txtSalAdvDedn() As TextBox, txtProfTax() As TextBox, txtSalaryToPay() As TextBox, txtSalaryPaid() As TextBox
+    Private dsFiltered As DataSet, oSumOTHours As Object, sQuery As String, dataAdapter As New OleDb.OleDbDataAdapter, dsAttd As New DataSet
+    Private iNSAllowance As Integer = 0, iBFAllowance As Integer = 0, dTotalSalAdvForEmp As Double = 0
+    Private dTotalGrossPay As Double = 0, dTotalNetPay As Double = 0, dTotalESIDedn As Double = 0, dTotalAdvDedn As Double = 0, dTotalProfTax As Double = 0
+    Private dTotalAmtToPay As Double = 0, dTotalSalaryPaid As Double = 0, dTotalESIEmplContr As Double = 0
+
     Protected Overrides Sub Finalize()
         MyBase.Finalize()
     End Sub
 
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        Me.Close()
+    End Sub
+
     Private Sub PayrollCalc_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        AppMainWindow.DisablePrintMenuItem()
+        AppMainWindow.DisablePrintMenuItems()
+        AppMainWindow.StatusBarLabel1.ForeColor = Color.Black
+        AppMainWindow.StatusBarLabel1.Text = "Welcome to the Krithika Industries Payroll Application!"
     End Sub
 
     Private Sub PayrollCalc_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -17,58 +37,418 @@
         'TODO: This line of code loads data into the 'KIPayrollDataSet.SalaryCalculation' table. You can move, or remove it, as needed.
         Me.SalaryCalculationTableAdapter.Fill(Me.KIPayrollDataSet.SalaryCalculation)
 
+        Dim dtPrevMonth As DateTime, dtCurrMonth As DateTime, dtNextMonth As DateTime
+
+        dtPrevMonth = New DateTime(Now().Year, Now().Month() - 1, 1)
+        dtCurrMonth = New DateTime(Now().Year, Now().Month(), 1)
+        dtNextMonth = New DateTime(Now().Year, Now().Month() + 1, 1)
+
+        cmbPayrollForMonth.Items.Clear()
+        cmbPayrollForMonth.Items.Add(dtPrevMonth.ToString("MMMM yyyy"))
+        cmbPayrollForMonth.Items.Add(dtCurrMonth.ToString("MMMM yyyy"))
+        cmbPayrollForMonth.Items.Add(dtNextMonth.ToString("MMMM yyyy"))
+
+        btnSave.Visible = False
+        btnCancel.Visible = False
+    End Sub
+
+    Private Sub btnGeneratePayroll_Click(sender As Object, e As EventArgs) Handles btnGeneratePayroll.Click
         'Dynamically create all the text boxes to display salary calculations for each active employee this month
-        Dim iEmpIndex As Integer, iYLocation As Integer
-        Dim iEmpIDXLocation As Integer, iEmpNameXLocation As Integer, iPresentXLocation As Integer, iAbsentXLocation As Integer
-        Dim txtEmpIDs(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox, txtEmpNames(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
-        Dim txtPayMonth(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox, txtPresent(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox
-        Dim txtAbsent(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox
-        Dim txtOTHours(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox, txtOTDays(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox
-        Dim txtTotalDays(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox, txtNumDaysInMonth(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox
-        Dim txtBasicSalary(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox, txtGrossPay(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox
-        Dim txtAttdBonus(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox, txtNSBFAllow(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox
-        Dim txtNetPay(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox, txtESIDedn(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox
-        Dim txtSalAdvDedn(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox, txtProfTax(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox
-        Dim txtSalaryToPay(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox, txtSalaryPaid(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox
-        Dim txtESIEmployerContrib(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count) As TextBox
+        Dim dvEmpMaster As DataView, dvEmpRow As DataRowView, dvSalAdvances() As DataView, dvSalAdvRow As DataRowView
+        Dim dtPayrollForMonth As DateTime, culture As New Globalization.CultureInfo("en-IN")
+
+        ReDim txtEmpIDs(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
+        ReDim txtEmpNames(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
+        ReDim txtPresent(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
+        ReDim txtAbsent(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
+        ReDim txtOTHours(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
+        ReDim txtOTDays(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
+        ReDim txtTotalDays(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
+        ReDim txtBasicSalary(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
+        ReDim txtGrossPay(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
+        ReDim txtAttdBonus(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
+        ReDim txtNSBFAllow(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
+        ReDim txtNetPay(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
+        ReDim txtESIDedn(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
+        ReDim txtSalAdvDedn(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
+        ReDim txtProfTax(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
+        ReDim txtSalaryToPay(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
+        ReDim txtSalaryPaid(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
+        ReDim txtESIEmployerContrib(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
 
         iEmpIDXLocation = lblEmpID.Location.X + 3
         iEmpNameXLocation = lblEmpName.Location.X + 3
         iPresentXLocation = lblPresent.Location.X + 3
         iAbsentXLocation = lblAbsent.Location.X + 3
-
+        iOTHrsXLocation = lblOTHours.Location.X + 3
+        iOTDaysXLocation = lblOTDays.Location.X + 3
+        iTotalDaysXLocation = lblTotalDays.Location.X + 3
+        iBasicSalaryXLocation = lblBasicSalary.Location.X + 3
+        iGrossPayXLocation = lblGrossPay.Location.X + 3
+        iAttdBonusXLocation = lblAttdBonus.Location.X + 3
+        iNSBFXLocation = lblNSBF.Location.X + 3
+        iNetPayXLocation = lblNetPay.Location.X + 3
+        iESIDednXLocation = lblESIDedn.Location.X + 3
+        iSalAdvDednXLocation = lblAdvDedn.Location.X + 3
+        iProfTaxXLocation = lblProfTax.Location.X + 3
+        iSalToPayXLocation = lblAmtToPay.Location.X + 3
+        iSalPaidXLocation = lblSalaryPaid.Location.X + 3
+        iESIEmplContrXLocation = lblESIEmplContr.Location.X + 3
         iYLocation = lblLine.Location.Y + 10
-        For iEmpIndex = 0 To Me.KIPayrollDataSet.EmployeeMaster.Rows.Count - 1
-            txtEmpIDs(iEmpIndex) = New TextBox()
-            txtEmpIDs(iEmpIndex).Enabled = False
-            txtEmpIDs(iEmpIndex).Size = New Size(50, 20)
-            txtEmpIDs(iEmpIndex).Location = New Point(iEmpIDXLocation, iYLocation)
-            txtEmpIDs(iEmpIndex).Text = Me.KIPayrollDataSet.EmployeeMaster.Rows(iEmpIndex)("EmpID").ToString
 
-            txtEmpNames(iEmpIndex) = New TextBox()
-            txtEmpNames(iEmpIndex).Enabled = False
-            txtEmpNames(iEmpIndex).Size = New Size(110, 20)
-            txtEmpNames(iEmpIndex).Location = New Point(iEmpNameXLocation, iYLocation)
-            txtEmpNames(iEmpIndex).Text = Me.KIPayrollDataSet.EmployeeMaster.Rows(iEmpIndex)("EmpName").ToString
+        dtPayrollForMonth = DateTime.Parse(cmbPayrollForMonth.SelectedItem.ToString)
 
-            txtPresent(iEmpIndex) = New TextBox()
-            txtPresent(iEmpIndex).Enabled = False
-            txtPresent(iEmpIndex).Size = New Size(30, 20)
-            txtPresent(iEmpIndex).Location = New Point(iPresentXLocation, iYLocation)
-            'txtPresent(iEmpIndex).Text = Me.KIPayrollDataSet.EmployeeMaster.Rows(iEmpIndex)("Present").ToString
+        dvEmpMaster = New DataView(Me.KIPayrollDataSet.EmployeeMaster, "EmpStatus = 'Active'", "", DataViewRowState.CurrentRows)
+        dsFiltered = Me.KIPayrollDataSet.Copy
 
-            txtAbsent(iEmpIndex) = New TextBox()
-            txtAbsent(iEmpIndex).Enabled = False
-            txtAbsent(iEmpIndex).Size = New Size(30, 20)
-            txtAbsent(iEmpIndex).Location = New Point(iAbsentXLocation, iYLocation)
-            'txtAbsent(iEmpIndex).Text = Me.KIPayrollDataSet.EmployeeMaster.Rows(iEmpIndex)("Absent").ToString
+        For iEmpIndex = 0 To dvEmpMaster.Count - 1
+            ReDim dvSalAdvances(dvEmpMaster.Count)
+
+            dvEmpRow = dvEmpMaster.Item(iEmpIndex)
+            dvSalAdvances(iEmpIndex) = New DataView(Me.KIPayrollDataSet.SalaryAdvances, "EmpID = '" & dvEmpRow.Item("EmpID").ToString & "' AND AdvPaybackStatus NOT LIKE 'Completed'", "", DataViewRowState.CurrentRows)
+
+            txtEmpIDs(iEmpIndex) = New TextBox() With {
+                                        .Enabled = False,
+                                        .Size = New Size(50, 20),
+                                        .Location = New Point(iEmpIDXLocation, iYLocation)}
+            txtEmpIDs(iEmpIndex).Text = dvEmpRow.Item("EmpID").ToString
+
+            txtEmpNames(iEmpIndex) = New TextBox() With {
+                                        .Enabled = False,
+                                        .Size = New Size(110, 20),
+                                        .Location = New Point(iEmpNameXLocation, iYLocation)}
+            txtEmpNames(iEmpIndex).Text = dvEmpRow.Item("EmpName").ToString
+
+            txtPresent(iEmpIndex) = New TextBox() With {
+                                        .Enabled = False,
+                                        .Size = New Size(30, 20),
+                                        .Location = New Point(iPresentXLocation, iYLocation),
+                                        .TextAlign = HorizontalAlignment.Right}
+            Dim sRowFilterCriteria As String, dtFirstDay As Date, dtLastDay As Date
+            dtFirstDay = DateSerial(dtPayrollForMonth.Year, dtPayrollForMonth.Month, 1)
+            dtLastDay = DateSerial(dtPayrollForMonth.Year, dtPayrollForMonth.Month + 1, 0)
+            sRowFilterCriteria = String.Format("EmpID LIKE '{0}' AND (AttdDate >= '{1}' AND AttdDate <= '{2}')", txtEmpIDs(iEmpIndex).Text, dtFirstDay.ToShortDateString(), dtLastDay.ToShortDateString())
+            dsFiltered.Tables("Attendance").DefaultView.RowFilter = sRowFilterCriteria
+            txtPresent(iEmpIndex).Text = dsFiltered.Tables("Attendance").DefaultView.Count
+
+            txtAbsent(iEmpIndex) = New TextBox() With {
+                                        .Enabled = False,
+                                        .Size = New Size(30, 20),
+                                        .Location = New Point(iAbsentXLocation, iYLocation),
+                                        .TextAlign = HorizontalAlignment.Right}
+            txtAbsent(iEmpIndex).Text = CInt(txtNumDaysInMonth.Text) - CInt(txtPresent(iEmpIndex).Text)
+
+            txtOTHours(iEmpIndex) = New TextBox() With {
+                                        .Enabled = False,
+                                        .Size = New Size(35, 20),
+                                        .Location = New Point(iOTHrsXLocation, iYLocation),
+                                        .TextAlign = HorizontalAlignment.Right}
+            sRowFilterCriteria = String.Format("EmpID = '{0}' AND (AttdDate >= '{1}' AND AttdDate <= '{2}')", txtEmpIDs(iEmpIndex).Text, dtFirstDay.ToShortDateString(), dtLastDay.ToShortDateString())
+            oSumOTHours = dsFiltered.Tables("Attendance").Compute("SUM(OvertimeHours)", sRowFilterCriteria)
+            If oSumOTHours IsNot Nothing Then
+                If oSumOTHours.ToString = "" Then
+                    txtOTHours(iEmpIndex).Text = "0"
+                Else
+                    txtOTHours(iEmpIndex).Text = oSumOTHours.ToString
+                End If
+            Else
+                txtOTHours(iEmpIndex).Text = "0"
+            End If
+
+            txtOTDays(iEmpIndex) = New TextBox() With {
+                                        .Enabled = False,
+                                        .Size = New Size(35, 20),
+                                        .Location = New Point(iOTDaysXLocation, iYLocation),
+                                        .TextAlign = HorizontalAlignment.Right}
+            txtOTDays(iEmpIndex).Text = Math.Round((((CDbl(txtOTHours(iEmpIndex).Text)) * 1.5) / 8), 2, MidpointRounding.AwayFromZero)
+
+            txtTotalDays(iEmpIndex) = New TextBox() With {
+                                        .Enabled = False,
+                                        .Size = New Size(35, 20),
+                                        .Location = New Point(iTotalDaysXLocation, iYLocation),
+                                        .TextAlign = HorizontalAlignment.Right}
+            txtTotalDays(iEmpIndex).Text = (CInt(txtPresent(iEmpIndex).Text) + CDbl(txtOTDays(iEmpIndex).Text))
+
+            txtBasicSalary(iEmpIndex) = New TextBox()
+            txtBasicSalary(iEmpIndex).Enabled = False
+            txtBasicSalary(iEmpIndex).Size = New Size(60, 20)
+            txtBasicSalary(iEmpIndex).Location = New Point(iBasicSalaryXLocation, iYLocation)
+            txtBasicSalary(iEmpIndex).TextAlign = HorizontalAlignment.Right
+            txtBasicSalary(iEmpIndex).Text = FormatCurrency(dvEmpRow.Item("BasicSalary").ToString)
+
+            txtGrossPay(iEmpIndex) = New TextBox()
+            txtGrossPay(iEmpIndex).Enabled = False
+            txtGrossPay(iEmpIndex).Size = New Size(60, 20)
+            txtGrossPay(iEmpIndex).Location = New Point(iGrossPayXLocation, iYLocation)
+            txtGrossPay(iEmpIndex).TextAlign = HorizontalAlignment.Right
+            txtGrossPay(iEmpIndex).Text = FormatCurrency(Math.Round((txtTotalDays(iEmpIndex).Text * CDbl(txtBasicSalary(iEmpIndex).Text)) / txtNumDaysInMonth.Text, 2, MidpointRounding.AwayFromZero))
+            dTotalGrossPay += CDbl(txtGrossPay(iEmpIndex).Text)
+
+            txtAttdBonus(iEmpIndex) = New TextBox()
+            txtAttdBonus(iEmpIndex).Enabled = False
+            txtAttdBonus(iEmpIndex).Size = New Size(50, 20)
+            txtAttdBonus(iEmpIndex).Location = New Point(iAttdBonusXLocation, iYLocation)
+            txtAttdBonus(iEmpIndex).TextAlign = HorizontalAlignment.Right
+            If CDbl(txtNumDaysInMonth.Text) = CDbl(txtPresent(iEmpIndex).Text) Then
+                txtAttdBonus(iEmpIndex).Text = FormatCurrency(100)
+            Else
+                txtAttdBonus(iEmpIndex).Text = FormatCurrency(0)
+            End If
+
+            txtNSBFAllow(iEmpIndex) = New TextBox()
+            txtNSBFAllow(iEmpIndex).Enabled = False
+            txtNSBFAllow(iEmpIndex).Size = New Size(60, 20)
+            txtNSBFAllow(iEmpIndex).Location = New Point(iNSBFXLocation, iYLocation)
+            txtNSBFAllow(iEmpIndex).TextAlign = HorizontalAlignment.Right
+            ' execute query to filter and retrieve matching records for breakfast & night shift allowances
+            Try
+                Using myConnection As New OleDb.OleDbConnection(AppMainWindow.p_sConnectionString)
+                    myConnection.Open()
+
+                    sQuery = "SELECT * FROM ATTENDANCE WHERE TimeValue(StartTime) < #08:00:00 AM# AND EmpID=@EmpID AND (AttdDate >= @FirstDay AND AttdDate <= @LastDay)"
+
+                    Using dbCommand As OleDb.OleDbCommand = New OleDb.OleDbCommand(sQuery, myConnection)
+                        dbCommand.Parameters.AddWithValue("@EmpID", txtEmpIDs(iEmpIndex).Text)
+                        dbCommand.Parameters.AddWithValue("@FirstDay", DateSerial(dtPayrollForMonth.Year, dtPayrollForMonth.Month, 1))
+                        dbCommand.Parameters.AddWithValue("@LastDay", DateSerial(dtPayrollForMonth.Year, dtPayrollForMonth.Month + 1, 0))
+
+                        dataAdapter.SelectCommand = dbCommand
+                        dataAdapter.Fill(dsAttd, "Attendance")
+                        iBFAllowance = dsAttd.Tables("Attendance").Rows.Count
+                    End Using
+
+                    sQuery = "SELECT * FROM ATTENDANCE WHERE TimeValue(EndTime) > #07:00:00 PM# AND EmpID=@EmpID AND (AttdDate >= @FirstDay AND AttdDate <= @LastDay)"
+
+                    Using dbCommand As OleDb.OleDbCommand = New OleDb.OleDbCommand(sQuery, myConnection)
+                        dbCommand.Parameters.AddWithValue("@EmpID", txtEmpIDs(iEmpIndex).Text)
+                        dbCommand.Parameters.AddWithValue("@FirstDay", DateSerial(dtPayrollForMonth.Year, dtPayrollForMonth.Month, 1))
+                        dbCommand.Parameters.AddWithValue("@LastDay", DateSerial(dtPayrollForMonth.Year, dtPayrollForMonth.Month + 1, 0))
+
+                        dataAdapter.SelectCommand = dbCommand
+                        dataAdapter.Fill(dsAttd, "Attendance")
+                        iNSAllowance = dsAttd.Tables("Attendance").Rows.Count
+                    End Using
+                End Using
+            Catch localException As Exception
+                MsgBox(localException.ToString)
+            End Try
+            txtNSBFAllow(iEmpIndex).Text = FormatCurrency((iNSAllowance + iBFAllowance) * 100)
+
+            txtNetPay(iEmpIndex) = New TextBox()
+            txtNetPay(iEmpIndex).Enabled = False
+            txtNetPay(iEmpIndex).Size = New Size(60, 20)
+            txtNetPay(iEmpIndex).Location = New Point(iNetPayXLocation, iYLocation)
+            txtNetPay(iEmpIndex).TextAlign = HorizontalAlignment.Right
+            Dim dNetPay As Double = 0
+            dNetPay = CDbl(txtGrossPay(iEmpIndex).Text) + CDbl(txtAttdBonus(iEmpIndex).Text) + CDbl(txtNSBFAllow(iEmpIndex).Text)
+            txtNetPay(iEmpIndex).Text = FormatCurrency(dNetPay)
+            dTotalNetPay += dNetPay
+
+            txtESIDedn(iEmpIndex) = New TextBox()
+            txtESIDedn(iEmpIndex).Enabled = False
+            txtESIDedn(iEmpIndex).Size = New Size(50, 20)
+            txtESIDedn(iEmpIndex).Location = New Point(iESIDednXLocation, iYLocation)
+            txtESIDedn(iEmpIndex).TextAlign = HorizontalAlignment.Right
+            Dim dESIDedn As Double = 0
+            If (CDbl(txtNetPay(iEmpIndex).Text) > 0) And (CDbl(txtNetPay(iEmpIndex).Text) < 15000) Then
+                dESIDedn = -(Me.Ceiling(dNetPay * 0.0175))
+            Else
+                dESIDedn = 0
+            End If
+            txtESIDedn(iEmpIndex).Text = FormatCurrency(dESIDedn)
+            dTotalESIDedn += dESIDedn
+
+            txtSalAdvDedn(iEmpIndex) = New TextBox()
+            txtSalAdvDedn(iEmpIndex).Enabled = False
+            txtSalAdvDedn(iEmpIndex).Size = New Size(50, 20)
+            txtSalAdvDedn(iEmpIndex).Location = New Point(iSalAdvDednXLocation, iYLocation)
+            txtSalAdvDedn(iEmpIndex).TextAlign = HorizontalAlignment.Right
+            dTotalSalAdvForEmp = 0
+            For Each dvSalAdvRow In dvSalAdvances(iEmpIndex)
+                dTotalSalAdvForEmp += -(CDbl(dvSalAdvRow.Item("AdvPaybackAmtPerMth").ToString))
+            Next
+            If dNetPay <= 0 Then
+                dTotalSalAdvForEmp = 0
+            End If
+            txtSalAdvDedn(iEmpIndex).Text = FormatCurrency(dTotalSalAdvForEmp)
+            dTotalAdvDedn += dTotalSalAdvForEmp
+
+            txtProfTax(iEmpIndex) = New TextBox()
+            txtProfTax(iEmpIndex).Enabled = False
+            txtProfTax(iEmpIndex).Size = New Size(50, 20)
+            txtProfTax(iEmpIndex).Location = New Point(iProfTaxXLocation, iYLocation)
+            txtProfTax(iEmpIndex).TextAlign = HorizontalAlignment.Right
+            Dim dProfTax As Double = 0
+            If (CDbl(txtNetPay(iEmpIndex).Text) > 9999) And (CDbl(txtNetPay(iEmpIndex).Text) < 15000) Then
+                dProfTax = -(150)
+            ElseIf (CDbl(txtnetpay(iempindex).text) > 14999) Then
+                dProfTax = -(200)
+            Else
+                dProfTax = 0
+            End If
+            txtProfTax(iEmpIndex).Text = FormatCurrency(dProfTax)
+            dTotalProfTax += dProfTax
+
+            txtSalaryToPay(iEmpIndex) = New TextBox()
+            txtSalaryToPay(iEmpIndex).Enabled = False
+            txtSalaryToPay(iEmpIndex).Size = New Size(60, 20)
+            txtSalaryToPay(iEmpIndex).Location = New Point(iSalToPayXLocation, iYLocation)
+            txtSalaryToPay(iEmpIndex).TextAlign = HorizontalAlignment.Right
+            Dim dSalToPay As Double = 0
+            dSalToPay = (CDbl(txtNetPay(iEmpIndex).Text) + CDbl(txtESIDedn(iEmpIndex).Text) + CDbl(txtSalAdvDedn(iEmpIndex).Text) + CDbl(txtProfTax(iEmpIndex).Text))
+            dSalToPay = Math.Round(dSalToPay, 0, MidpointRounding.AwayFromZero)
+            txtSalaryToPay(iEmpIndex).Text = FormatCurrency(dSalToPay)
+            dTotalAmtToPay += dSalToPay
+
+            txtSalaryPaid(iEmpIndex) = New TextBox()
+            txtSalaryPaid(iEmpIndex).Enabled = False
+            txtSalaryPaid(iEmpIndex).Size = New Size(60, 20)
+            txtSalaryPaid(iEmpIndex).Location = New Point(iSalPaidXLocation, iYLocation)
+            txtSalaryPaid(iEmpIndex).TextAlign = HorizontalAlignment.Right
+            txtSalaryPaid(iEmpIndex).Text = FormatCurrency(Me.Ceiling(dSalToPay, 10))
+            dTotalSalaryPaid += Me.Ceiling(dSalToPay, 10)
+
+            txtESIEmployerContrib(iEmpIndex) = New TextBox()
+            txtESIEmployerContrib(iEmpIndex).Enabled = False
+            txtESIEmployerContrib(iEmpIndex).Size = New Size(60, 20)
+            txtESIEmployerContrib(iEmpIndex).Location = New Point(iESIEmplContrXLocation, iYLocation)
+            txtESIEmployerContrib(iEmpIndex).TextAlign = HorizontalAlignment.Right
+            Dim dESIEmplContr As Double = 0
+            dESIEmplContr = -(Me.Ceiling(dNetPay * 0.0475, 1))
+            If dNetPay <= 0 Then
+                txtESIEmployerContrib(iEmpIndex).Text = FormatCurrency(0)
+            Else
+                txtESIEmployerContrib(iEmpIndex).Text = FormatCurrency(dESIEmplContr)
+            End If
+            dTotalESIEmplContr += dESIEmplContr
 
             grpSalAbstract.Controls.Add(txtEmpIDs(iEmpIndex))
             grpSalAbstract.Controls.Add(txtEmpNames(iEmpIndex))
             grpSalAbstract.Controls.Add(txtPresent(iEmpIndex))
             grpSalAbstract.Controls.Add(txtAbsent(iEmpIndex))
+            grpSalAbstract.Controls.Add(txtOTHours(iEmpIndex))
+            grpSalAbstract.Controls.Add(txtOTDays(iEmpIndex))
+            grpSalAbstract.Controls.Add(txtTotalDays(iEmpIndex))
+            grpSalAbstract.Controls.Add(txtBasicSalary(iEmpIndex))
+            grpSalAbstract.Controls.Add(txtGrossPay(iEmpIndex))
+            grpSalAbstract.Controls.Add(txtAttdBonus(iEmpIndex))
+            grpSalAbstract.Controls.Add(txtNSBFAllow(iEmpIndex))
+            grpSalAbstract.Controls.Add(txtNetPay(iEmpIndex))
+            grpSalAbstract.Controls.Add(txtESIDedn(iEmpIndex))
+            grpSalAbstract.Controls.Add(txtSalAdvDedn(iEmpIndex))
+            grpSalAbstract.Controls.Add(txtProfTax(iEmpIndex))
+            grpSalAbstract.Controls.Add(txtSalaryToPay(iEmpIndex))
+            grpSalAbstract.Controls.Add(txtSalaryPaid(iEmpIndex))
+            grpSalAbstract.Controls.Add(txtESIEmployerContrib(iEmpIndex))
 
             iYLocation = iYLocation + 25
         Next
+        txtTotalGrossPay.Text = FormatCurrency(dTotalGrossPay)
+        txtTotalNetPay.Text = FormatCurrency(dTotalNetPay)
+        txtTotalESIDedn.Text = FormatCurrency(dTotalESIDedn)
+        txtTotalAdvDedn.Text = FormatCurrency(dTotalAdvDedn)
+        txtTotalProfTax.Text = FormatCurrency(dTotalProfTax)
+        txtTotalAmt.Text = FormatCurrency(dTotalAmtToPay)
+        txtTotalSalPaid.Text = FormatCurrency(dTotalSalaryPaid)
+        txtTotalESIEmplContr.Text = FormatCurrency(dTotalESIEmplContr)
+
+        If dTotalSalaryPaid <= 0 Then
+            AppMainWindow.StatusBarLabel1.Text = "No payroll data available to generate payroll for this month - " & dtPayrollForMonth.ToString("MMM-yyyy") & "!"
+            AppMainWindow.StatusBarLabel1.ForeColor = Color.Red
+            btnSave.Visible = False
+            btnCancel.Visible = False
+            AppMainWindow.DisablePrintMenuItems()
+        Else
+            btnSave.Visible = True
+            btnCancel.Visible = True
+            AppMainWindow.EnablePrintMenuItems()
+        End If
+
+        grpSalAbstract.Visible = True
+    End Sub
+
+    Private Sub cmbPayrollForMonth_TextChanged(sender As Object, e As EventArgs) Handles cmbPayrollForMonth.TextChanged
+        Dim sMonthAndYear As String, iNumDaysInMonth As Integer, dtMonth As DateTime
+
+        If cmbPayrollForMonth.SelectedIndex >= 0 Then
+            sMonthAndYear = cmbPayrollForMonth.SelectedItem.ToString
+            dtMonth = DateTime.Parse(sMonthAndYear)
+            iNumDaysInMonth = DateTime.DaysInMonth(dtMonth.Year, dtMonth.Month)
+            txtNumDaysInMonth.Text = iNumDaysInMonth
+        End If
+    End Sub
+
+    Public Function Ceiling(ByVal dInputValue As Double, Optional ByVal dFactor As Double = 1) As Double
+        Ceiling = (Int(dInputValue / dFactor) - (dInputValue / dFactor - Int(dInputValue / dFactor) > 0)) * dFactor
+    End Function
+
+    Public Function Floor(ByVal dInputValue As Double, Optional ByVal dFactor As Double = 1) As Double
+        Floor = (Int(dInputValue / dFactor) - (dInputValue / dFactor - Int(dInputValue / dFactor) > 0)) * dFactor
+    End Function
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Dim dtPayrollMonth As DateTime
+
+        dtPayrollMonth = DateTime.Parse(cmbPayrollForMonth.SelectedItem.ToString)
+        Me.KIPayrollDataSet.SalaryCalculation.DefaultView.RowFilter = "PayMonth = '" & dtPayrollMonth.ToString("MMM-yyyy") & "'"
+        If Me.KIPayrollDataSet.SalaryCalculation.DefaultView.Count > 0 Then
+            MsgBox("Payroll calculations for " & dtPayrollMonth.ToString("MMM-yyyy") & " already exists!")
+        Else
+            ' Insert code to iterate through textboxes and insert each employee's payroll calculation into the SalaryCalculation table
+            Dim dvEmpMaster As DataView
+
+            dvEmpMaster = New DataView(Me.KIPayrollDataSet.EmployeeMaster, "EmpStatus = 'Active'", "", DataViewRowState.CurrentRows)
+            For iEmpIndex = 0 To dvEmpMaster.Count - 1
+                Try
+                    Me.SalaryCalculationTableAdapter.Insert(txtEmpIDs(iEmpIndex).Text, dtPayrollMonth.ToString("MMM-yyyy"), txtPresent(iEmpIndex).Text,
+                                                            txtAbsent(iEmpIndex).Text, txtOTHours(iEmpIndex).Text, txtOTDays(iEmpIndex).Text,
+                                                            txtTotalDays(iEmpIndex).Text, txtNumDaysInMonth.Text, txtGrossPay(iEmpIndex).Text,
+                                                            txtAttdBonus(iEmpIndex).Text, txtNSBFAllow(iEmpIndex).Text, txtNetPay(iEmpIndex).Text,
+                                                            txtESIDedn(iEmpIndex).Text, txtSalAdvDedn(iEmpIndex).Text, txtProfTax(iEmpIndex).Text,
+                                                            txtSalaryToPay(iEmpIndex).Text, txtSalaryPaid(iEmpIndex).Text, txtESIEmployerContrib(iEmpIndex).Text)
+                Catch ex As Exception
+                    MsgBox("Insert failed due to: " & ex.Message)
+                End Try
+
+                ' Remove & dispose off the dynamically created controls once the payroll run record has been saved to the database
+                Me.grpSalAbstract.Controls.Remove(txtEmpIDs(iEmpIndex))
+                txtEmpIDs(iEmpIndex).Dispose()
+                Me.grpSalAbstract.Controls.Remove(txtEmpNames(iEmpIndex))
+                txtEmpNames(iEmpIndex).Dispose()
+                Me.grpSalAbstract.Controls.Remove(txtPresent(iEmpIndex))
+                txtPresent(iEmpIndex).Dispose()
+                Me.grpSalAbstract.Controls.Remove(txtAbsent(iEmpIndex))
+                txtAbsent(iEmpIndex).Dispose()
+                Me.grpSalAbstract.Controls.Remove(txtOTHours(iEmpIndex))
+                txtOTHours(iEmpIndex).Dispose()
+                Me.grpSalAbstract.Controls.Remove(txtOTDays(iEmpIndex))
+                txtOTDays(iEmpIndex).Dispose()
+                Me.grpSalAbstract.Controls.Remove(txtTotalDays(iEmpIndex))
+                txtTotalDays(iEmpIndex).Dispose()
+                Me.grpSalAbstract.Controls.Remove(txtGrossPay(iEmpIndex))
+                txtGrossPay(iEmpIndex).Dispose()
+                Me.grpSalAbstract.Controls.Remove(txtAttdBonus(iEmpIndex))
+                txtAttdBonus(iEmpIndex).Dispose()
+                Me.grpSalAbstract.Controls.Remove(txtNSBFAllow(iEmpIndex))
+                txtNSBFAllow(iEmpIndex).Dispose()
+                Me.grpSalAbstract.Controls.Remove(txtNetPay(iEmpIndex))
+                txtNetPay(iEmpIndex).Dispose()
+                Me.grpSalAbstract.Controls.Remove(txtESIDedn(iEmpIndex))
+                txtESIDedn(iEmpIndex).Dispose()
+                Me.grpSalAbstract.Controls.Remove(txtSalAdvDedn(iEmpIndex))
+                txtSalAdvDedn(iEmpIndex).Dispose()
+                Me.grpSalAbstract.Controls.Remove(txtProfTax(iEmpIndex))
+                txtProfTax(iEmpIndex).Dispose()
+                Me.grpSalAbstract.Controls.Remove(txtSalaryToPay(iEmpIndex))
+                txtSalaryToPay(iEmpIndex).Dispose()
+                Me.grpSalAbstract.Controls.Remove(txtSalaryPaid(iEmpIndex))
+                txtSalaryPaid(iEmpIndex).Dispose()
+                Me.grpSalAbstract.Controls.Remove(txtESIEmployerContrib(iEmpIndex))
+                txtESIEmployerContrib(iEmpIndex).Dispose()
+            Next
+        End If
+        btnSave.Enabled = False
+        btnCancel.Enabled = False
+        grpSalAbstract.Visible = False
     End Sub
 End Class

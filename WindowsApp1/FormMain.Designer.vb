@@ -28,17 +28,19 @@ Partial Class AppMainWindow
         Me.SalaryAdvancesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AttendanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PayrollToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PrintToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.StatusBarLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.GeneratePayrollToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PrintSalaryAbstractToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PrintSalarySlipsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmpInfoToolStripMenuItem, Me.PayrollToolStripMenuItem, Me.PrintToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmpInfoToolStripMenuItem, Me.PayrollToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1063, 24)
@@ -72,16 +74,10 @@ Partial Class AppMainWindow
         '
         'PayrollToolStripMenuItem
         '
+        Me.PayrollToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GeneratePayrollToolStripMenuItem, Me.PrintSalaryAbstractToolStripMenuItem, Me.PrintSalarySlipsToolStripMenuItem})
         Me.PayrollToolStripMenuItem.Name = "PayrollToolStripMenuItem"
-        Me.PayrollToolStripMenuItem.Size = New System.Drawing.Size(105, 20)
-        Me.PayrollToolStripMenuItem.Text = "&Generate Payroll"
-        '
-        'PrintToolStripMenuItem
-        '
-        Me.PrintToolStripMenuItem.Enabled = False
-        Me.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem"
-        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
-        Me.PrintToolStripMenuItem.Text = "&Print"
+        Me.PayrollToolStripMenuItem.Size = New System.Drawing.Size(55, 20)
+        Me.PayrollToolStripMenuItem.Text = "P&ayroll"
         '
         'ExitToolStripMenuItem
         '
@@ -103,6 +99,24 @@ Partial Class AppMainWindow
         Me.StatusBarLabel1.Name = "StatusBarLabel1"
         Me.StatusBarLabel1.Size = New System.Drawing.Size(291, 17)
         Me.StatusBarLabel1.Text = "Welcome to the Krithika Industries Payroll Application"
+        '
+        'GeneratePayrollToolStripMenuItem
+        '
+        Me.GeneratePayrollToolStripMenuItem.Name = "GeneratePayrollToolStripMenuItem"
+        Me.GeneratePayrollToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.GeneratePayrollToolStripMenuItem.Text = "Generate Payroll"
+        '
+        'PrintSalaryAbstractToolStripMenuItem
+        '
+        Me.PrintSalaryAbstractToolStripMenuItem.Name = "PrintSalaryAbstractToolStripMenuItem"
+        Me.PrintSalaryAbstractToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PrintSalaryAbstractToolStripMenuItem.Text = "Print Salary Abstract"
+        '
+        'PrintSalarySlipsToolStripMenuItem
+        '
+        Me.PrintSalarySlipsToolStripMenuItem.Name = "PrintSalarySlipsToolStripMenuItem"
+        Me.PrintSalarySlipsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PrintSalarySlipsToolStripMenuItem.Text = "Print Salary Slips"
         '
         'AppMainWindow
         '
@@ -128,11 +142,13 @@ Partial Class AppMainWindow
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents EmpInfoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PayrollToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents PrintToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EmployeeMasterToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SalaryAdvancesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AttendanceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents StatusBarLabel1 As ToolStripStatusLabel
+    Friend WithEvents GeneratePayrollToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PrintSalaryAbstractToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PrintSalarySlipsToolStripMenuItem As ToolStripMenuItem
 End Class

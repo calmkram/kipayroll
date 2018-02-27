@@ -4614,7 +4614,7 @@ Namespace KIPayrollDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.OleDb.OleDbConnection()
-            Me._connection.ConnectionString = Global.WindowsApp1.My.MySettings.Default.KIPayrollConnectionString
+            Me._connection.ConnectionString = Global.KIPayroll.My.MySettings.Default.KIPayrollConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -5081,7 +5081,7 @@ Namespace KIPayrollDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.OleDb.OleDbConnection()
-            Me._connection.ConnectionString = Global.WindowsApp1.My.MySettings.Default.KIPayrollConnectionString
+            Me._connection.ConnectionString = Global.KIPayroll.My.MySettings.Default.KIPayrollConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -5547,7 +5547,7 @@ Namespace KIPayrollDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.OleDb.OleDbConnection()
-            Me._connection.ConnectionString = Global.WindowsApp1.My.MySettings.Default.KIPayrollConnectionString
+            Me._connection.ConnectionString = Global.KIPayroll.My.MySettings.Default.KIPayrollConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -6066,7 +6066,7 @@ Namespace KIPayrollDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("PayMonth", Global.System.Data.OleDb.OleDbType.VarWChar, 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "PayMonth", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Present", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Present", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Absent", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "Absent", Global.System.Data.DataRowVersion.Current, false, Nothing))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("OvertimeHours", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OvertimeHours", Global.System.Data.DataRowVersion.Current, false, Nothing))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("OvertimeHours", Global.System.Data.OleDb.OleDbType.[Double], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OvertimeHours", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("OvertimeDays", Global.System.Data.OleDb.OleDbType.[Double], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "OvertimeDays", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("TotalDays", Global.System.Data.OleDb.OleDbType.[Double], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "TotalDays", Global.System.Data.DataRowVersion.Current, false, Nothing))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("NumDaysInMonth", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0,Byte), CType(0,Byte), "NumDaysInMonth", Global.System.Data.DataRowVersion.Current, false, Nothing))
@@ -6163,7 +6163,7 @@ Namespace KIPayrollDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.OleDb.OleDbConnection()
-            Me._connection.ConnectionString = Global.WindowsApp1.My.MySettings.Default.KIPayrollConnectionString
+            Me._connection.ConnectionString = Global.KIPayroll.My.MySettings.Default.KIPayrollConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -6406,7 +6406,7 @@ Namespace KIPayrollDataSetTableAdapters
                     ByVal PayMonth As String,  _
                     ByVal Present As Global.System.Nullable(Of Integer),  _
                     ByVal Absent As Global.System.Nullable(Of Integer),  _
-                    ByVal OvertimeHours As Global.System.Nullable(Of Integer),  _
+                    ByVal OvertimeHours As Global.System.Nullable(Of Double),  _
                     ByVal OvertimeDays As Global.System.Nullable(Of Double),  _
                     ByVal TotalDays As Global.System.Nullable(Of Double),  _
                     ByVal NumDaysInMonth As Global.System.Nullable(Of Integer),  _
@@ -6441,7 +6441,7 @@ Namespace KIPayrollDataSetTableAdapters
                 Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
             If (OvertimeHours.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(4).Value = CType(OvertimeHours.Value,Integer)
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(OvertimeHours.Value,Double)
             Else
                 Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
@@ -7044,7 +7044,7 @@ Namespace KIPayrollDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.OleDb.OleDbConnection()
-            Me._connection.ConnectionString = Global.WindowsApp1.My.MySettings.Default.KIPayrollConnectionString
+            Me._connection.ConnectionString = Global.KIPayroll.My.MySettings.Default.KIPayrollConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -7661,7 +7661,7 @@ Namespace KIPayrollDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.OleDb.OleDbConnection()
-            Me._connection.ConnectionString = Global.WindowsApp1.My.MySettings.Default.KIPayrollConnectionString
+            Me._connection.ConnectionString = Global.KIPayroll.My.MySettings.Default.KIPayrollConnectionString
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
