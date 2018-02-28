@@ -22,20 +22,26 @@ Partial Class AppMainWindow
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.EmpInfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EmployeeMasterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalaryAdvancesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AttendanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PayrollToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.StatusBarLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.GeneratePayrollToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PrintSalaryAbstractToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PrintSalarySlipsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.StatusBarLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.KIPayrollDataSet = New KIPayroll.KIPayrollDataSet()
+        Me.SalaryCalculationBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.SalaryCalculationTableAdapter = New KIPayroll.KIPayrollDataSetTableAdapters.SalaryCalculationTableAdapter()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
+        CType(Me.KIPayrollDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SalaryCalculationBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -79,6 +85,24 @@ Partial Class AppMainWindow
         Me.PayrollToolStripMenuItem.Size = New System.Drawing.Size(55, 20)
         Me.PayrollToolStripMenuItem.Text = "P&ayroll"
         '
+        'GeneratePayrollToolStripMenuItem
+        '
+        Me.GeneratePayrollToolStripMenuItem.Name = "GeneratePayrollToolStripMenuItem"
+        Me.GeneratePayrollToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.GeneratePayrollToolStripMenuItem.Text = "Generate Payroll"
+        '
+        'PrintSalaryAbstractToolStripMenuItem
+        '
+        Me.PrintSalaryAbstractToolStripMenuItem.Name = "PrintSalaryAbstractToolStripMenuItem"
+        Me.PrintSalaryAbstractToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PrintSalaryAbstractToolStripMenuItem.Text = "Print Salary Abstract"
+        '
+        'PrintSalarySlipsToolStripMenuItem
+        '
+        Me.PrintSalarySlipsToolStripMenuItem.Name = "PrintSalarySlipsToolStripMenuItem"
+        Me.PrintSalarySlipsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PrintSalarySlipsToolStripMenuItem.Text = "Print Salary Slips"
+        '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
@@ -100,23 +124,19 @@ Partial Class AppMainWindow
         Me.StatusBarLabel1.Size = New System.Drawing.Size(291, 17)
         Me.StatusBarLabel1.Text = "Welcome to the Krithika Industries Payroll Application"
         '
-        'GeneratePayrollToolStripMenuItem
+        'KIPayrollDataSet
         '
-        Me.GeneratePayrollToolStripMenuItem.Name = "GeneratePayrollToolStripMenuItem"
-        Me.GeneratePayrollToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GeneratePayrollToolStripMenuItem.Text = "Generate Payroll"
+        Me.KIPayrollDataSet.DataSetName = "KIPayrollDataSet"
+        Me.KIPayrollDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
-        'PrintSalaryAbstractToolStripMenuItem
+        'SalaryCalculationBindingSource
         '
-        Me.PrintSalaryAbstractToolStripMenuItem.Name = "PrintSalaryAbstractToolStripMenuItem"
-        Me.PrintSalaryAbstractToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.PrintSalaryAbstractToolStripMenuItem.Text = "Print Salary Abstract"
+        Me.SalaryCalculationBindingSource.DataMember = "SalaryCalculation"
+        Me.SalaryCalculationBindingSource.DataSource = Me.KIPayrollDataSet
         '
-        'PrintSalarySlipsToolStripMenuItem
+        'SalaryCalculationTableAdapter
         '
-        Me.PrintSalarySlipsToolStripMenuItem.Name = "PrintSalarySlipsToolStripMenuItem"
-        Me.PrintSalarySlipsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.PrintSalarySlipsToolStripMenuItem.Text = "Print Salary Slips"
+        Me.SalaryCalculationTableAdapter.ClearBeforeFill = True
         '
         'AppMainWindow
         '
@@ -134,6 +154,8 @@ Partial Class AppMainWindow
         Me.MenuStrip1.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        CType(Me.KIPayrollDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SalaryCalculationBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -151,4 +173,7 @@ Partial Class AppMainWindow
     Friend WithEvents GeneratePayrollToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PrintSalaryAbstractToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PrintSalarySlipsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SalaryCalculationBindingSource As BindingSource
+    Friend WithEvents KIPayrollDataSet As KIPayrollDataSet
+    Friend WithEvents SalaryCalculationTableAdapter As KIPayrollDataSetTableAdapters.SalaryCalculationTableAdapter
 End Class

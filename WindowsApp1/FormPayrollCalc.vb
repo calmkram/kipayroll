@@ -37,6 +37,12 @@
         grpSalAbstract.Visible = False
         btnSave.Visible = False
         btnCancel.Visible = False
+        btnGeneratePayroll.Enabled = True
+        btnClose.Enabled = True
+        Me.ControlBox = True
+        AppMainWindow.ControlBox = True
+        AppMainWindow.EnablePrintMenuItems()
+        AppMainWindow.ExitToolStripMenuItem.Enabled = True
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -582,4 +588,18 @@
             Next
         End If
     End Sub
+
+    Public Function GetPayrollForMonth() As String
+        GetPayrollForMonth = cmbPayrollForMonth.SelectedItem.ToString
+    End Function
+
+    Public Function IsPayrollMonthSelected() As Boolean
+        If cmbPayrollForMonth.SelectedIndex <= 0 Then
+            IsPayrollMonthSelected = False
+        ElseIf cmbPayrollForMonth.SelectedIndex > 0 Then
+            IsPayrollMonthSelected = True
+        Else
+            IsPayrollMonthSelected = False
+        End If
+    End Function
 End Class

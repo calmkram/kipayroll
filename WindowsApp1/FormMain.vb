@@ -23,6 +23,8 @@ Public Class AppMainWindow
     End Sub
 
     Private Sub AppMainWindow_Load(sender As Object, e As EventArgs) Handles Me.Load
+        'TODO: This line of code loads data into the 'KIPayrollDataSet.SalaryCalculation' table. You can move, or remove it, as needed.
+        Me.SalaryCalculationTableAdapter.Fill(Me.KIPayrollDataSet.SalaryCalculation)
         p_sConnectionString = My.Settings.KIPayrollConnectionString
 
         DisablePrintMenuItems()
@@ -64,4 +66,23 @@ Public Class AppMainWindow
         End If
         AskExitQuestion = True
     End Function
+
+    Private Sub PrintSalaryAbstractToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintSalaryAbstractToolStripMenuItem.Click
+        If Application.OpenForms().OfType(Of PayrollCalc).Any Then
+            If PayrollCalc.IsPayrollMonthSelected() Then
+                Dim sPayrollForMonth As String, dtPayrollForMonth As DateTime
+
+                sPayrollForMonth = PayrollCalc.GetPayrollForMonth()
+                dtPayrollForMonth = DateTime.Parse(sPayrollForMonth)
+
+                ReportsContainer.MdiParent = AppMainWindow.ActiveForm
+                ReportsContainer.SetReportName("Salary Abstract for " & dtPayrollForMonth.ToString("MMMM yyyy"))
+                ReportsContainer.Show()
+            Else
+
+            End If
+        Else
+
+        End If
+    End Sub
 End Class
