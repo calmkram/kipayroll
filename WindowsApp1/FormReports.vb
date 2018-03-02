@@ -8,13 +8,19 @@ Public Class ReportsContainer
 
         Me.SalaryAbstractQueryTableAdapter.Fill(Me.KIPayrollDataSet.SalaryAbstractQuery)
 
-        Dim parRepName As New ReportParameter("parReportName", p_sReportName)
-
         Me.rptSalaryAbstract.Dock = DockStyle.Fill
+
+        Dim parRepName As New ReportParameter("parReportName", p_sReportName)
         Me.rptSalaryAbstract.LocalReport.SetParameters(parRepName)
+
         rdsConsolidatedSalaryAbstractDataset = New ReportDataSource("ConsolidatedSalaryAbstractDataset", Me.KIPayrollDataSet.SalaryAbstractQuery.CopyToDataTable)
         Me.rptSalaryAbstract.LocalReport.DataSources.Clear()
         Me.rptSalaryAbstract.LocalReport.DataSources.Add(rdsConsolidatedSalaryAbstractDataset)
+
+        Dim myPgSettings As New Printing.PageSettings() With {
+                    .Landscape = True,
+                    .Margins = New Printing.Margins(6, 3, 8, 8)}
+        Me.rptSalaryAbstract.SetPageSettings(myPgSettings)
         Me.rptSalaryAbstract.RefreshReport()
     End Sub
 

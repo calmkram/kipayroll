@@ -116,52 +116,52 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.4074cm</Width>
+                  <Width>1.37552cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.4074cm</Width>
+                  <Width>1.32261cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.4074cm</Width>
+                  <Width>1.71948cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.4074cm</Width>
+                  <Width>1.69302cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.4074cm</Width>
+                  <Width>1.26969cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.4074cm</Width>
+                  <Width>1.90462cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.4074cm</Width>
+                  <Width>1.87823cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.4074cm</Width>
+                  <Width>1.42844cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.4074cm</Width>
+                  <Width>2.01052cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.4074cm</Width>
+                  <Width>2.06344cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.4074cm</Width>
+                  <Width>1.7724cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.4074cm</Width>
+                  <Width>1.7724cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.4074cm</Width>
+                  <Width>1.56073cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.4074cm</Width>
+                  <Width>1.71948cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.4074cm</Width>
+                  <Width>1.69303cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.4074cm</Width>
+                  <Width>2.06344cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -180,6 +180,7 @@
                                   <Value>Present</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -235,6 +236,7 @@
                                   <Value>Absent</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -290,6 +292,7 @@
                                   <Value>Overtime Hours</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -345,6 +348,7 @@
                                   <Value>Overtime Days</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -400,6 +404,7 @@
                                   <Value>Total Days</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -455,6 +460,7 @@
                                   <Value>Basic Salary</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -510,6 +516,7 @@
                                   <Value>Gross Pay</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -565,6 +572,7 @@
                                   <Value>Attd Bonus</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -620,6 +628,7 @@
                                   <Value>Night Shift Or Breakfast Allowance</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -675,6 +684,7 @@
                                   <Value>Net Pay</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -730,6 +740,7 @@
                                   <Value>ESI Deduction</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -785,6 +796,7 @@
                                   <Value>Salary Advance Deduction</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -840,6 +852,7 @@
                                   <Value>Prof Tax</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -895,6 +908,7 @@
                                   <Value>Salary To Pay</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -950,6 +964,7 @@
                                   <Value>Salary Paid</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1005,6 +1020,7 @@
                                   <Value>ESI Employer Contribution</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1065,6 +1081,7 @@
                                   <Value>=Sum(Fields!Present.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                     <Color>DarkBlue</Color>
                                   </Style>
@@ -1121,6 +1138,7 @@
                                   <Value>=Sum(Fields!Absent.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                     <Color>DarkBlue</Color>
                                   </Style>
@@ -1177,6 +1195,7 @@
                                   <Value>=Sum(Fields!OvertimeHours.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                     <Color>DarkBlue</Color>
                                   </Style>
@@ -1233,6 +1252,7 @@
                                   <Value>=Sum(Fields!OvertimeDays.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                     <Color>DarkBlue</Color>
                                   </Style>
@@ -1289,6 +1309,7 @@
                                   <Value>=Sum(Fields!TotalDays.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                     <Color>DarkBlue</Color>
                                   </Style>
@@ -1345,6 +1366,7 @@
                                   <Value>=Sum(Fields!BasicSalary.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>Teal</Color>
@@ -1399,6 +1421,7 @@
                                   <Value>=Sum(Fields!Pay.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>Teal</Color>
@@ -1453,6 +1476,7 @@
                                   <Value>=Sum(Fields!AttdBonus.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>Teal</Color>
@@ -1507,6 +1531,7 @@
                                   <Value>=Sum(Fields!NightShiftOrBreakfastAllow.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>Teal</Color>
@@ -1561,6 +1586,7 @@
                                   <Value>=Sum(Fields!NetPay.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>Teal</Color>
@@ -1615,6 +1641,7 @@
                                   <Value>=Sum(Fields!ESIDeduction.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>Teal</Color>
@@ -1669,6 +1696,7 @@
                                   <Value>=Sum(Fields!SalAdvDeduction.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>Teal</Color>
@@ -1723,6 +1751,7 @@
                                   <Value>=Sum(Fields!ProfTax.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>Teal</Color>
@@ -1777,6 +1806,7 @@
                                   <Value>=Sum(Fields!SalaryToPay.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>Teal</Color>
@@ -1831,6 +1861,7 @@
                                   <Value>=Sum(Fields!SalaryPaid.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>Teal</Color>
@@ -1885,6 +1916,7 @@
                                   <Value>=Sum(Fields!ESIEmployerContribution.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>#333333</Color>
@@ -1944,6 +1976,7 @@
                                   <Value>=Sum(Fields!Present.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>#333333</Color>
                                   </Style>
@@ -1990,6 +2023,7 @@
                                   <Value>=Sum(Fields!Absent.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>#333333</Color>
                                   </Style>
@@ -2036,6 +2070,7 @@
                                   <Value>=Sum(Fields!OvertimeHours.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>#333333</Color>
                                   </Style>
@@ -2082,6 +2117,7 @@
                                   <Value>=Sum(Fields!OvertimeDays.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>#333333</Color>
                                   </Style>
@@ -2128,6 +2164,7 @@
                                   <Value>=Sum(Fields!TotalDays.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>#333333</Color>
                                   </Style>
@@ -2174,6 +2211,7 @@
                                   <Value>=Sum(Fields!BasicSalary.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>#333333</Color>
@@ -2218,6 +2256,7 @@
                                   <Value>=Sum(Fields!Pay.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>#333333</Color>
@@ -2262,6 +2301,7 @@
                                   <Value>=Sum(Fields!AttdBonus.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>#333333</Color>
@@ -2306,6 +2346,7 @@
                                   <Value>=Sum(Fields!NightShiftOrBreakfastAllow.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>#333333</Color>
@@ -2350,6 +2391,7 @@
                                   <Value>=Sum(Fields!NetPay.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>#333333</Color>
@@ -2394,6 +2436,7 @@
                                   <Value>=Sum(Fields!ESIDeduction.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>#333333</Color>
@@ -2438,6 +2481,7 @@
                                   <Value>=Sum(Fields!SalAdvDeduction.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>#333333</Color>
@@ -2482,6 +2526,7 @@
                                   <Value>=Sum(Fields!ProfTax.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>#333333</Color>
@@ -2526,6 +2571,7 @@
                                   <Value>=Sum(Fields!SalaryToPay.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>#333333</Color>
@@ -2570,6 +2616,7 @@
                                   <Value>=Sum(Fields!SalaryPaid.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>#333333</Color>
@@ -2614,6 +2661,7 @@
                                   <Value>=Sum(Fields!ESIEmployerContribution.Value)</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
                                     <Color>#333333</Color>
@@ -2677,7 +2725,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>2.4074cm</Size>
+                    <Size>1.26969cm</Size>
                     <CellContents>
                       <Textbox Name="Textbox35">
                         <CanGrow>true</CanGrow>
@@ -2689,6 +2737,7 @@
                                 <Value>Emp ID</Value>
                                 <Style>
                                   <FontFamily>Tahoma</FontFamily>
+                                  <FontSize>8pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
                               </TextRun>
@@ -2735,7 +2784,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>4.07428cm</Size>
+                        <Size>2.56615cm</Size>
                         <CellContents>
                           <Textbox Name="Textbox33">
                             <CanGrow>true</CanGrow>
@@ -2747,6 +2796,7 @@
                                     <Value>Emp Name</Value>
                                     <Style>
                                       <FontFamily>Tahoma</FontFamily>
+                                      <FontSize>8pt</FontSize>
                                       <FontWeight>Bold</FontWeight>
                                     </Style>
                                   </TextRun>
@@ -2808,7 +2858,7 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>2.4074cm</Size>
+                    <Size>1.26969cm</Size>
                     <CellContents>
                       <Textbox Name="EmpID">
                         <CanGrow>true</CanGrow>
@@ -2820,6 +2870,7 @@
                                 <Value>=Fields!EmpID.Value</Value>
                                 <Style>
                                   <FontFamily>Tahoma</FontFamily>
+                                  <FontSize>8pt</FontSize>
                                   <FontWeight>Normal</FontWeight>
                                   <Color>#333333</Color>
                                 </Style>
@@ -2861,7 +2912,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>4.07428cm</Size>
+                        <Size>2.56615cm</Size>
                         <CellContents>
                           <Textbox Name="EmpName">
                             <CanGrow>true</CanGrow>
@@ -2873,6 +2924,7 @@
                                     <Value>=Fields!EmpName.Value</Value>
                                     <Style>
                                       <FontFamily>Tahoma</FontFamily>
+                                      <FontSize>8pt</FontSize>
                                       <FontWeight>Normal</FontWeight>
                                       <Color>#333333</Color>
                                     </Style>
@@ -2923,7 +2975,7 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>2.4074cm</Size>
+                    <Size>1.26969cm</Size>
                     <CellContents>
                       <Textbox Name="Textbox37">
                         <CanGrow>true</CanGrow>
@@ -2935,6 +2987,7 @@
                                 <Value>Total</Value>
                                 <Style>
                                   <FontFamily>Tahoma</FontFamily>
+                                  <FontSize>8pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                   <Color>#333333</Color>
                                 </Style>
@@ -2969,7 +3022,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>4.07428cm</Size>
+                        <Size>2.56615cm</Size>
                         <CellContents>
                           <Textbox Name="Textbox38">
                             <CanGrow>true</CanGrow>
@@ -2981,6 +3034,7 @@
                                     <Value />
                                     <Style>
                                       <FontFamily>Tahoma</FontFamily>
+                                      <FontSize>8pt</FontSize>
                                       <FontWeight>Bold</FontWeight>
                                       <Color>#333333</Color>
                                     </Style>
@@ -3021,10 +3075,10 @@
             </TablixRowHierarchy>
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>ConsolidatedSalaryAbstractDataset</DataSetName>
-            <Top>2.64584cm</Top>
-            <Left>0.3175cm</Left>
+            <Top>1.98175cm</Top>
+            <Left>0.31753cm</Left>
             <Height>2.67313cm</Height>
-            <Width>45cm</Width>
+            <Width>31.08289cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3042,7 +3096,7 @@
                     <Value>=Parameters!parReportName.Value</Value>
                     <Style>
                       <FontFamily>Tahoma</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -3053,10 +3107,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>ReportName</rd:DefaultName>
-            <Top>1.45203cm</Top>
-            <Left>0.3175cm</Left>
-            <Height>0.83812cm</Height>
-            <Width>45cm</Width>
+            <Top>1.15245cm</Top>
+            <Left>0.31747cm</Left>
+            <Height>0.65291cm</Height>
+            <Width>30.23636cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -3078,7 +3132,7 @@
                     <Value>Krithika Industries</Value>
                     <Style>
                       <FontFamily>Tahoma</FontFamily>
-                      <FontSize>20pt</FontSize>
+                      <FontSize>16pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Color>DarkBlue</Color>
                     </Style>
@@ -3089,10 +3143,10 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>0.26141cm</Top>
+            <Top>0.22613cm</Top>
             <Left>0.3175cm</Left>
-            <Height>1.15562cm</Height>
-            <Width>45cm</Width>
+            <Height>0.7852cm</Height>
+            <Width>30.23633cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -3104,11 +3158,44 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="ExecutionTime">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Globals!ExecutionTime</Value>
+                    <Style>
+                      <FontFamily>Tahoma</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>ExecutionTime</rd:DefaultName>
+            <Top>5.02391cm</Top>
+            <Left>0.3175cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4.60313cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>2.2053in</Height>
+        <Height>2.23497in</Height>
         <Style />
       </Body>
-      <Width>18.49779in</Width>
+      <Width>12.36237in</Width>
       <Page>
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>
