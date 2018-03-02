@@ -140,11 +140,17 @@
         iESIEmplContrXLocation = lblESIEmplContr.Location.X + 3
         iYLocation = lblLine.Location.Y + 10
 
+        'Saving the selected Payroll Month and Year information
         dtPayrollForMonth = DateTime.Parse(cmbPayrollForMonth.SelectedItem.ToString)
 
+        'Creating a DataView of the Employee Master table filtered for 'Active' employees only
         dvEmpMaster = New DataView(Me.KIPayrollDataSet.EmployeeMaster, "EmpStatus = 'Active'", "", DataViewRowState.CurrentRows)
+        'Creating a filtered DataSet copy of the main KIPayrollDataSet
         dsFiltered = Me.KIPayrollDataSet.Copy
+        'Filtering the Salary Advances table to retrieve only "Issued" or "In Progress" advances that should be included in
+        'the payroll calculations
         dsFiltered.Tables("SalaryAdvances").DefaultView.RowFilter = "AdvPaybackStatus NOT LIKE 'Completed'"
+
         iTotalNumSalAdvances = dvEmpMaster.Count * dsFiltered.Tables("SalaryAdvances").DefaultView.Count
         ReDim structEmpSalAdvances(iTotalNumSalAdvances)
 
@@ -459,28 +465,38 @@
     End Function
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        Dim dtPayrollMonth As DateTime, dvEmpMaster As DataView, iIndex As Integer = 0
+        Dim dtPayrollMonth As DateTime, dvEmpMaster As DataView, iIndex As Integer = 0, sEmpMasterID As String
 
         dtPayrollMonth = DateTime.Parse(cmbPayrollForMonth.SelectedItem.ToString)
         Me.KIPayrollDataSet.SalaryCalculation.DefaultView.RowFilter = "PayMonth = '" & dtPayrollMonth.ToString("MMM-yyyy") & "'"
         If Me.KIPayrollDataSet.SalaryCalculation.DefaultView.Count > 0 Then
             MsgBox("Payroll calculations for " & dtPayrollMonth.ToString("MMM-yyyy") & " already exists!")
         Else
-            dvEmpMaster = New DataView(Me.KIPayrollDataSet.EmployeeMaster, "EmpStatus = 'Active'", "", DataViewRowState.CurrentRows)
+            Me.KIPayrollDataSet.EmployeeMaster.DefaultView.RowFilter = "EmpStatus = 'Active'"
 
-            For iEmpIndex = 0 To dvEmpMaster.Count - 1
+            For iEmpIndex = 0 To Me.KIPayrollDataSet.EmployeeMaster.DefaultView.Count - 1
                 'Insert payroll record for each employee into the SalaryCalculation table
                 Try
+                    sEmpMasterID = Me.KIPayrollDataSet.EmployeeMaster.DefaultView.Item(iEmpIndex)("EmpID").ToString
+
                     Me.SalaryCalculationTableAdapter.Insert(txtEmpIDs(iEmpIndex).Text, dtPayrollMonth.ToString("MMM-yyyy"), txtPresent(iEmpIndex).Text,
                                                             txtAbsent(iEmpIndex).Text, txtOTHours(iEmpIndex).Text, txtOTDays(iEmpIndex).Text,
                                                             txtTotalDays(iEmpIndex).Text, txtNumDaysInMonth.Text, txtGrossPay(iEmpIndex).Text,
                                                             txtAttdBonus(iEmpIndex).Text, txtNSBFAllow(iEmpIndex).Text, txtNetPay(iEmpIndex).Text,
                                                             txtESIDedn(iEmpIndex).Text, txtSalAdvDedn(iEmpIndex).Text, txtProfTax(iEmpIndex).Text,
                                                             txtSalaryToPay(iEmpIndex).Text, txtSalaryPaid(iEmpIndex).Text, txtESIEmployerContrib(iEmpIndex).Text)
-                    'If payroll record for each employee is successfully inserted, then check and update Salary Advance records to "In Progress" or "Completed"
+                Catch ex As Exception
+                    Console.WriteLine("Insert failed in Salary Calculation Insert due to: " & ex.Message)
+                    Exit Sub
+                End Try
+
+                'If payroll record for each employee is successfully inserted, then check and update Salary Advance records to "In Progress" or "Completed"
+                'and also calculate the total outstanding salary advance for each employee after the current month's deductions
+                Dim dOutstandingSalAdv As Double = 0, drSalAdvRow As KIPayrollDataSet.SalaryAdvancesRow
+
+                Try
                     For iIndex = 0 To iSalAdvanceCount
                         If structEmpSalAdvances(iIndex).sEmpID = txtEmpIDs(iEmpIndex).Text Then
-                            Dim drSalAdvRow As KIPayrollDataSet.SalaryAdvancesRow
                             drSalAdvRow = Me.KIPayrollDataSet.SalaryAdvances.FindByID(structEmpSalAdvances(iIndex).iID)
                             If drSalAdvRow.EmpID = structEmpSalAdvances(iIndex).sEmpID Then
                                 drSalAdvRow.AdvPaybkRemMonths = structEmpSalAdvances(iIndex).iAdvancePaybackRemainingMonths
@@ -495,7 +511,25 @@
                         End If
                     Next
                 Catch ex As Exception
-                    MsgBox("Insert failed due to: " & ex.Message)
+                    Console.WriteLine("Insert failed in Salary Advances Update due to: " & ex.Message)
+                    Exit Sub
+                End Try
+
+                Try
+                    For Each drSalAdvRow In Me.KIPayrollDataSet.SalaryAdvances
+                        If (drSalAdvRow.EmpID = sEmpMasterID) And
+                            (drSalAdvRow.AdvPaybackStatus = "Issued" Or drSalAdvRow.AdvPaybackStatus = "In Progress") Then
+                            dOutstandingSalAdv += (drSalAdvRow.AdvPaybackAmtPerMth * drSalAdvRow.AdvPaybkRemMonths)
+                        End If
+                    Next
+                    Dim drEmpRow As KIPayrollDataSet.EmployeeMasterRow
+                    drEmpRow = Me.KIPayrollDataSet.EmployeeMaster.FindByEmpID(sEmpMasterID)
+                    drEmpRow.PendingAdvBalance = dOutstandingSalAdv
+                    Me.EmployeeMasterTableAdapter.Update(Me.KIPayrollDataSet.EmployeeMaster)
+                    Me.KIPayrollDataSet.AcceptChanges()
+                    Console.WriteLine("Emp ID: " & sEmpMasterID & " has " & FormatCurrency(dOutstandingSalAdv) & " in Salary Advances outstanding!")
+                Catch ex As Exception
+                    Console.WriteLine("Insert failed in Employee Master Update due to: " & ex.Message)
                     Exit Sub
                 End Try
             Next

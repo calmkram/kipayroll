@@ -30,26 +30,26 @@ Partial Class EmpMaster
         Me.lblEmpName = New System.Windows.Forms.Label()
         Me.txtEmpAddress = New System.Windows.Forms.TextBox()
         Me.lblEmpAddress = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.grpEmpInfo = New System.Windows.Forms.GroupBox()
         Me.txtBasicSalary = New System.Windows.Forms.MaskedTextBox()
         Me.dtpDOD = New System.Windows.Forms.DateTimePicker()
         Me.lblDOD = New System.Windows.Forms.Label()
         Me.txtEmpStatus = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lblEmpStatus = New System.Windows.Forms.Label()
         Me.txtEmpID = New System.Windows.Forms.MaskedTextBox()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.dtpSalaryEffDate = New System.Windows.Forms.DateTimePicker()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblSalEffDate = New System.Windows.Forms.Label()
         Me.dtpDOJ = New System.Windows.Forms.DateTimePicker()
         Me.dtpDOB = New System.Windows.Forms.DateTimePicker()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblBasicSalary = New System.Windows.Forms.Label()
+        Me.lblDOJ = New System.Windows.Forms.Label()
+        Me.lblDOB = New System.Windows.Forms.Label()
         Me.txtPincode = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblPincode = New System.Windows.Forms.Label()
         Me.txtCity = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblCity = New System.Windows.Forms.Label()
         Me.lstbxCurrentEmpList = New System.Windows.Forms.ListBox()
         Me.lblCurrentEmpList = New System.Windows.Forms.Label()
         Me.btnAddEmpInfo = New System.Windows.Forms.Button()
@@ -60,7 +60,7 @@ Partial Class EmpMaster
         Me.EmpInfoArchiveTableAdapter = New KIPayroll.KIPayrollDataSetTableAdapters.EmpInfoArchiveTableAdapter()
         CType(Me.EmployeeMasterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.KIPayrollDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox1.SuspendLayout()
+        Me.grpEmpInfo.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblEmpID
@@ -119,33 +119,33 @@ Partial Class EmpMaster
         Me.lblEmpAddress.TabIndex = 4
         Me.lblEmpAddress.Text = "Home Address:"
         '
-        'GroupBox1
+        'grpEmpInfo
         '
-        Me.GroupBox1.Controls.Add(Me.txtBasicSalary)
-        Me.GroupBox1.Controls.Add(Me.dtpDOD)
-        Me.GroupBox1.Controls.Add(Me.lblDOD)
-        Me.GroupBox1.Controls.Add(Me.txtEmpStatus)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.txtEmpID)
-        Me.GroupBox1.Controls.Add(Me.btnCancel)
-        Me.GroupBox1.Controls.Add(Me.btnSave)
-        Me.GroupBox1.Controls.Add(Me.dtpSalaryEffDate)
-        Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.dtpDOJ)
-        Me.GroupBox1.Controls.Add(Me.dtpDOB)
-        Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.txtPincode)
-        Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.txtCity)
-        Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 13)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(670, 297)
-        Me.GroupBox1.TabIndex = 6
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Employee Information"
+        Me.grpEmpInfo.Controls.Add(Me.txtBasicSalary)
+        Me.grpEmpInfo.Controls.Add(Me.dtpDOD)
+        Me.grpEmpInfo.Controls.Add(Me.lblDOD)
+        Me.grpEmpInfo.Controls.Add(Me.txtEmpStatus)
+        Me.grpEmpInfo.Controls.Add(Me.lblEmpStatus)
+        Me.grpEmpInfo.Controls.Add(Me.txtEmpID)
+        Me.grpEmpInfo.Controls.Add(Me.btnCancel)
+        Me.grpEmpInfo.Controls.Add(Me.btnSave)
+        Me.grpEmpInfo.Controls.Add(Me.dtpSalaryEffDate)
+        Me.grpEmpInfo.Controls.Add(Me.lblSalEffDate)
+        Me.grpEmpInfo.Controls.Add(Me.dtpDOJ)
+        Me.grpEmpInfo.Controls.Add(Me.dtpDOB)
+        Me.grpEmpInfo.Controls.Add(Me.lblBasicSalary)
+        Me.grpEmpInfo.Controls.Add(Me.lblDOJ)
+        Me.grpEmpInfo.Controls.Add(Me.lblDOB)
+        Me.grpEmpInfo.Controls.Add(Me.txtPincode)
+        Me.grpEmpInfo.Controls.Add(Me.lblPincode)
+        Me.grpEmpInfo.Controls.Add(Me.txtCity)
+        Me.grpEmpInfo.Controls.Add(Me.lblCity)
+        Me.grpEmpInfo.Location = New System.Drawing.Point(12, 13)
+        Me.grpEmpInfo.Name = "grpEmpInfo"
+        Me.grpEmpInfo.Size = New System.Drawing.Size(670, 297)
+        Me.grpEmpInfo.TabIndex = 6
+        Me.grpEmpInfo.TabStop = False
+        Me.grpEmpInfo.Text = "Employee Information"
         '
         'txtBasicSalary
         '
@@ -188,14 +188,14 @@ Partial Class EmpMaster
         Me.txtEmpStatus.Size = New System.Drawing.Size(60, 20)
         Me.txtEmpStatus.TabIndex = 23
         '
-        'Label7
+        'lblEmpStatus
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(417, 168)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(89, 13)
-        Me.Label7.TabIndex = 22
-        Me.Label7.Text = "Employee Status:"
+        Me.lblEmpStatus.AutoSize = True
+        Me.lblEmpStatus.Location = New System.Drawing.Point(417, 168)
+        Me.lblEmpStatus.Name = "lblEmpStatus"
+        Me.lblEmpStatus.Size = New System.Drawing.Size(89, 13)
+        Me.lblEmpStatus.TabIndex = 22
+        Me.lblEmpStatus.Text = "Employee Status:"
         '
         'txtEmpID
         '
@@ -239,14 +239,14 @@ Partial Class EmpMaster
         Me.dtpSalaryEffDate.TabIndex = 8
         Me.dtpSalaryEffDate.Value = New Date(2018, 2, 16, 0, 0, 0, 0)
         '
-        'Label6
+        'lblSalEffDate
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(417, 132)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(110, 13)
-        Me.Label6.TabIndex = 19
-        Me.Label6.Text = "Salary Effective Date:"
+        Me.lblSalEffDate.AutoSize = True
+        Me.lblSalEffDate.Location = New System.Drawing.Point(417, 132)
+        Me.lblSalEffDate.Name = "lblSalEffDate"
+        Me.lblSalEffDate.Size = New System.Drawing.Size(110, 13)
+        Me.lblSalEffDate.TabIndex = 19
+        Me.lblSalEffDate.Text = "Salary Effective Date:"
         '
         'dtpDOJ
         '
@@ -272,32 +272,32 @@ Partial Class EmpMaster
         Me.dtpDOB.TabIndex = 5
         Me.dtpDOB.Value = New Date(2018, 2, 16, 0, 0, 0, 0)
         '
-        'Label5
+        'lblBasicSalary
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(417, 95)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(68, 13)
-        Me.Label5.TabIndex = 15
-        Me.Label5.Text = "Basic Salary:"
+        Me.lblBasicSalary.AutoSize = True
+        Me.lblBasicSalary.Location = New System.Drawing.Point(417, 95)
+        Me.lblBasicSalary.Name = "lblBasicSalary"
+        Me.lblBasicSalary.Size = New System.Drawing.Size(68, 13)
+        Me.lblBasicSalary.TabIndex = 15
+        Me.lblBasicSalary.Text = "Basic Salary:"
         '
-        'Label4
+        'lblDOJ
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(417, 30)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(81, 13)
-        Me.Label4.TabIndex = 13
-        Me.Label4.Text = "Date of Joining:"
+        Me.lblDOJ.AutoSize = True
+        Me.lblDOJ.Location = New System.Drawing.Point(417, 30)
+        Me.lblDOJ.Name = "lblDOJ"
+        Me.lblDOJ.Size = New System.Drawing.Size(81, 13)
+        Me.lblDOJ.TabIndex = 13
+        Me.lblDOJ.Text = "Date of Joining:"
         '
-        'Label3
+        'lblDOB
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(23, 262)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(69, 13)
-        Me.Label3.TabIndex = 11
-        Me.Label3.Text = "Date of Birth:"
+        Me.lblDOB.AutoSize = True
+        Me.lblDOB.Location = New System.Drawing.Point(23, 262)
+        Me.lblDOB.Name = "lblDOB"
+        Me.lblDOB.Size = New System.Drawing.Size(69, 13)
+        Me.lblDOB.TabIndex = 11
+        Me.lblDOB.Text = "Date of Birth:"
         '
         'txtPincode
         '
@@ -308,14 +308,14 @@ Partial Class EmpMaster
         Me.txtPincode.Size = New System.Drawing.Size(100, 20)
         Me.txtPincode.TabIndex = 4
         '
-        'Label2
+        'lblPincode
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(23, 227)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(53, 13)
-        Me.Label2.TabIndex = 9
-        Me.Label2.Text = "Pin Code:"
+        Me.lblPincode.AutoSize = True
+        Me.lblPincode.Location = New System.Drawing.Point(23, 227)
+        Me.lblPincode.Name = "lblPincode"
+        Me.lblPincode.Size = New System.Drawing.Size(53, 13)
+        Me.lblPincode.TabIndex = 9
+        Me.lblPincode.Text = "Pin Code:"
         '
         'txtCity
         '
@@ -326,14 +326,14 @@ Partial Class EmpMaster
         Me.txtCity.Size = New System.Drawing.Size(194, 20)
         Me.txtCity.TabIndex = 3
         '
-        'Label1
+        'lblCity
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(23, 193)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(27, 13)
-        Me.Label1.TabIndex = 7
-        Me.Label1.Text = "City:"
+        Me.lblCity.AutoSize = True
+        Me.lblCity.Location = New System.Drawing.Point(23, 193)
+        Me.lblCity.Name = "lblCity"
+        Me.lblCity.Size = New System.Drawing.Size(27, 13)
+        Me.lblCity.TabIndex = 7
+        Me.lblCity.Text = "City:"
         '
         'lstbxCurrentEmpList
         '
@@ -415,13 +415,13 @@ Partial Class EmpMaster
         Me.Controls.Add(Me.txtEmpName)
         Me.Controls.Add(Me.lblEmpName)
         Me.Controls.Add(Me.lblEmpID)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.grpEmpInfo)
         Me.Name = "EmpMaster"
         Me.Text = "Employee Master"
         CType(Me.EmployeeMasterBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.KIPayrollDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.grpEmpInfo.ResumeLayout(False)
+        Me.grpEmpInfo.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -432,18 +432,18 @@ Partial Class EmpMaster
     Friend WithEvents lblEmpName As Label
     Friend WithEvents txtEmpAddress As TextBox
     Friend WithEvents lblEmpAddress As Label
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents grpEmpInfo As GroupBox
     Friend WithEvents dtpSalaryEffDate As DateTimePicker
-    Friend WithEvents Label6 As Label
+    Friend WithEvents lblSalEffDate As Label
     Friend WithEvents dtpDOJ As DateTimePicker
     Friend WithEvents dtpDOB As DateTimePicker
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label3 As Label
+    Friend WithEvents lblBasicSalary As Label
+    Friend WithEvents lblDOJ As Label
+    Friend WithEvents lblDOB As Label
     Friend WithEvents txtPincode As TextBox
-    Friend WithEvents Label2 As Label
+    Friend WithEvents lblPincode As Label
     Friend WithEvents txtCity As TextBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblCity As Label
     Friend WithEvents lstbxCurrentEmpList As ListBox
     Friend WithEvents lblCurrentEmpList As Label
     Friend WithEvents btnAddEmpInfo As Button
@@ -455,7 +455,7 @@ Partial Class EmpMaster
     Friend WithEvents EmployeeMasterTableAdapter As KIPayrollDataSetTableAdapters.EmployeeMasterTableAdapter
     Friend WithEvents txtEmpID As MaskedTextBox
     Friend WithEvents txtEmpStatus As TextBox
-    Friend WithEvents Label7 As Label
+    Friend WithEvents lblEmpStatus As Label
     Friend WithEvents btnClose As Button
     Friend WithEvents dtpDOD As DateTimePicker
     Friend WithEvents lblDOD As Label

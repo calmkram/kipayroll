@@ -372,7 +372,7 @@ Partial Class SalaryAdvances
         Me.cmbSalAdvListForEmp.FormattingEnabled = True
         Me.cmbSalAdvListForEmp.Location = New System.Drawing.Point(160, 23)
         Me.cmbSalAdvListForEmp.Name = "cmbSalAdvListForEmp"
-        Me.cmbSalAdvListForEmp.Size = New System.Drawing.Size(253, 21)
+        Me.cmbSalAdvListForEmp.Size = New System.Drawing.Size(284, 21)
         Me.cmbSalAdvListForEmp.TabIndex = 28
         '
         'txtViewAdvDue
@@ -481,7 +481,7 @@ Partial Class SalaryAdvances
         '
         Me.txtViewEmpName.Location = New System.Drawing.Point(308, 68)
         Me.txtViewEmpName.Name = "txtViewEmpName"
-        Me.txtViewEmpName.Size = New System.Drawing.Size(138, 20)
+        Me.txtViewEmpName.Size = New System.Drawing.Size(136, 20)
         Me.txtViewEmpName.TabIndex = 16
         Me.txtViewEmpName.Visible = False
         '

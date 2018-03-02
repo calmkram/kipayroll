@@ -122,13 +122,13 @@
                   <Width>1.32261cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.71948cm</Width>
+                  <Width>1.16386cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.69302cm</Width>
+                  <Width>1.29622cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.26969cm</Width>
+                  <Width>1.11094cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1.90462cm</Width>
@@ -289,7 +289,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Overtime Hours</Value>
+                                  <Value>OT Hours</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -345,7 +345,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Overtime Days</Value>
+                                  <Value>OT Days</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -2784,7 +2784,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>2.56615cm</Size>
+                        <Size>2.27511cm</Size>
                         <CellContents>
                           <Textbox Name="Textbox33">
                             <CanGrow>true</CanGrow>
@@ -2912,7 +2912,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>2.56615cm</Size>
+                        <Size>2.27511cm</Size>
                         <CellContents>
                           <Textbox Name="EmpName">
                             <CanGrow>true</CanGrow>
@@ -3022,7 +3022,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>2.56615cm</Size>
+                        <Size>2.27511cm</Size>
                         <CellContents>
                           <Textbox Name="Textbox38">
                             <CanGrow>true</CanGrow>
@@ -3078,7 +3078,7 @@
             <Top>1.98175cm</Top>
             <Left>0.31753cm</Left>
             <Height>2.67313cm</Height>
-            <Width>31.08289cm</Width>
+            <Width>29.68068cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3110,7 +3110,7 @@
             <Top>1.15245cm</Top>
             <Left>0.31747cm</Left>
             <Height>0.65291cm</Height>
-            <Width>30.23636cm</Width>
+            <Width>29.68074cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -3146,7 +3146,7 @@
             <Top>0.22613cm</Top>
             <Left>0.3175cm</Left>
             <Height>0.7852cm</Height>
-            <Width>30.23633cm</Width>
+            <Width>29.6807cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -3178,7 +3178,7 @@
             <rd:DefaultName>ExecutionTime</rd:DefaultName>
             <Top>5.02391cm</Top>
             <Left>0.3175cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.65291cm</Height>
             <Width>4.60313cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
@@ -3195,7 +3195,7 @@
         <Height>2.23497in</Height>
         <Style />
       </Body>
-      <Width>12.36237in</Width>
+      <Width>11.95612in</Width>
       <Page>
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>
