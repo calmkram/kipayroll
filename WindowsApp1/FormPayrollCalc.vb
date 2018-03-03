@@ -26,10 +26,6 @@
     End Structure
     Private structEmpSalAdvances() As EmpSalAdvances
 
-    Protected Overrides Sub Finalize()
-        MyBase.Finalize()
-    End Sub
-
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         If iPayrollGenerated > 0 Then
             RemoveAndDisposeControls()
@@ -89,9 +85,12 @@
 
         dtCurrentSelection = DateTime.Parse(cmbPayrollForMonth.SelectedItem.ToString)
         dtPrevSelection = dtPayrollForMonth
+        dtPayrollForMonth = DateTime.Parse(cmbPayrollForMonth.SelectedItem.ToString)
+        Me.KIPayrollDataSet.SalaryCalculation.DefaultView.RowFilter = "PayMonth = '" & dtPayrollForMonth.ToString("MMM-yyyy") & "'"
 
         If dtCurrentSelection.Date = dtPrevSelection.Date Then
             MsgBox("Payroll for this month has just been generated - " & dtPayrollForMonth.ToString("MMM-yyyy") & "! Please exit this form or generate payroll for a different month.")
+            Console.WriteLine("Payroll for this month has just been generated - " & dtPayrollForMonth.ToString("MMM-yyyy") & "! Please exit this form or generate payroll for a different month.")
             Exit Sub
         End If
 
@@ -465,26 +464,28 @@
     End Function
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        Dim dtPayrollMonth As DateTime, dvEmpMaster As DataView, iIndex As Integer = 0, sEmpMasterID As String
+        Dim dtPayrollMonth As DateTime, iIndex As Integer = 0, sEmpMasterID As String
 
         dtPayrollMonth = DateTime.Parse(cmbPayrollForMonth.SelectedItem.ToString)
         Me.KIPayrollDataSet.SalaryCalculation.DefaultView.RowFilter = "PayMonth = '" & dtPayrollMonth.ToString("MMM-yyyy") & "'"
-        If Me.KIPayrollDataSet.SalaryCalculation.DefaultView.Count > 0 Then
-            MsgBox("Payroll calculations for " & dtPayrollMonth.ToString("MMM-yyyy") & " already exists!")
-        Else
-            Me.KIPayrollDataSet.EmployeeMaster.DefaultView.RowFilter = "EmpStatus = 'Active'"
+        Me.KIPayrollDataSet.EmployeeMaster.DefaultView.RowFilter = "EmpStatus = 'Active'"
 
+        If Me.KIPayrollDataSet.SalaryCalculation.DefaultView.Count > 0 Then
+            MsgBox("Payroll calculations for " & dtPayrollForMonth.ToString("MMM-yyyy") & " already exist in the database! Select a different month for the payroll run.")
+            Console.WriteLine("Payroll calculations for " & dtPayrollForMonth.ToString("MMM-yyyy") & " already exist in the database! Select a different month for the payroll run.")
+            Exit Sub
+        Else
             For iEmpIndex = 0 To Me.KIPayrollDataSet.EmployeeMaster.DefaultView.Count - 1
                 'Insert payroll record for each employee into the SalaryCalculation table
                 Try
                     sEmpMasterID = Me.KIPayrollDataSet.EmployeeMaster.DefaultView.Item(iEmpIndex)("EmpID").ToString
 
                     Me.SalaryCalculationTableAdapter.Insert(txtEmpIDs(iEmpIndex).Text, dtPayrollMonth.ToString("MMM-yyyy"), txtPresent(iEmpIndex).Text,
-                                                            txtAbsent(iEmpIndex).Text, txtOTHours(iEmpIndex).Text, txtOTDays(iEmpIndex).Text,
-                                                            txtTotalDays(iEmpIndex).Text, txtNumDaysInMonth.Text, txtGrossPay(iEmpIndex).Text,
-                                                            txtAttdBonus(iEmpIndex).Text, txtNSBFAllow(iEmpIndex).Text, txtNetPay(iEmpIndex).Text,
-                                                            txtESIDedn(iEmpIndex).Text, txtSalAdvDedn(iEmpIndex).Text, txtProfTax(iEmpIndex).Text,
-                                                            txtSalaryToPay(iEmpIndex).Text, txtSalaryPaid(iEmpIndex).Text, txtESIEmployerContrib(iEmpIndex).Text)
+                                                        txtAbsent(iEmpIndex).Text, txtOTHours(iEmpIndex).Text, txtOTDays(iEmpIndex).Text,
+                                                        txtTotalDays(iEmpIndex).Text, txtNumDaysInMonth.Text, txtGrossPay(iEmpIndex).Text,
+                                                        txtAttdBonus(iEmpIndex).Text, txtNSBFAllow(iEmpIndex).Text, txtNetPay(iEmpIndex).Text,
+                                                        txtESIDedn(iEmpIndex).Text, txtSalAdvDedn(iEmpIndex).Text, txtProfTax(iEmpIndex).Text,
+                                                        txtSalaryToPay(iEmpIndex).Text, txtSalaryPaid(iEmpIndex).Text, txtESIEmployerContrib(iEmpIndex).Text)
                 Catch ex As Exception
                     Console.WriteLine("Insert failed in Salary Calculation Insert due to: " & ex.Message)
                     Exit Sub
@@ -518,7 +519,7 @@
                 Try
                     For Each drSalAdvRow In Me.KIPayrollDataSet.SalaryAdvances
                         If (drSalAdvRow.EmpID = sEmpMasterID) And
-                            (drSalAdvRow.AdvPaybackStatus = "Issued" Or drSalAdvRow.AdvPaybackStatus = "In Progress") Then
+                        (drSalAdvRow.AdvPaybackStatus = "Issued" Or drSalAdvRow.AdvPaybackStatus = "In Progress") Then
                             dOutstandingSalAdv += (drSalAdvRow.AdvPaybackAmtPerMth * drSalAdvRow.AdvPaybkRemMonths)
                         End If
                     Next
@@ -534,6 +535,7 @@
                 End Try
             Next
         End If
+
         'Dispense with the dynamically created TextBoxes, as necessary
         RemoveAndDisposeControls()
 

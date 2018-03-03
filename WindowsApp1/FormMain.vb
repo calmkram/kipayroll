@@ -27,7 +27,11 @@ Public Class AppMainWindow
         Me.SalaryCalculationTableAdapter.Fill(Me.KIPayrollDataSet.SalaryCalculation)
         p_sConnectionString = My.Settings.KIPayrollConnectionString
 
-        DisablePrintMenuItems()
+        Me.DateTimeStatusLabel.Text = DateTime.Now.ToString("dd-MMM-yyyy hh:mm:ss tt")
+        Me.DateTimeStatusLabel.BorderStyle = BorderStyle.Fixed3D
+        'Me.StatusBarLabel1.Width = Me.Size.Width * 0.835
+        Me.DateTimeStatusLabel.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        'DisablePrintMenuItems()
     End Sub
 
     Private Sub AppMainWindow_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
@@ -76,13 +80,30 @@ Public Class AppMainWindow
                 dtPayrollForMonth = DateTime.Parse(sPayrollForMonth)
 
                 ReportsContainer.MdiParent = AppMainWindow.ActiveForm
+                ReportsContainer.SetPayrollFormStatus(True)
                 ReportsContainer.SetReportName("Salary Abstract for " & dtPayrollForMonth.ToString("MMMM yyyy"))
                 ReportsContainer.Show()
             Else
-
+                ReportsContainer.MdiParent = AppMainWindow.ActiveForm
+                ReportsContainer.SetPayrollFormStatus(False)
+                ReportsContainer.Show()
             End If
         Else
-
+            ReportsContainer.MdiParent = AppMainWindow.ActiveForm
+            ReportsContainer.SetPayrollFormStatus(False)
+            ReportsContainer.Show()
         End If
+    End Sub
+
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+        AboutBox.ShowDialog(AppMainWindow.ActiveForm)
+    End Sub
+
+    Private Sub DTTimer_Tick(sender As Object, e As EventArgs) Handles DTTimer.Tick
+        Me.DateTimeStatusLabel.Text = DateTime.Now.ToString("dd-MMM-yyyy hh:mm:ss tt")
+    End Sub
+
+    Private Sub AppMainWindow_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
+        'Me.StatusBarLabel1.Width = Me.Size.Width * 0.835
     End Sub
 End Class

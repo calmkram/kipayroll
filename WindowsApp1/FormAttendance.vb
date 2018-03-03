@@ -2,7 +2,7 @@
     Dim p_sEmpIDArray() As String, p_bInvalidAttdRecord As Boolean, p_iEditState As Integer
 
     Private Sub Attendance_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Dim iIndex As Integer = 0
+        Dim iIndex As Integer = 0, dtStartTime As DateTime, dtEndTime As DateTime, drvEmpRow As DataRowView
 
         p_bInvalidAttdRecord = False
         p_iEditState = 0
@@ -13,13 +13,13 @@
         ReDim p_sEmpIDArray(Me.KIPayrollDataSet.EmployeeMaster.Rows.Count)
 
         cmbEmpName.Items.Clear()
-        For Each row In Me.KIPayrollDataSet.EmployeeMaster
-            p_sEmpIDArray(iIndex) = row.EmpID
-            cmbEmpName.Items.Add(row.EmpName)
+        Me.KIPayrollDataSet.EmployeeMaster.DefaultView.RowFilter = "EmpStatus = 'Active'"
+        For Each drvEmpRow In Me.KIPayrollDataSet.EmployeeMaster.DefaultView
+            p_sEmpIDArray(iIndex) = drvEmpRow.Item("EmpID").ToString
+            cmbEmpName.Items.Add(drvEmpRow.Item("EmpName").ToString)
             iIndex = iIndex + 1
         Next
 
-        Dim dtStartTime As DateTime, dtEndTime As DateTime
         dtStartTime = New DateTime(Today().Year, Today().Month, Today().Day, 8, 0, 0)
         dtEndTime = New DateTime(Today().Year, Today().Month, Today().Day, 16, 0, 0)
         dtpStartTime.Value = dtStartTime

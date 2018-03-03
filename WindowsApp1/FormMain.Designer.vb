@@ -23,60 +23,63 @@ Partial Class AppMainWindow
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.MenuStrip = New System.Windows.Forms.MenuStrip()
         Me.EmpInfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AttendanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EmployeeMasterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalaryAdvancesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AttendanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PayrollToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GeneratePayrollToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PrintSalaryAbstractToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PrintSalarySlipsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.StatusBarLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.DateTimeStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.KIPayrollDataSet = New KIPayroll.KIPayrollDataSet()
         Me.SalaryCalculationBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.SalaryCalculationTableAdapter = New KIPayroll.KIPayrollDataSetTableAdapters.SalaryCalculationTableAdapter()
-        Me.MenuStrip1.SuspendLayout()
-        Me.StatusStrip1.SuspendLayout()
+        Me.DTTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.MenuStrip.SuspendLayout()
+        Me.StatusStrip.SuspendLayout()
         CType(Me.KIPayrollDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SalaryCalculationBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'MenuStrip1
+        'MenuStrip
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmpInfoToolStripMenuItem, Me.PayrollToolStripMenuItem, Me.ExitToolStripMenuItem})
-        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(1063, 24)
-        Me.MenuStrip1.TabIndex = 0
-        Me.MenuStrip1.Text = "mnuStrip"
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmpInfoToolStripMenuItem, Me.PayrollToolStripMenuItem, Me.AboutToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip.Name = "MenuStrip"
+        Me.MenuStrip.Size = New System.Drawing.Size(1063, 24)
+        Me.MenuStrip.TabIndex = 0
+        Me.MenuStrip.Text = "mnuStrip"
         '
         'EmpInfoToolStripMenuItem
         '
-        Me.EmpInfoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmployeeMasterToolStripMenuItem, Me.SalaryAdvancesToolStripMenuItem, Me.AttendanceToolStripMenuItem})
+        Me.EmpInfoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AttendanceToolStripMenuItem, Me.EmployeeMasterToolStripMenuItem, Me.SalaryAdvancesToolStripMenuItem})
         Me.EmpInfoToolStripMenuItem.Name = "EmpInfoToolStripMenuItem"
         Me.EmpInfoToolStripMenuItem.Size = New System.Drawing.Size(137, 20)
         Me.EmpInfoToolStripMenuItem.Text = "Employee &Information"
-        '
-        'EmployeeMasterToolStripMenuItem
-        '
-        Me.EmployeeMasterToolStripMenuItem.Name = "EmployeeMasterToolStripMenuItem"
-        Me.EmployeeMasterToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
-        Me.EmployeeMasterToolStripMenuItem.Text = "Employee Master"
-        '
-        'SalaryAdvancesToolStripMenuItem
-        '
-        Me.SalaryAdvancesToolStripMenuItem.Name = "SalaryAdvancesToolStripMenuItem"
-        Me.SalaryAdvancesToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
-        Me.SalaryAdvancesToolStripMenuItem.Text = "Salary Advances"
         '
         'AttendanceToolStripMenuItem
         '
         Me.AttendanceToolStripMenuItem.Name = "AttendanceToolStripMenuItem"
         Me.AttendanceToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
-        Me.AttendanceToolStripMenuItem.Text = "Attendance"
+        Me.AttendanceToolStripMenuItem.Text = "&Attendance"
+        '
+        'EmployeeMasterToolStripMenuItem
+        '
+        Me.EmployeeMasterToolStripMenuItem.Name = "EmployeeMasterToolStripMenuItem"
+        Me.EmployeeMasterToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.EmployeeMasterToolStripMenuItem.Text = "&Employee Master"
+        '
+        'SalaryAdvancesToolStripMenuItem
+        '
+        Me.SalaryAdvancesToolStripMenuItem.Name = "SalaryAdvancesToolStripMenuItem"
+        Me.SalaryAdvancesToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.SalaryAdvancesToolStripMenuItem.Text = "&Salary Advances"
         '
         'PayrollToolStripMenuItem
         '
@@ -89,19 +92,25 @@ Partial Class AppMainWindow
         '
         Me.GeneratePayrollToolStripMenuItem.Name = "GeneratePayrollToolStripMenuItem"
         Me.GeneratePayrollToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GeneratePayrollToolStripMenuItem.Text = "Generate Payroll"
+        Me.GeneratePayrollToolStripMenuItem.Text = "&Generate Payroll"
         '
         'PrintSalaryAbstractToolStripMenuItem
         '
         Me.PrintSalaryAbstractToolStripMenuItem.Name = "PrintSalaryAbstractToolStripMenuItem"
         Me.PrintSalaryAbstractToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.PrintSalaryAbstractToolStripMenuItem.Text = "Print Salary Abstract"
+        Me.PrintSalaryAbstractToolStripMenuItem.Text = "Print Salary &Abstract"
         '
         'PrintSalarySlipsToolStripMenuItem
         '
         Me.PrintSalarySlipsToolStripMenuItem.Name = "PrintSalarySlipsToolStripMenuItem"
         Me.PrintSalarySlipsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.PrintSalarySlipsToolStripMenuItem.Text = "Print Salary Slips"
+        Me.PrintSalarySlipsToolStripMenuItem.Text = "Print Salary &Slips"
+        '
+        'AboutToolStripMenuItem
+        '
+        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
+        Me.AboutToolStripMenuItem.Text = "A&bout"
         '
         'ExitToolStripMenuItem
         '
@@ -109,20 +118,29 @@ Partial Class AppMainWindow
         Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.ExitToolStripMenuItem.Text = "&Exit"
         '
-        'StatusStrip1
+        'StatusStrip
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StatusBarLabel1})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 590)
-        Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1063, 22)
-        Me.StatusStrip1.Stretch = False
-        Me.StatusStrip1.TabIndex = 2
+        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StatusBarLabel1, Me.DateTimeStatusLabel})
+        Me.StatusStrip.Location = New System.Drawing.Point(0, 590)
+        Me.StatusStrip.Name = "StatusStrip"
+        Me.StatusStrip.Size = New System.Drawing.Size(1063, 22)
+        Me.StatusStrip.Stretch = False
+        Me.StatusStrip.TabIndex = 2
         '
         'StatusBarLabel1
         '
+        Me.StatusBarLabel1.AutoSize = False
         Me.StatusBarLabel1.Name = "StatusBarLabel1"
-        Me.StatusBarLabel1.Size = New System.Drawing.Size(291, 17)
-        Me.StatusBarLabel1.Text = "Welcome to the Krithika Industries Payroll Application"
+        Me.StatusBarLabel1.Size = New System.Drawing.Size(850, 17)
+        Me.StatusBarLabel1.Text = "Welcome to the Krithika Industries Payroll Application!"
+        Me.StatusBarLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'DateTimeStatusLabel
+        '
+        Me.DateTimeStatusLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.DateTimeStatusLabel.Name = "DateTimeStatusLabel"
+        Me.DateTimeStatusLabel.Size = New System.Drawing.Size(0, 17)
+        Me.DateTimeStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'KIPayrollDataSet
         '
@@ -138,22 +156,27 @@ Partial Class AppMainWindow
         '
         Me.SalaryCalculationTableAdapter.ClearBeforeFill = True
         '
+        'DTTimer
+        '
+        Me.DTTimer.Enabled = True
+        Me.DTTimer.Interval = 1000
+        '
         'AppMainWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1063, 612)
-        Me.Controls.Add(Me.StatusStrip1)
-        Me.Controls.Add(Me.MenuStrip1)
+        Me.Controls.Add(Me.StatusStrip)
+        Me.Controls.Add(Me.MenuStrip)
         Me.IsMdiContainer = True
-        Me.MainMenuStrip = Me.MenuStrip1
+        Me.MainMenuStrip = Me.MenuStrip
         Me.Name = "AppMainWindow"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Krithika Industries - Payroll Application"
-        Me.MenuStrip1.ResumeLayout(False)
-        Me.MenuStrip1.PerformLayout()
-        Me.StatusStrip1.ResumeLayout(False)
-        Me.StatusStrip1.PerformLayout()
+        Me.Text = "Krithika Industries Payroll Application"
+        Me.MenuStrip.ResumeLayout(False)
+        Me.MenuStrip.PerformLayout()
+        Me.StatusStrip.ResumeLayout(False)
+        Me.StatusStrip.PerformLayout()
         CType(Me.KIPayrollDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.SalaryCalculationBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -161,14 +184,14 @@ Partial Class AppMainWindow
 
     End Sub
 
-    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents MenuStrip As MenuStrip
     Friend WithEvents EmpInfoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PayrollToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EmployeeMasterToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SalaryAdvancesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AttendanceToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents StatusStrip As StatusStrip
     Friend WithEvents StatusBarLabel1 As ToolStripStatusLabel
     Friend WithEvents GeneratePayrollToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PrintSalaryAbstractToolStripMenuItem As ToolStripMenuItem
@@ -176,4 +199,7 @@ Partial Class AppMainWindow
     Friend WithEvents SalaryCalculationBindingSource As BindingSource
     Friend WithEvents KIPayrollDataSet As KIPayrollDataSet
     Friend WithEvents SalaryCalculationTableAdapter As KIPayrollDataSetTableAdapters.SalaryCalculationTableAdapter
+    Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DateTimeStatusLabel As ToolStripStatusLabel
+    Friend WithEvents DTTimer As Timer
 End Class
