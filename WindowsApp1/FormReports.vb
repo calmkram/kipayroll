@@ -43,6 +43,7 @@ Public Class ReportsContainer
         End If
 
         Me.rptSalaryAbstract.RefreshReport()
+        Me.rptSalarySlip.RefreshReport
     End Sub
 
     Private Sub SetReportPageSettings()

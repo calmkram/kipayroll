@@ -28,6 +28,9 @@ Partial Class ReportsContainer
         Me.btnShowSalaryAbstractReport = New System.Windows.Forms.Button()
         Me.cmbPayrollForMonth = New System.Windows.Forms.ComboBox()
         Me.lblPayrollForMonth = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cmbEmpName = New System.Windows.Forms.ComboBox()
+        Me.rptSalarySlip = New Microsoft.Reporting.WinForms.ReportViewer()
         CType(Me.KIPayrollDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -37,7 +40,7 @@ Partial Class ReportsContainer
         Me.rptSalaryAbstract.Location = New System.Drawing.Point(12, 118)
         Me.rptSalaryAbstract.Name = "rptSalaryAbstract"
         Me.rptSalaryAbstract.ServerReport.BearerToken = Nothing
-        Me.rptSalaryAbstract.Size = New System.Drawing.Size(1132, 452)
+        Me.rptSalaryAbstract.Size = New System.Drawing.Size(241, 452)
         Me.rptSalaryAbstract.TabIndex = 0
         '
         'SalaryAbstractQueryTableAdapter
@@ -64,7 +67,7 @@ Partial Class ReportsContainer
         Me.cmbPayrollForMonth.FormattingEnabled = True
         Me.cmbPayrollForMonth.Location = New System.Drawing.Point(111, 12)
         Me.cmbPayrollForMonth.Name = "cmbPayrollForMonth"
-        Me.cmbPayrollForMonth.Size = New System.Drawing.Size(154, 21)
+        Me.cmbPayrollForMonth.Size = New System.Drawing.Size(142, 21)
         Me.cmbPayrollForMonth.TabIndex = 5
         '
         'lblPayrollForMonth
@@ -76,11 +79,41 @@ Partial Class ReportsContainer
         Me.lblPayrollForMonth.TabIndex = 4
         Me.lblPayrollForMonth.Text = "Payroll for Month:"
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(337, 16)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(86, 13)
+        Me.Label1.TabIndex = 7
+        Me.Label1.Text = "Select Employee"
+        '
+        'cmbEmpName
+        '
+        Me.cmbEmpName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbEmpName.FormattingEnabled = True
+        Me.cmbEmpName.Location = New System.Drawing.Point(429, 12)
+        Me.cmbEmpName.Name = "cmbEmpName"
+        Me.cmbEmpName.Size = New System.Drawing.Size(126, 21)
+        Me.cmbEmpName.TabIndex = 8
+        '
+        'rptSalarySlip
+        '
+        Me.rptSalarySlip.LocalReport.ReportEmbeddedResource = "KIPayroll.ReportSalarySlip.rdlc"
+        Me.rptSalarySlip.Location = New System.Drawing.Point(340, 118)
+        Me.rptSalarySlip.Name = "rptSalarySlip"
+        Me.rptSalarySlip.ServerReport.BearerToken = Nothing
+        Me.rptSalarySlip.Size = New System.Drawing.Size(396, 407)
+        Me.rptSalarySlip.TabIndex = 9
+        '
         'ReportsContainer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(290, 80)
+        Me.ClientSize = New System.Drawing.Size(1162, 525)
+        Me.Controls.Add(Me.rptSalarySlip)
+        Me.Controls.Add(Me.cmbEmpName)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnShowSalaryAbstractReport)
         Me.Controls.Add(Me.cmbPayrollForMonth)
         Me.Controls.Add(Me.lblPayrollForMonth)
@@ -99,4 +132,7 @@ Partial Class ReportsContainer
     Friend WithEvents btnShowSalaryAbstractReport As Button
     Friend WithEvents cmbPayrollForMonth As ComboBox
     Friend WithEvents lblPayrollForMonth As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents cmbEmpName As ComboBox
+    Friend WithEvents rptSalarySlip As Microsoft.Reporting.WinForms.ReportViewer
 End Class

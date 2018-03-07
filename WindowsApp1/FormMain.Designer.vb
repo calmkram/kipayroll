@@ -35,7 +35,7 @@ Partial Class AppMainWindow
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
-        Me.StatusBarLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.AppStatusBarLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.DateTimeStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.KIPayrollDataSet = New KIPayroll.KIPayrollDataSet()
         Me.SalaryCalculationBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -120,26 +120,28 @@ Partial Class AppMainWindow
         '
         'StatusStrip
         '
-        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StatusBarLabel1, Me.DateTimeStatusLabel})
+        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AppStatusBarLabel, Me.DateTimeStatusLabel})
         Me.StatusStrip.Location = New System.Drawing.Point(0, 590)
         Me.StatusStrip.Name = "StatusStrip"
         Me.StatusStrip.Size = New System.Drawing.Size(1063, 22)
         Me.StatusStrip.Stretch = False
         Me.StatusStrip.TabIndex = 2
         '
-        'StatusBarLabel1
+        'AppStatusBarLabel
         '
-        Me.StatusBarLabel1.AutoSize = False
-        Me.StatusBarLabel1.Name = "StatusBarLabel1"
-        Me.StatusBarLabel1.Size = New System.Drawing.Size(850, 17)
-        Me.StatusBarLabel1.Text = "Welcome to the Krithika Industries Payroll Application!"
-        Me.StatusBarLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.AppStatusBarLabel.AutoSize = False
+        Me.AppStatusBarLabel.Name = "AppStatusBarLabel"
+        Me.AppStatusBarLabel.Size = New System.Drawing.Size(850, 17)
+        Me.AppStatusBarLabel.Text = "Welcome to the Krithika Industries Payroll Application!"
+        Me.AppStatusBarLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'DateTimeStatusLabel
         '
         Me.DateTimeStatusLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.DateTimeStatusLabel.Name = "DateTimeStatusLabel"
-        Me.DateTimeStatusLabel.Size = New System.Drawing.Size(0, 17)
+        Me.DateTimeStatusLabel.Size = New System.Drawing.Size(167, 17)
+        Me.DateTimeStatusLabel.Spring = True
+        Me.DateTimeStatusLabel.Text = "Date Time Label"
         Me.DateTimeStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'KIPayrollDataSet
@@ -192,7 +194,7 @@ Partial Class AppMainWindow
     Friend WithEvents SalaryAdvancesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AttendanceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StatusStrip As StatusStrip
-    Friend WithEvents StatusBarLabel1 As ToolStripStatusLabel
+    Friend WithEvents AppStatusBarLabel As ToolStripStatusLabel
     Friend WithEvents GeneratePayrollToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PrintSalaryAbstractToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PrintSalarySlipsToolStripMenuItem As ToolStripMenuItem

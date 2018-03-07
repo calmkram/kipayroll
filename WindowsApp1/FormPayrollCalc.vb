@@ -47,8 +47,8 @@
 
     Private Sub PayrollCalc_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         AppMainWindow.DisablePrintMenuItems()
-        AppMainWindow.StatusBarLabel1.ForeColor = Color.Black
-        AppMainWindow.StatusBarLabel1.Text = "Welcome to the Krithika Industries Payroll Application!"
+        AppMainWindow.AppStatusBarLabel.ForeColor = Color.Black
+        AppMainWindow.AppStatusBarLabel.Text = "Welcome to the Krithika Industries Payroll Application!"
     End Sub
 
     Private Sub PayrollCalc_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -418,8 +418,8 @@
         txtTotalESIEmplContr.Text = FormatCurrency(dTotalESIEmplContr)
 
         If dTotalSalaryPaid <= 0 Then
-            AppMainWindow.StatusBarLabel1.Text = "No payroll data available to generate payroll for this month - " & dtPayrollForMonth.ToString("MMM-yyyy") & "!"
-            AppMainWindow.StatusBarLabel1.ForeColor = Color.Red
+            AppMainWindow.AppStatusBarLabel.Text = "No payroll data available to generate payroll for this month - " & dtPayrollForMonth.ToString("MMM-yyyy") & "!"
+            AppMainWindow.AppStatusBarLabel.ForeColor = Color.Red
             btnSave.Visible = False
             btnCancel.Visible = False
             btnGeneratePayroll.Enabled = True

@@ -138,7 +138,7 @@
 
         Me.SalaryAdvancesTableAdapter.Insert(txtEmpID.Text, Today(), txtAdvanceReason.Text, CDbl(txtAdvanceAmt.Text), cmbPaybackDuration.SelectedItem.ToString, CDbl(txtPaybackAmt.Text), txtAdvStatus.Text, cmbPaybackDuration.SelectedItem.ToString)
         Me.SalaryAdvancesTableAdapter.Fill(Me.KIPayrollDataSet.SalaryAdvances)
-        AppMainWindow.StatusBarLabel1.Text = "New Salary Advance issued and saved successfully!"
+        AppMainWindow.AppStatusBarLabel.Text = "New Salary Advance issued and saved successfully!"
 
         btnViewSalAdvInfo.Enabled = True
         btnAddSalAdvance.Enabled = True

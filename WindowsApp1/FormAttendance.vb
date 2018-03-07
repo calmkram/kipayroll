@@ -20,6 +20,13 @@
             iIndex = iIndex + 1
         Next
 
+        cmbViewMonth.Items.Clear()
+        cmbViewMonth.Items.Add(DateSerial(DateTime.Now().Year, DateTime.Now().Month - 1, 1).ToString("MMMM yyyy"))
+        cmbViewMonth.Items.Add(DateTime.Now().ToString("MMMM yyyy"))
+        cmbViewMonth.Items.Add(DateSerial(DateTime.Now().Year, DateTime.Now().Month + 1, 1).ToString("MMMM yyyy"))
+        cmbViewMonth.Visible = False
+        lblSelectMonth.Visible = False
+
         dtStartTime = New DateTime(Today().Year, Today().Month, Today().Day, 8, 0, 0)
         dtEndTime = New DateTime(Today().Year, Today().Month, Today().Day, 16, 0, 0)
         dtpStartTime.Value = dtStartTime
@@ -43,45 +50,50 @@
                     btnSave.Enabled = True
                     btnCancel.Enabled = True
                 ElseIf p_iEditState = 2 Then
-                    Dim sQuery As String, dataAdapter As New OleDb.OleDbDataAdapter, dataGridDataSet As New DataSet
+                    If cmbViewMonth.SelectedIndex >= 0 Then
+                        Dim sQuery As String, dataAdapter As New OleDb.OleDbDataAdapter, dataGridDataSet As New DataSet
 
-                    Try
-                        Using myConnection As New OleDb.OleDbConnection(AppMainWindow.p_sConnectionString)
-                            myConnection.Open()
+                        Try
+                            Using myConnection As New OleDb.OleDbConnection(AppMainWindow.p_sConnectionString)
+                                myConnection.Open()
 
-                            sQuery = "SELECT * FROM ATTENDANCE WHERE EmpID=@EmpID AND (AttdDate>=@CurrentMthFirstDate AND AttdDate<=@CurrentMthLastDate)"
+                                sQuery = "SELECT * FROM ATTENDANCE WHERE EmpID=@EmpID AND (AttdDate>=@SelectedMonthFirstDate AND AttdDate<=@SelectedMonthLastDate)"
 
-                            Using dbCommand As OleDb.OleDbCommand = New OleDb.OleDbCommand(sQuery, myConnection)
-                                Dim dtFirstDate As DateTime, dtLastDate As DateTime
+                                Using dbCommand As OleDb.OleDbCommand = New OleDb.OleDbCommand(sQuery, myConnection)
+                                    Dim dtFirstDate As DateTime, dtLastDate As DateTime, dtSelectedMonth As DateTime
 
-                                dtFirstDate = DateSerial(Today.Year, Today.Month, 1)
-                                dtLastDate = DateSerial(Today.Year, Today.Month + 1, 0)
-                                dbCommand.Parameters.AddWithValue("@EmpID", txtEmpID.Text)
-                                dbCommand.Parameters.AddWithValue("@CurrentMthFirstDate", dtFirstDate.ToShortDateString)
-                                dbCommand.Parameters.AddWithValue("@CurrentMthLastDate", dtLastDate.ToShortDateString)
+                                    dtSelectedMonth = DateTime.Parse(cmbViewMonth.SelectedItem.ToString())
+                                    dtFirstDate = DateSerial(dtSelectedMonth.Year, dtSelectedMonth.Month, 1)
+                                    dtLastDate = DateSerial(dtSelectedMonth.Year, dtSelectedMonth.Month + 1, 0)
+                                    dbCommand.Parameters.AddWithValue("@EmpID", txtEmpID.Text)
+                                    dbCommand.Parameters.AddWithValue("@SelectedMonthFirstDate", dtFirstDate.ToShortDateString)
+                                    dbCommand.Parameters.AddWithValue("@SelectedMonthLastDate", dtLastDate.ToShortDateString)
 
-                                dataAdapter.SelectCommand = dbCommand
-                                dataAdapter.Fill(dataGridDataSet)
-                                dgvViewAttdRecords.DataSource = dataGridDataSet.Tables(0)
-                                dgvViewAttdRecords.DefaultCellStyle.SelectionForeColor = Color.Navy
-                                dgvViewAttdRecords.DefaultCellStyle.SelectionBackColor = Color.SkyBlue
-                                dgvViewAttdRecords.Columns(0).Visible = False
-                                dgvViewAttdRecords.Columns(3).DefaultCellStyle.Format = "hh:mm tt" 'setting the format to Time only for the Start Time field
-                                dgvViewAttdRecords.Columns(4).DefaultCellStyle.Format = "hh:mm tt" 'setting the format to Time only for the End Time field
-                                If dataGridDataSet.Tables(0).Rows.Count <= 0 Then
-                                    AppMainWindow.StatusBarLabel1.Text = "No attendance records available for " & cmbEmpName.SelectedItem.ToString & "!"
-                                Else
-                                    AppMainWindow.StatusBarLabel1.Text = "Attendance records displayed above for " & cmbEmpName.SelectedItem.ToString & "!"
-                                End If
+                                    dataAdapter.SelectCommand = dbCommand
+                                    dataAdapter.Fill(dataGridDataSet)
+                                    dgvViewAttdRecords.DataSource = dataGridDataSet.Tables(0)
+                                    dgvViewAttdRecords.DefaultCellStyle.SelectionForeColor = Color.Navy
+                                    dgvViewAttdRecords.DefaultCellStyle.SelectionBackColor = Color.SkyBlue
+                                    dgvViewAttdRecords.Columns(0).Visible = False
+                                    dgvViewAttdRecords.Columns(3).DefaultCellStyle.Format = "hh:mm tt" 'setting the format to Time only for the Start Time field
+                                    dgvViewAttdRecords.Columns(4).DefaultCellStyle.Format = "hh:mm tt" 'setting the format to Time only for the End Time field
+                                    If dataGridDataSet.Tables(0).Rows.Count <= 0 Then
+                                        AppMainWindow.AppStatusBarLabel.Text = "No attendance records available for " & cmbEmpName.SelectedItem.ToString & "!"
+                                    Else
+                                        AppMainWindow.AppStatusBarLabel.Text = dataGridDataSet.Tables(0).Rows.Count.ToString & " attendance record(s) displayed above for " & cmbEmpName.SelectedItem.ToString & "!"
+                                    End If
+                                End Using
                             End Using
-                        End Using
-                    Catch localException As Exception
-                        MsgBox(localException.ToString)
-                    End Try
+                        Catch localException As Exception
+                            MsgBox(localException.ToString)
+                        End Try
 
-                    grpViewAttdRecords.Visible = True
-                    btnAddNewAttdRec.Enabled = True
-                    btnViewAttdRecords.Enabled = False
+                        grpViewAttdRecords.Visible = True
+                        btnAddNewAttdRec.Enabled = True
+                        btnViewAttdRecords.Enabled = False
+                    Else
+                        cmbViewMonth.Select()
+                    End If
                 End If
             End If
         End If
@@ -90,9 +102,12 @@
     Private Sub btnAddNewAttdRec_Click(sender As Object, e As EventArgs) Handles btnAddNewAttdRec.Click
         p_iEditState = 1
         cmbEmpName.Enabled = True
+        cmbViewMonth.Visible = False
+        lblSelectMonth.Visible = False
 
         grpViewAttdRecords.Visible = False
         grpAddAttdRecord.Visible = True
+        Me.Size = New Size(481, 407)
         btnSave.Enabled = True
         btnCancel.Enabled = True
 
@@ -100,23 +115,32 @@
         btnViewAttdRecords.Enabled = False
 
         txtEmpID.Text = ""
+        AppMainWindow.AppStatusBarLabel.Text = "Select an Employee above to add a new attendance record"
         cmbEmpName.SelectedIndex = -1
         cmbEmpName.Select()
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        AppMainWindow.AppStatusBarLabel.Text = "Closing the Attendance Form!"
         Me.Close()
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If p_bInvalidAttdRecord = False Then
+            Dim iReturnResult As Integer
 
             dtpStartTime.Value = CDate(Format(dtpAttdDate.Value, "dd-MMM-yyyy")) & " " & CDate(Format(dtpStartTime.Value, "hh:mm tt"))
             dtpEndTime.Value = CDate(Format(dtpAttdDate.Value, "dd-MMM-yyyy")) & " " & CDate(Format(dtpEndTime.Value, "hh:mm tt"))
 
-            Me.AttendanceTableAdapter.Insert(txtEmpID.Text, dtpAttdDate.Value.ToShortDateString, dtpStartTime.Value, dtpEndTime.Value, txtTotalHrs.Text, txtOvertimeHrs.Text)
-            Me.AttendanceTableAdapter.Fill(Me.KIPayrollDataSet.Attendance)
-
+            Try
+                iReturnResult = Me.AttendanceTableAdapter.Insert(txtEmpID.Text, dtpAttdDate.Value.ToShortDateString, dtpStartTime.Value, dtpEndTime.Value, txtTotalHrs.Text, txtOvertimeHrs.Text)
+                If iReturnResult = 0 Then
+                    Me.AttendanceTableAdapter.Fill(Me.KIPayrollDataSet.Attendance)
+                    AppMainWindow.AppStatusBarLabel.Text = "Attendance record for " & cmbEmpName.SelectedItem.ToString & " on " & Format(dtpAttdDate.Value, "dd-MMM-yyyy") & " has been successfully saved!"
+                End If
+            Catch localException As Exception
+                MessageBox.Show(localException.Message)
+            End Try
             txtEmpID.Text = ""
             cmbEmpName.SelectedIndex = -1
             p_iEditState = 0
@@ -139,6 +163,7 @@
             btnViewAttdRecords.Enabled = True
         ElseIf p_bInvalidAttdRecord = True Then
             MessageBox.Show("The attendance record for " & Format(dtpAttdDate.Value, "dd-MMM-yyyy") & " already exists for " & cmbEmpName.SelectedItem.ToString & "! Please record attendance for another day for this employee.", "Record Daily Attendance", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            AppMainWindow.AppStatusBarLabel.Text = "The attendance record for " & Format(dtpAttdDate.Value, "dd-MMM-yyyy") & " already exists for " & cmbEmpName.SelectedItem.ToString & "! Please record attendance for another day for this employee."
             dtpAttdDate.ResetText()
             dtpAttdDate.Select()
         End If
@@ -164,11 +189,16 @@
         p_iEditState = 2
         grpAddAttdRecord.Visible = False
         grpViewAttdRecords.Visible = False
+        Me.Size = New Size(633, 407)
 
         cmbEmpName.Enabled = True
         cmbEmpName.Select()
 
-        AppMainWindow.StatusBarLabel1.Text = "Select an Employee above to view their attendance records for the current month"
+        lblSelectMonth.Visible = True
+        cmbViewMonth.Visible = True
+        cmbViewMonth.Enabled = True
+
+        AppMainWindow.AppStatusBarLabel.Text = "Select an Employee and then Month above to view their attendance records for that month"
     End Sub
 
     Private Sub dtpAttdDate_TextChanged(sender As Object, e As EventArgs) Handles dtpAttdDate.TextChanged
@@ -225,5 +255,51 @@
         txtRegularHrs.Text = ""
         txtOvertimeHrs.Text = ""
         txtTotalHrs.Text = ""
+    End Sub
+
+    Private Sub cmbViewMonth_TextChanged(sender As Object, e As EventArgs) Handles cmbViewMonth.TextChanged
+
+        If p_iEditState = 2 And (Not cmbViewMonth.SelectedIndex = -1) Then
+            Dim sQuery As String, dataAdapter As New OleDb.OleDbDataAdapter, dataGridDataSet As New DataSet
+
+            Try
+                Using myConnection As New OleDb.OleDbConnection(AppMainWindow.p_sConnectionString)
+                    myConnection.Open()
+
+                    sQuery = "SELECT * FROM ATTENDANCE WHERE EmpID=@EmpID AND (AttdDate>=@SelectedMonthFirstDate AND AttdDate<=@SelectedMonthLastDate)"
+
+                    Using dbCommand As OleDb.OleDbCommand = New OleDb.OleDbCommand(sQuery, myConnection)
+                        Dim dtFirstDate As DateTime, dtLastDate As DateTime, dtSelectedMonth As DateTime
+
+                        dtSelectedMonth = DateTime.Parse(cmbViewMonth.SelectedItem.ToString())
+                        dtFirstDate = DateSerial(dtSelectedMonth.Year, dtSelectedMonth.Month, 1)
+                        dtLastDate = DateSerial(dtSelectedMonth.Year, dtSelectedMonth.Month + 1, 0)
+                        dbCommand.Parameters.AddWithValue("@EmpID", txtEmpID.Text)
+                        dbCommand.Parameters.AddWithValue("@SelectedMonthFirstDate", dtFirstDate.ToShortDateString)
+                        dbCommand.Parameters.AddWithValue("@SelectedMonthLastDate", dtLastDate.ToShortDateString)
+
+                        dataAdapter.SelectCommand = dbCommand
+                        dataAdapter.Fill(dataGridDataSet)
+                        dgvViewAttdRecords.DataSource = dataGridDataSet.Tables(0)
+                        dgvViewAttdRecords.DefaultCellStyle.SelectionForeColor = Color.Navy
+                        dgvViewAttdRecords.DefaultCellStyle.SelectionBackColor = Color.SkyBlue
+                        dgvViewAttdRecords.Columns(0).Visible = False
+                        dgvViewAttdRecords.Columns(3).DefaultCellStyle.Format = "hh:mm tt" 'setting the format to Time only for the Start Time field
+                        dgvViewAttdRecords.Columns(4).DefaultCellStyle.Format = "hh:mm tt" 'setting the format to Time only for the End Time field
+                        If dataGridDataSet.Tables(0).Rows.Count <= 0 Then
+                            AppMainWindow.AppStatusBarLabel.Text = "No attendance records available for " & cmbEmpName.SelectedItem.ToString & "!"
+                        Else
+                            AppMainWindow.AppStatusBarLabel.Text = dataGridDataSet.Tables(0).Rows.Count.ToString & " attendance record(s) displayed above for " & cmbEmpName.SelectedItem.ToString & "!"
+                        End If
+                    End Using
+                End Using
+            Catch localException As Exception
+                MsgBox(localException.ToString)
+            End Try
+
+            grpViewAttdRecords.Visible = True
+            btnAddNewAttdRec.Enabled = True
+            btnViewAttdRecords.Enabled = False
+        End If
     End Sub
 End Class

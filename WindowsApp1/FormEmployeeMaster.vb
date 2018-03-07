@@ -127,7 +127,7 @@
     End Sub
 
     Private Sub EmpMaster_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        AppMainWindow.StatusBarLabel1.Text = "Welcome to the Krithika Industries Payroll Application!"
+        AppMainWindow.AppStatusBarLabel.Text = "Welcome to the Krithika Industries Payroll Application!"
     End Sub
 
     Private Sub btnModEmpInfo_Click(sender As Object, e As EventArgs) Handles btnModEmpInfo.Click

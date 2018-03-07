@@ -595,6 +595,39 @@ FROM            (EmployeeMaster INNER JOIN
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SalarySlipQueryTableAdapter" GeneratorDataComponentClassName="SalarySlipQueryTableAdapter" Name="SalarySlipQuery" UserDataComponentName="SalarySlipQueryTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="KIPayrollConnectionString (MySettings)" DbObjectName="SalarySlipQuery" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT EmpID, EmpName, PayMonth, Present, Absent, OvertimeHours, OvertimeDays, TotalDays, NumDaysInMonth, Pay, AttdBonus, NightShiftOrBreakfastAllow, NetPay, ESIDeduction, SalAdvDeduction, ProfTax, SalaryToPay, SalaryPaid FROM SalarySlipQuery</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="EmpID" DataSetColumn="EmpID" />
+              <Mapping SourceColumn="EmpName" DataSetColumn="EmpName" />
+              <Mapping SourceColumn="PayMonth" DataSetColumn="PayMonth" />
+              <Mapping SourceColumn="Present" DataSetColumn="Present" />
+              <Mapping SourceColumn="Absent" DataSetColumn="Absent" />
+              <Mapping SourceColumn="OvertimeHours" DataSetColumn="OvertimeHours" />
+              <Mapping SourceColumn="OvertimeDays" DataSetColumn="OvertimeDays" />
+              <Mapping SourceColumn="TotalDays" DataSetColumn="TotalDays" />
+              <Mapping SourceColumn="NumDaysInMonth" DataSetColumn="NumDaysInMonth" />
+              <Mapping SourceColumn="Pay" DataSetColumn="Pay" />
+              <Mapping SourceColumn="AttdBonus" DataSetColumn="AttdBonus" />
+              <Mapping SourceColumn="NightShiftOrBreakfastAllow" DataSetColumn="NightShiftOrBreakfastAllow" />
+              <Mapping SourceColumn="NetPay" DataSetColumn="NetPay" />
+              <Mapping SourceColumn="ESIDeduction" DataSetColumn="ESIDeduction" />
+              <Mapping SourceColumn="SalAdvDeduction" DataSetColumn="SalAdvDeduction" />
+              <Mapping SourceColumn="ProfTax" DataSetColumn="ProfTax" />
+              <Mapping SourceColumn="SalaryToPay" DataSetColumn="SalaryToPay" />
+              <Mapping SourceColumn="SalaryPaid" DataSetColumn="SalaryPaid" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -831,6 +864,48 @@ FROM            (EmployeeMaster INNER JOIN
                 </xs:simpleType>
               </xs:element>
               <xs:element name="BasicSalary" msprop:Generator_ColumnVarNameInTable="columnBasicSalary" msprop:Generator_ColumnPropNameInRow="BasicSalary" msprop:Generator_ColumnPropNameInTable="BasicSalaryColumn" msprop:Generator_UserColumnName="BasicSalary" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SalarySlipQuery" msprop:Generator_TableClassName="SalarySlipQueryDataTable" msprop:Generator_TableVarName="tableSalarySlipQuery" msprop:Generator_TablePropName="SalarySlipQuery" msprop:Generator_RowDeletingName="SalarySlipQueryRowDeleting" msprop:Generator_RowChangingName="SalarySlipQueryRowChanging" msprop:Generator_RowEvHandlerName="SalarySlipQueryRowChangeEventHandler" msprop:Generator_RowDeletedName="SalarySlipQueryRowDeleted" msprop:Generator_UserTableName="SalarySlipQuery" msprop:Generator_RowChangedName="SalarySlipQueryRowChanged" msprop:Generator_RowEvArgName="SalarySlipQueryRowChangeEvent" msprop:Generator_RowClassName="SalarySlipQueryRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EmpID" msprop:Generator_ColumnVarNameInTable="columnEmpID" msprop:Generator_ColumnPropNameInRow="EmpID" msprop:Generator_ColumnPropNameInTable="EmpIDColumn" msprop:Generator_UserColumnName="EmpID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EmpName" msprop:Generator_ColumnVarNameInTable="columnEmpName" msprop:Generator_ColumnPropNameInRow="EmpName" msprop:Generator_ColumnPropNameInTable="EmpNameColumn" msprop:Generator_UserColumnName="EmpName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PayMonth" msprop:Generator_ColumnVarNameInTable="columnPayMonth" msprop:Generator_ColumnPropNameInRow="PayMonth" msprop:Generator_ColumnPropNameInTable="PayMonthColumn" msprop:Generator_UserColumnName="PayMonth" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Present" msprop:Generator_ColumnVarNameInTable="columnPresent" msprop:Generator_ColumnPropNameInRow="Present" msprop:Generator_ColumnPropNameInTable="PresentColumn" msprop:Generator_UserColumnName="Present" type="xs:int" minOccurs="0" />
+              <xs:element name="Absent" msprop:Generator_ColumnVarNameInTable="columnAbsent" msprop:Generator_ColumnPropNameInRow="Absent" msprop:Generator_ColumnPropNameInTable="AbsentColumn" msprop:Generator_UserColumnName="Absent" type="xs:int" minOccurs="0" />
+              <xs:element name="OvertimeHours" msprop:Generator_ColumnVarNameInTable="columnOvertimeHours" msprop:Generator_ColumnPropNameInRow="OvertimeHours" msprop:Generator_ColumnPropNameInTable="OvertimeHoursColumn" msprop:Generator_UserColumnName="OvertimeHours" type="xs:double" minOccurs="0" />
+              <xs:element name="OvertimeDays" msprop:Generator_ColumnVarNameInTable="columnOvertimeDays" msprop:Generator_ColumnPropNameInRow="OvertimeDays" msprop:Generator_ColumnPropNameInTable="OvertimeDaysColumn" msprop:Generator_UserColumnName="OvertimeDays" type="xs:double" minOccurs="0" />
+              <xs:element name="TotalDays" msprop:Generator_ColumnVarNameInTable="columnTotalDays" msprop:Generator_ColumnPropNameInRow="TotalDays" msprop:Generator_ColumnPropNameInTable="TotalDaysColumn" msprop:Generator_UserColumnName="TotalDays" type="xs:double" minOccurs="0" />
+              <xs:element name="NumDaysInMonth" msprop:Generator_ColumnVarNameInTable="columnNumDaysInMonth" msprop:Generator_ColumnPropNameInRow="NumDaysInMonth" msprop:Generator_ColumnPropNameInTable="NumDaysInMonthColumn" msprop:Generator_UserColumnName="NumDaysInMonth" type="xs:int" minOccurs="0" />
+              <xs:element name="Pay" msprop:Generator_ColumnVarNameInTable="columnPay" msprop:Generator_ColumnPropNameInRow="Pay" msprop:Generator_ColumnPropNameInTable="PayColumn" msprop:Generator_UserColumnName="Pay" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AttdBonus" msprop:Generator_ColumnVarNameInTable="columnAttdBonus" msprop:Generator_ColumnPropNameInRow="AttdBonus" msprop:Generator_ColumnPropNameInTable="AttdBonusColumn" msprop:Generator_UserColumnName="AttdBonus" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NightShiftOrBreakfastAllow" msprop:Generator_ColumnVarNameInTable="columnNightShiftOrBreakfastAllow" msprop:Generator_ColumnPropNameInRow="NightShiftOrBreakfastAllow" msprop:Generator_ColumnPropNameInTable="NightShiftOrBreakfastAllowColumn" msprop:Generator_UserColumnName="NightShiftOrBreakfastAllow" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NetPay" msprop:Generator_ColumnVarNameInTable="columnNetPay" msprop:Generator_ColumnPropNameInRow="NetPay" msprop:Generator_ColumnPropNameInTable="NetPayColumn" msprop:Generator_UserColumnName="NetPay" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ESIDeduction" msprop:Generator_ColumnVarNameInTable="columnESIDeduction" msprop:Generator_ColumnPropNameInRow="ESIDeduction" msprop:Generator_ColumnPropNameInTable="ESIDeductionColumn" msprop:Generator_UserColumnName="ESIDeduction" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SalAdvDeduction" msprop:Generator_ColumnVarNameInTable="columnSalAdvDeduction" msprop:Generator_ColumnPropNameInRow="SalAdvDeduction" msprop:Generator_ColumnPropNameInTable="SalAdvDeductionColumn" msprop:Generator_UserColumnName="SalAdvDeduction" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ProfTax" msprop:Generator_ColumnVarNameInTable="columnProfTax" msprop:Generator_ColumnPropNameInRow="ProfTax" msprop:Generator_ColumnPropNameInTable="ProfTaxColumn" msprop:Generator_UserColumnName="ProfTax" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SalaryToPay" msprop:Generator_ColumnVarNameInTable="columnSalaryToPay" msprop:Generator_ColumnPropNameInRow="SalaryToPay" msprop:Generator_ColumnPropNameInTable="SalaryToPayColumn" msprop:Generator_UserColumnName="SalaryToPay" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SalaryPaid" msprop:Generator_ColumnVarNameInTable="columnSalaryPaid" msprop:Generator_ColumnPropNameInRow="SalaryPaid" msprop:Generator_ColumnPropNameInTable="SalaryPaidColumn" msprop:Generator_UserColumnName="SalaryPaid" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

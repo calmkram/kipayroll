@@ -58,6 +58,8 @@ Partial Class Attendance
         Me.btnViewAttdRecords = New System.Windows.Forms.Button()
         Me.AttendanceTableAdapter = New KIPayroll.KIPayrollDataSetTableAdapters.AttendanceTableAdapter()
         Me.EmployeeMasterTableAdapter = New KIPayroll.KIPayrollDataSetTableAdapters.EmployeeMasterTableAdapter()
+        Me.lblSelectMonth = New System.Windows.Forms.Label()
+        Me.cmbViewMonth = New System.Windows.Forms.ComboBox()
         Me.grpAddAttdRecord.SuspendLayout()
         Me.grpViewAttdRecords.SuspendLayout()
         CType(Me.dgvViewAttdRecords, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -70,7 +72,7 @@ Partial Class Attendance
         Me.cmbEmpName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbEmpName.Enabled = False
         Me.cmbEmpName.FormattingEnabled = True
-        Me.cmbEmpName.Location = New System.Drawing.Point(322, 16)
+        Me.cmbEmpName.Location = New System.Drawing.Point(245, 16)
         Me.cmbEmpName.Name = "cmbEmpName"
         Me.cmbEmpName.Size = New System.Drawing.Size(141, 21)
         Me.cmbEmpName.TabIndex = 0
@@ -78,7 +80,7 @@ Partial Class Attendance
         'lblSelectEmp
         '
         Me.lblSelectEmp.AutoSize = True
-        Me.lblSelectEmp.Location = New System.Drawing.Point(226, 19)
+        Me.lblSelectEmp.Location = New System.Drawing.Point(150, 19)
         Me.lblSelectEmp.Name = "lblSelectEmp"
         Me.lblSelectEmp.Size = New System.Drawing.Size(89, 13)
         Me.lblSelectEmp.TabIndex = 1
@@ -87,7 +89,7 @@ Partial Class Attendance
         'lblEmpID
         '
         Me.lblEmpID.AutoSize = True
-        Me.lblEmpID.Location = New System.Drawing.Point(22, 19)
+        Me.lblEmpID.Location = New System.Drawing.Point(13, 19)
         Me.lblEmpID.Name = "lblEmpID"
         Me.lblEmpID.Size = New System.Drawing.Size(70, 13)
         Me.lblEmpID.TabIndex = 2
@@ -96,9 +98,9 @@ Partial Class Attendance
         'txtEmpID
         '
         Me.txtEmpID.Enabled = False
-        Me.txtEmpID.Location = New System.Drawing.Point(122, 16)
+        Me.txtEmpID.Location = New System.Drawing.Point(89, 16)
         Me.txtEmpID.Name = "txtEmpID"
-        Me.txtEmpID.Size = New System.Drawing.Size(63, 20)
+        Me.txtEmpID.Size = New System.Drawing.Size(49, 20)
         Me.txtEmpID.TabIndex = 3
         '
         'dtpAttdDate
@@ -210,7 +212,7 @@ Partial Class Attendance
         '
         'btnAddNewAttdRec
         '
-        Me.btnAddNewAttdRec.Location = New System.Drawing.Point(22, 309)
+        Me.btnAddNewAttdRec.Location = New System.Drawing.Point(13, 309)
         Me.btnAddNewAttdRec.Name = "btnAddNewAttdRec"
         Me.btnAddNewAttdRec.Size = New System.Drawing.Size(114, 34)
         Me.btnAddNewAttdRec.TabIndex = 16
@@ -239,7 +241,7 @@ Partial Class Attendance
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(388, 309)
+        Me.btnClose.Location = New System.Drawing.Point(373, 309)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 34)
         Me.btnClose.TabIndex = 19
@@ -262,7 +264,7 @@ Partial Class Attendance
         Me.grpAddAttdRecord.Controls.Add(Me.lblOvertimeHrs)
         Me.grpAddAttdRecord.Controls.Add(Me.lblRegHrs)
         Me.grpAddAttdRecord.Controls.Add(Me.txtOvertimeHrs)
-        Me.grpAddAttdRecord.Location = New System.Drawing.Point(25, 49)
+        Me.grpAddAttdRecord.Location = New System.Drawing.Point(13, 49)
         Me.grpAddAttdRecord.Name = "grpAddAttdRecord"
         Me.grpAddAttdRecord.Size = New System.Drawing.Size(438, 242)
         Me.grpAddAttdRecord.TabIndex = 20
@@ -272,9 +274,9 @@ Partial Class Attendance
         'grpViewAttdRecords
         '
         Me.grpViewAttdRecords.Controls.Add(Me.dgvViewAttdRecords)
-        Me.grpViewAttdRecords.Location = New System.Drawing.Point(25, 50)
+        Me.grpViewAttdRecords.Location = New System.Drawing.Point(12, 49)
         Me.grpViewAttdRecords.Name = "grpViewAttdRecords"
-        Me.grpViewAttdRecords.Size = New System.Drawing.Size(529, 242)
+        Me.grpViewAttdRecords.Size = New System.Drawing.Size(586, 242)
         Me.grpViewAttdRecords.TabIndex = 21
         Me.grpViewAttdRecords.TabStop = False
         Me.grpViewAttdRecords.Text = "View Attendance Records"
@@ -294,7 +296,7 @@ Partial Class Attendance
         Me.dgvViewAttdRecords.Location = New System.Drawing.Point(8, 19)
         Me.dgvViewAttdRecords.Name = "dgvViewAttdRecords"
         Me.dgvViewAttdRecords.ReadOnly = True
-        Me.dgvViewAttdRecords.Size = New System.Drawing.Size(512, 212)
+        Me.dgvViewAttdRecords.Size = New System.Drawing.Size(569, 212)
         Me.dgvViewAttdRecords.TabIndex = 0
         '
         'IDDataGridViewTextBoxColumn
@@ -365,7 +367,7 @@ Partial Class Attendance
         '
         'btnViewAttdRecords
         '
-        Me.btnViewAttdRecords.Location = New System.Drawing.Point(201, 309)
+        Me.btnViewAttdRecords.Location = New System.Drawing.Point(192, 309)
         Me.btnViewAttdRecords.Name = "btnViewAttdRecords"
         Me.btnViewAttdRecords.Size = New System.Drawing.Size(114, 34)
         Me.btnViewAttdRecords.TabIndex = 22
@@ -380,11 +382,31 @@ Partial Class Attendance
         '
         Me.EmployeeMasterTableAdapter.ClearBeforeFill = True
         '
+        'lblSelectMonth
+        '
+        Me.lblSelectMonth.AutoSize = True
+        Me.lblSelectMonth.Location = New System.Drawing.Point(401, 19)
+        Me.lblSelectMonth.Name = "lblSelectMonth"
+        Me.lblSelectMonth.Size = New System.Drawing.Size(73, 13)
+        Me.lblSelectMonth.TabIndex = 23
+        Me.lblSelectMonth.Text = "Select Month:"
+        '
+        'cmbViewMonth
+        '
+        Me.cmbViewMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbViewMonth.FormattingEnabled = True
+        Me.cmbViewMonth.Location = New System.Drawing.Point(480, 16)
+        Me.cmbViewMonth.Name = "cmbViewMonth"
+        Me.cmbViewMonth.Size = New System.Drawing.Size(119, 21)
+        Me.cmbViewMonth.TabIndex = 24
+        '
         'Attendance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(568, 368)
+        Me.ClientSize = New System.Drawing.Size(617, 368)
+        Me.Controls.Add(Me.cmbViewMonth)
+        Me.Controls.Add(Me.lblSelectMonth)
         Me.Controls.Add(Me.btnViewAttdRecords)
         Me.Controls.Add(Me.grpViewAttdRecords)
         Me.Controls.Add(Me.grpAddAttdRecord)
@@ -445,4 +467,6 @@ Partial Class Attendance
     Friend WithEvents OvertimeHoursDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents AttendanceBindingSource As BindingSource
     Friend WithEvents btnViewAttdRecords As Button
+    Friend WithEvents lblSelectMonth As Label
+    Friend WithEvents cmbViewMonth As ComboBox
 End Class
