@@ -81,16 +81,19 @@ Public Class AppMainWindow
 
                 ReportsContainer.MdiParent = AppMainWindow.ActiveForm
                 ReportsContainer.SetPayrollFormStatus(True)
+                ReportsContainer.SetLoadSalaryAbstractReport(True)
                 ReportsContainer.SetReportName("Salary Abstract for " & dtPayrollForMonth.ToString("MMMM yyyy"))
                 ReportsContainer.Show()
             Else
                 ReportsContainer.MdiParent = AppMainWindow.ActiveForm
                 ReportsContainer.SetPayrollFormStatus(False)
+                ReportsContainer.SetLoadSalaryAbstractReport(True)
                 ReportsContainer.Show()
             End If
         Else
             ReportsContainer.MdiParent = AppMainWindow.ActiveForm
             ReportsContainer.SetPayrollFormStatus(False)
+            ReportsContainer.SetLoadSalaryAbstractReport(True)
             ReportsContainer.Show()
         End If
     End Sub
@@ -103,7 +106,29 @@ Public Class AppMainWindow
         Me.DateTimeStatusLabel.Text = DateTime.Now.ToString("dd-MMM-yyyy hh:mm:ss tt")
     End Sub
 
-    Private Sub AppMainWindow_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
-        'Me.StatusBarLabel1.Width = Me.Size.Width * 0.835
+    Private Sub PrintSalarySlipsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintSalarySlipsToolStripMenuItem.Click
+        If Application.OpenForms().OfType(Of PayrollCalc).Any Then
+            If PayrollCalc.IsPayrollMonthSelected() Then
+                Dim dtPayrollForMonth As DateTime
+
+                dtPayrollForMonth = DateTime.Parse(PayrollCalc.GetPayrollForMonth())
+
+                ReportsContainer.MdiParent = AppMainWindow.ActiveForm
+                ReportsContainer.SetPayrollFormStatus(True)
+                ReportsContainer.SetLoadSalarySlipReport(True)
+                ReportsContainer.SetReportName("Salary Abstract for " & dtPayrollForMonth.ToString("MMMM yyyy"))
+                ReportsContainer.Show()
+            Else
+                ReportsContainer.MdiParent = AppMainWindow.ActiveForm
+                ReportsContainer.SetPayrollFormStatus(False)
+                ReportsContainer.SetLoadSalarySlipReport(True)
+                ReportsContainer.Show()
+            End If
+        Else
+            ReportsContainer.MdiParent = AppMainWindow.ActiveForm
+            ReportsContainer.SetPayrollFormStatus(False)
+            ReportsContainer.SetLoadSalarySlipReport(True)
+            ReportsContainer.Show()
+        End If
     End Sub
 End Class

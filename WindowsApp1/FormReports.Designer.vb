@@ -25,12 +25,11 @@ Partial Class ReportsContainer
         Me.rptSalaryAbstract = New Microsoft.Reporting.WinForms.ReportViewer()
         Me.SalaryAbstractQueryTableAdapter = New KIPayroll.KIPayrollDataSetTableAdapters.SalaryAbstractQueryTableAdapter()
         Me.KIPayrollDataSet = New KIPayroll.KIPayrollDataSet()
-        Me.btnShowSalaryAbstractReport = New System.Windows.Forms.Button()
+        Me.btnShowReport = New System.Windows.Forms.Button()
         Me.cmbPayrollForMonth = New System.Windows.Forms.ComboBox()
         Me.lblPayrollForMonth = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.cmbEmpName = New System.Windows.Forms.ComboBox()
         Me.rptSalarySlip = New Microsoft.Reporting.WinForms.ReportViewer()
+        Me.SalarySlipQueryTableAdapter = New KIPayroll.KIPayrollDataSetTableAdapters.SalarySlipQueryTableAdapter()
         CType(Me.KIPayrollDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -52,14 +51,14 @@ Partial Class ReportsContainer
         Me.KIPayrollDataSet.DataSetName = "KIPayrollDataSet"
         Me.KIPayrollDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
-        'btnShowSalaryAbstractReport
+        'btnShowReport
         '
-        Me.btnShowSalaryAbstractReport.Location = New System.Drawing.Point(61, 46)
-        Me.btnShowSalaryAbstractReport.Name = "btnShowSalaryAbstractReport"
-        Me.btnShowSalaryAbstractReport.Size = New System.Drawing.Size(157, 23)
-        Me.btnShowSalaryAbstractReport.TabIndex = 6
-        Me.btnShowSalaryAbstractReport.Text = "Show Salary Abstract Report"
-        Me.btnShowSalaryAbstractReport.UseVisualStyleBackColor = True
+        Me.btnShowReport.Location = New System.Drawing.Point(51, 46)
+        Me.btnShowReport.Name = "btnShowReport"
+        Me.btnShowReport.Size = New System.Drawing.Size(157, 23)
+        Me.btnShowReport.TabIndex = 6
+        Me.btnShowReport.Text = "Show Salary Abstract Report"
+        Me.btnShowReport.UseVisualStyleBackColor = True
         '
         'cmbPayrollForMonth
         '
@@ -79,24 +78,6 @@ Partial Class ReportsContainer
         Me.lblPayrollForMonth.TabIndex = 4
         Me.lblPayrollForMonth.Text = "Payroll for Month:"
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(337, 16)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(86, 13)
-        Me.Label1.TabIndex = 7
-        Me.Label1.Text = "Select Employee"
-        '
-        'cmbEmpName
-        '
-        Me.cmbEmpName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbEmpName.FormattingEnabled = True
-        Me.cmbEmpName.Location = New System.Drawing.Point(429, 12)
-        Me.cmbEmpName.Name = "cmbEmpName"
-        Me.cmbEmpName.Size = New System.Drawing.Size(126, 21)
-        Me.cmbEmpName.TabIndex = 8
-        '
         'rptSalarySlip
         '
         Me.rptSalarySlip.LocalReport.ReportEmbeddedResource = "KIPayroll.ReportSalarySlip.rdlc"
@@ -106,15 +87,17 @@ Partial Class ReportsContainer
         Me.rptSalarySlip.Size = New System.Drawing.Size(396, 407)
         Me.rptSalarySlip.TabIndex = 9
         '
+        'SalarySlipQueryTableAdapter
+        '
+        Me.SalarySlipQueryTableAdapter.ClearBeforeFill = True
+        '
         'ReportsContainer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1162, 525)
+        Me.ClientSize = New System.Drawing.Size(277, 82)
         Me.Controls.Add(Me.rptSalarySlip)
-        Me.Controls.Add(Me.cmbEmpName)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.btnShowSalaryAbstractReport)
+        Me.Controls.Add(Me.btnShowReport)
         Me.Controls.Add(Me.cmbPayrollForMonth)
         Me.Controls.Add(Me.lblPayrollForMonth)
         Me.Controls.Add(Me.rptSalaryAbstract)
@@ -129,10 +112,9 @@ Partial Class ReportsContainer
     Friend WithEvents rptSalaryAbstract As Microsoft.Reporting.WinForms.ReportViewer
     Friend WithEvents SalaryAbstractQueryTableAdapter As KIPayrollDataSetTableAdapters.SalaryAbstractQueryTableAdapter
     Friend WithEvents KIPayrollDataSet As KIPayrollDataSet
-    Friend WithEvents btnShowSalaryAbstractReport As Button
+    Friend WithEvents btnShowReport As Button
     Friend WithEvents cmbPayrollForMonth As ComboBox
     Friend WithEvents lblPayrollForMonth As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents cmbEmpName As ComboBox
     Friend WithEvents rptSalarySlip As Microsoft.Reporting.WinForms.ReportViewer
+    Friend WithEvents SalarySlipQueryTableAdapter As KIPayrollDataSetTableAdapters.SalarySlipQueryTableAdapter
 End Class
