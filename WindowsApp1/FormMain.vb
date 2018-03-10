@@ -131,4 +131,9 @@ Public Class AppMainWindow
             ReportsContainer.Show()
         End If
     End Sub
+
+    Private Sub TestDataGridViewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestDataGridViewToolStripMenuItem.Click
+        Form1.MdiParent = AppMainWindow.ActiveForm
+        Form1.Show()
+    End Sub
 End Class

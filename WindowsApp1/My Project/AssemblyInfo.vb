@@ -8,7 +8,7 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Krithika Industries Payroll Application")>
+<Assembly: AssemblyTitle("KI Payroll")>
 <Assembly: AssemblyDescription("This is a basic payroll application that was custom built for Krithika Industries.")>
 <Assembly: AssemblyCompany("Karthik Ramadas")>
 <Assembly: AssemblyProduct("KI Payroll")>

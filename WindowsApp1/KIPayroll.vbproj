@@ -78,12 +78,6 @@
     <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.WebDesign, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WebDesign.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.ReportViewer.WebForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WebForms.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
     </Reference>
@@ -117,6 +111,20 @@
     <Compile Include="AboutBox.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="CalendarColumn.vb" />
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAttendance.Designer.vb">
+      <DependentUpon>FormAttendance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormAttendance.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormReports.Designer.vb">
       <DependentUpon>FormReports.vb</DependentUpon>
     </Compile>
@@ -139,12 +147,6 @@
       <DependentUpon>FormSalaryAdvances.vb</DependentUpon>
     </Compile>
     <Compile Include="FormSalaryAdvances.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormAttendance.Designer.vb">
-      <DependentUpon>FormAttendance.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormAttendance.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMain.vb">
@@ -185,6 +187,12 @@
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAttendance.resx">
+      <DependentUpon>FormAttendance.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormReports.resx">
       <DependentUpon>FormReports.vb</DependentUpon>
     </EmbeddedResource>
@@ -197,9 +205,6 @@
     <EmbeddedResource Include="FormSalaryAdvances.resx">
       <DependentUpon>FormSalaryAdvances.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormAttendance.resx">
-      <DependentUpon>FormAttendance.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
@@ -210,6 +215,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportSalarySlip.rdlc" />
+    <EmbeddedResource Include="ReportSalarySlipOld.rdlc" />
     <EmbeddedResource Include="ReportSalaryAbstract.rdlc" />
     <EmbeddedResource Include="SplashScreen.resx">
       <DependentUpon>SplashScreen.vb</DependentUpon>

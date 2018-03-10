@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class AppMainWindow
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class AppMainWindow
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
@@ -41,6 +41,7 @@ Partial Class AppMainWindow
         Me.SalaryCalculationBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.SalaryCalculationTableAdapter = New KIPayroll.KIPayrollDataSetTableAdapters.SalaryCalculationTableAdapter()
         Me.DTTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.TestDataGridViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         CType(Me.KIPayrollDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -49,7 +50,7 @@ Partial Class AppMainWindow
         '
         'MenuStrip
         '
-        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmpInfoToolStripMenuItem, Me.PayrollToolStripMenuItem, Me.AboutToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmpInfoToolStripMenuItem, Me.PayrollToolStripMenuItem, Me.AboutToolStripMenuItem, Me.ExitToolStripMenuItem, Me.TestDataGridViewToolStripMenuItem})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.Name = "MenuStrip"
         Me.MenuStrip.Size = New System.Drawing.Size(1063, 24)
@@ -139,7 +140,7 @@ Partial Class AppMainWindow
         '
         Me.DateTimeStatusLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.DateTimeStatusLabel.Name = "DateTimeStatusLabel"
-        Me.DateTimeStatusLabel.Size = New System.Drawing.Size(167, 17)
+        Me.DateTimeStatusLabel.Size = New System.Drawing.Size(198, 17)
         Me.DateTimeStatusLabel.Spring = True
         Me.DateTimeStatusLabel.Text = "Date Time Label"
         Me.DateTimeStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -162,6 +163,12 @@ Partial Class AppMainWindow
         '
         Me.DTTimer.Enabled = True
         Me.DTTimer.Interval = 1000
+        '
+        'TestDataGridViewToolStripMenuItem
+        '
+        Me.TestDataGridViewToolStripMenuItem.Name = "TestDataGridViewToolStripMenuItem"
+        Me.TestDataGridViewToolStripMenuItem.Size = New System.Drawing.Size(114, 20)
+        Me.TestDataGridViewToolStripMenuItem.Text = "Test DataGridView"
         '
         'AppMainWindow
         '
@@ -204,4 +211,5 @@ Partial Class AppMainWindow
     Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DateTimeStatusLabel As ToolStripStatusLabel
     Friend WithEvents DTTimer As Timer
+    Friend WithEvents TestDataGridViewToolStripMenuItem As ToolStripMenuItem
 End Class

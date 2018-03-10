@@ -94,15 +94,13 @@ Public Class ReportsContainer
     End Sub
 
     Private Sub SetReportParameters(rptViewer As ReportViewer)
-        Dim parRepName As ReportParameter, parPayMonth As ReportParameter, parNumDaysInMonth As ReportParameter
+        Dim parRepName As ReportParameter, parPayMonth As ReportParameter
 
         parRepName = New ReportParameter("parReportName", p_sReportName)
         rptViewer.LocalReport.SetParameters(parRepName)
         If p_bSalarySlip = True Then
             parPayMonth = New ReportParameter("parPayMonth", DateTime.Parse(cmbPayrollForMonth.SelectedItem.ToString).ToString("MMM-yyyy"))
-            parNumDaysInMonth = New ReportParameter("parNumDaysInMonth", p_dtblSalarySlip.Rows(0)("NumDaysInMonth").ToString)
             rptViewer.LocalReport.SetParameters(parPayMonth)
-            rptViewer.LocalReport.SetParameters(parNumDaysInMonth)
         End If
     End Sub
 
@@ -118,9 +116,7 @@ Public Class ReportsContainer
         Dim rdsSalarySlipDataset As ReportDataSource
 
         p_dtblSalarySlip = Me.KIPayrollDataSet.SalarySlipQuery.CopyToDataTable()
-        p_dtblSalarySlip.DefaultView.RowFilter = "PayMonth='" & sInputPayMonth & "'"
-
-        rdsSalarySlipDataset = New ReportDataSource("EmpSalarySlipDataset", p_dtblSalarySlip.DefaultView)
+        rdsSalarySlipDataset = New ReportDataSource("EmpSalarySlipDataset", p_dtblSalarySlip)
         Me.rptSalarySlip.LocalReport.DataSources.Clear()
         Me.rptSalarySlip.LocalReport.DataSources.Add(rdsSalarySlipDataset)
     End Sub

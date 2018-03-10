@@ -628,6 +628,29 @@ FROM            (EmployeeMaster INNER JOIN
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AttendanceQueryTableAdapter" GeneratorDataComponentClassName="AttendanceQueryTableAdapter" Name="AttendanceQuery" UserDataComponentName="AttendanceQueryTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="KIPayrollConnectionString (MySettings)" DbObjectName="AttendanceQuery" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT ID, EmpID, EmpName, AttdDate, StartTime, EndTime, TotalHours, OvertimeHours FROM AttendanceQuery</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ID" DataSetColumn="ID" />
+              <Mapping SourceColumn="EmpID" DataSetColumn="EmpID" />
+              <Mapping SourceColumn="EmpName" DataSetColumn="EmpName" />
+              <Mapping SourceColumn="AttdDate" DataSetColumn="AttdDate" />
+              <Mapping SourceColumn="StartTime" DataSetColumn="StartTime" />
+              <Mapping SourceColumn="EndTime" DataSetColumn="EndTime" />
+              <Mapping SourceColumn="TotalHours" DataSetColumn="TotalHours" />
+              <Mapping SourceColumn="OvertimeHours" DataSetColumn="OvertimeHours" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -636,7 +659,7 @@ FROM            (EmployeeMaster INNER JOIN
   <xs:element name="KIPayrollDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="KIPayrollDataSet" msprop:Generator_UserDSName="KIPayrollDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Attendance" msprop:Generator_TableClassName="AttendanceDataTable" msprop:Generator_TableVarName="tableAttendance" msprop:Generator_TablePropName="Attendance" msprop:Generator_RowDeletingName="AttendanceRowDeleting" msprop:Generator_RowChangingName="AttendanceRowChanging" msprop:Generator_RowEvHandlerName="AttendanceRowChangeEventHandler" msprop:Generator_RowDeletedName="AttendanceRowDeleted" msprop:Generator_UserTableName="Attendance" msprop:Generator_RowChangedName="AttendanceRowChanged" msprop:Generator_RowEvArgName="AttendanceRowChangeEvent" msprop:Generator_RowClassName="AttendanceRow">
+        <xs:element name="Attendance" msprop:Generator_TableClassName="AttendanceDataTable" msprop:Generator_TableVarName="tableAttendance" msprop:Generator_RowChangedName="AttendanceRowChanged" msprop:Generator_TablePropName="Attendance" msprop:Generator_RowDeletingName="AttendanceRowDeleting" msprop:Generator_RowChangingName="AttendanceRowChanging" msprop:Generator_RowEvHandlerName="AttendanceRowChangeEventHandler" msprop:Generator_RowDeletedName="AttendanceRowDeleted" msprop:Generator_RowClassName="AttendanceRow" msprop:Generator_UserTableName="Attendance" msprop:Generator_RowEvArgName="AttendanceRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -655,7 +678,7 @@ FROM            (EmployeeMaster INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="EmpInfoArchive" msprop:Generator_TableClassName="EmpInfoArchiveDataTable" msprop:Generator_TableVarName="tableEmpInfoArchive" msprop:Generator_TablePropName="EmpInfoArchive" msprop:Generator_RowDeletingName="EmpInfoArchiveRowDeleting" msprop:Generator_RowChangingName="EmpInfoArchiveRowChanging" msprop:Generator_RowEvHandlerName="EmpInfoArchiveRowChangeEventHandler" msprop:Generator_RowDeletedName="EmpInfoArchiveRowDeleted" msprop:Generator_UserTableName="EmpInfoArchive" msprop:Generator_RowChangedName="EmpInfoArchiveRowChanged" msprop:Generator_RowEvArgName="EmpInfoArchiveRowChangeEvent" msprop:Generator_RowClassName="EmpInfoArchiveRow">
+        <xs:element name="EmpInfoArchive" msprop:Generator_TableClassName="EmpInfoArchiveDataTable" msprop:Generator_TableVarName="tableEmpInfoArchive" msprop:Generator_RowChangedName="EmpInfoArchiveRowChanged" msprop:Generator_TablePropName="EmpInfoArchive" msprop:Generator_RowDeletingName="EmpInfoArchiveRowDeleting" msprop:Generator_RowChangingName="EmpInfoArchiveRowChanging" msprop:Generator_RowEvHandlerName="EmpInfoArchiveRowChangeEventHandler" msprop:Generator_RowDeletedName="EmpInfoArchiveRowDeleted" msprop:Generator_RowClassName="EmpInfoArchiveRow" msprop:Generator_UserTableName="EmpInfoArchive" msprop:Generator_RowEvArgName="EmpInfoArchiveRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ArchiveID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnArchiveID" msprop:Generator_ColumnPropNameInRow="ArchiveID" msprop:Generator_ColumnPropNameInTable="ArchiveIDColumn" msprop:Generator_UserColumnName="ArchiveID" type="xs:int" />
@@ -679,7 +702,7 @@ FROM            (EmployeeMaster INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="SalaryAdvances" msprop:Generator_TableClassName="SalaryAdvancesDataTable" msprop:Generator_TableVarName="tableSalaryAdvances" msprop:Generator_TablePropName="SalaryAdvances" msprop:Generator_RowDeletingName="SalaryAdvancesRowDeleting" msprop:Generator_RowChangingName="SalaryAdvancesRowChanging" msprop:Generator_RowEvHandlerName="SalaryAdvancesRowChangeEventHandler" msprop:Generator_RowDeletedName="SalaryAdvancesRowDeleted" msprop:Generator_UserTableName="SalaryAdvances" msprop:Generator_RowChangedName="SalaryAdvancesRowChanged" msprop:Generator_RowEvArgName="SalaryAdvancesRowChangeEvent" msprop:Generator_RowClassName="SalaryAdvancesRow">
+        <xs:element name="SalaryAdvances" msprop:Generator_TableClassName="SalaryAdvancesDataTable" msprop:Generator_TableVarName="tableSalaryAdvances" msprop:Generator_RowChangedName="SalaryAdvancesRowChanged" msprop:Generator_TablePropName="SalaryAdvances" msprop:Generator_RowDeletingName="SalaryAdvancesRowDeleting" msprop:Generator_RowChangingName="SalaryAdvancesRowChanging" msprop:Generator_RowEvHandlerName="SalaryAdvancesRowChangeEventHandler" msprop:Generator_RowDeletedName="SalaryAdvancesRowDeleted" msprop:Generator_RowClassName="SalaryAdvancesRow" msprop:Generator_UserTableName="SalaryAdvances" msprop:Generator_RowEvArgName="SalaryAdvancesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -712,7 +735,7 @@ FROM            (EmployeeMaster INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="SalaryCalculation" msprop:Generator_TableClassName="SalaryCalculationDataTable" msprop:Generator_TableVarName="tableSalaryCalculation" msprop:Generator_TablePropName="SalaryCalculation" msprop:Generator_RowDeletingName="SalaryCalculationRowDeleting" msprop:Generator_RowChangingName="SalaryCalculationRowChanging" msprop:Generator_RowEvHandlerName="SalaryCalculationRowChangeEventHandler" msprop:Generator_RowDeletedName="SalaryCalculationRowDeleted" msprop:Generator_UserTableName="SalaryCalculation" msprop:Generator_RowChangedName="SalaryCalculationRowChanged" msprop:Generator_RowEvArgName="SalaryCalculationRowChangeEvent" msprop:Generator_RowClassName="SalaryCalculationRow">
+        <xs:element name="SalaryCalculation" msprop:Generator_TableClassName="SalaryCalculationDataTable" msprop:Generator_TableVarName="tableSalaryCalculation" msprop:Generator_RowChangedName="SalaryCalculationRowChanged" msprop:Generator_TablePropName="SalaryCalculation" msprop:Generator_RowDeletingName="SalaryCalculationRowDeleting" msprop:Generator_RowChangingName="SalaryCalculationRowChanging" msprop:Generator_RowEvHandlerName="SalaryCalculationRowChangeEventHandler" msprop:Generator_RowDeletedName="SalaryCalculationRowDeleted" msprop:Generator_RowClassName="SalaryCalculationRow" msprop:Generator_UserTableName="SalaryCalculation" msprop:Generator_RowEvArgName="SalaryCalculationRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -749,7 +772,7 @@ FROM            (EmployeeMaster INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="EmployeeMaster" msprop:Generator_TableClassName="EmployeeMasterDataTable" msprop:Generator_TableVarName="tableEmployeeMaster" msprop:Generator_TablePropName="EmployeeMaster" msprop:Generator_RowDeletingName="EmployeeMasterRowDeleting" msprop:Generator_RowChangingName="EmployeeMasterRowChanging" msprop:Generator_RowEvHandlerName="EmployeeMasterRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeMasterRowDeleted" msprop:Generator_UserTableName="EmployeeMaster" msprop:Generator_RowChangedName="EmployeeMasterRowChanged" msprop:Generator_RowEvArgName="EmployeeMasterRowChangeEvent" msprop:Generator_RowClassName="EmployeeMasterRow">
+        <xs:element name="EmployeeMaster" msprop:Generator_TableClassName="EmployeeMasterDataTable" msprop:Generator_TableVarName="tableEmployeeMaster" msprop:Generator_RowChangedName="EmployeeMasterRowChanged" msprop:Generator_TablePropName="EmployeeMaster" msprop:Generator_RowDeletingName="EmployeeMasterRowDeleting" msprop:Generator_RowChangingName="EmployeeMasterRowChanging" msprop:Generator_RowEvHandlerName="EmployeeMasterRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeMasterRowDeleted" msprop:Generator_RowClassName="EmployeeMasterRow" msprop:Generator_UserTableName="EmployeeMaster" msprop:Generator_RowEvArgName="EmployeeMasterRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="EmpID" msprop:Generator_ColumnVarNameInTable="columnEmpID" msprop:Generator_ColumnPropNameInRow="EmpID" msprop:Generator_ColumnPropNameInTable="EmpIDColumn" msprop:Generator_UserColumnName="EmpID">
@@ -803,7 +826,7 @@ FROM            (EmployeeMaster INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="RetrieveEmpName" msprop:Generator_TableClassName="RetrieveEmpNameDataTable" msprop:Generator_TableVarName="tableRetrieveEmpName" msprop:Generator_RowChangedName="RetrieveEmpNameRowChanged" msprop:Generator_TablePropName="RetrieveEmpName" msprop:Generator_RowDeletingName="RetrieveEmpNameRowDeleting" msprop:Generator_RowChangingName="RetrieveEmpNameRowChanging" msprop:Generator_RowEvHandlerName="RetrieveEmpNameRowChangeEventHandler" msprop:Generator_RowDeletedName="RetrieveEmpNameRowDeleted" msprop:Generator_RowClassName="RetrieveEmpNameRow" msprop:Generator_UserTableName="RetrieveEmpName" msprop:Generator_RowEvArgName="RetrieveEmpNameRowChangeEvent">
+        <xs:element name="RetrieveEmpName" msprop:Generator_TableClassName="RetrieveEmpNameDataTable" msprop:Generator_TableVarName="tableRetrieveEmpName" msprop:Generator_TablePropName="RetrieveEmpName" msprop:Generator_RowDeletingName="RetrieveEmpNameRowDeleting" msprop:Generator_RowChangingName="RetrieveEmpNameRowChanging" msprop:Generator_RowEvHandlerName="RetrieveEmpNameRowChangeEventHandler" msprop:Generator_RowDeletedName="RetrieveEmpNameRowDeleted" msprop:Generator_UserTableName="RetrieveEmpName" msprop:Generator_RowChangedName="RetrieveEmpNameRowChanged" msprop:Generator_RowEvArgName="RetrieveEmpNameRowChangeEvent" msprop:Generator_RowClassName="RetrieveEmpNameRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="EmpName" msprop:Generator_ColumnVarNameInTable="columnEmpName" msprop:Generator_ColumnPropNameInRow="EmpName" msprop:Generator_ColumnPropNameInTable="EmpNameColumn" msprop:Generator_UserColumnName="EmpName" minOccurs="0">
@@ -823,7 +846,7 @@ FROM            (EmployeeMaster INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="SalaryAbstractQuery" msprop:Generator_TableClassName="SalaryAbstractQueryDataTable" msprop:Generator_TableVarName="tableSalaryAbstractQuery" msprop:Generator_RowChangedName="SalaryAbstractQueryRowChanged" msprop:Generator_TablePropName="SalaryAbstractQuery" msprop:Generator_RowDeletingName="SalaryAbstractQueryRowDeleting" msprop:Generator_RowChangingName="SalaryAbstractQueryRowChanging" msprop:Generator_RowEvHandlerName="SalaryAbstractQueryRowChangeEventHandler" msprop:Generator_RowDeletedName="SalaryAbstractQueryRowDeleted" msprop:Generator_RowClassName="SalaryAbstractQueryRow" msprop:Generator_UserTableName="SalaryAbstractQuery" msprop:Generator_RowEvArgName="SalaryAbstractQueryRowChangeEvent">
+        <xs:element name="SalaryAbstractQuery" msprop:Generator_TableClassName="SalaryAbstractQueryDataTable" msprop:Generator_TableVarName="tableSalaryAbstractQuery" msprop:Generator_TablePropName="SalaryAbstractQuery" msprop:Generator_RowDeletingName="SalaryAbstractQueryRowDeleting" msprop:Generator_RowChangingName="SalaryAbstractQueryRowChanging" msprop:Generator_RowEvHandlerName="SalaryAbstractQueryRowChangeEventHandler" msprop:Generator_RowDeletedName="SalaryAbstractQueryRowDeleted" msprop:Generator_UserTableName="SalaryAbstractQuery" msprop:Generator_RowChangedName="SalaryAbstractQueryRowChanged" msprop:Generator_RowEvArgName="SalaryAbstractQueryRowChangeEvent" msprop:Generator_RowClassName="SalaryAbstractQueryRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="EmpID" msprop:Generator_ColumnVarNameInTable="columnEmpID" msprop:Generator_ColumnPropNameInRow="EmpID" msprop:Generator_ColumnPropNameInTable="EmpIDColumn" msprop:Generator_UserColumnName="EmpID" minOccurs="0">
@@ -867,7 +890,7 @@ FROM            (EmployeeMaster INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="SalarySlipQuery" msprop:Generator_TableClassName="SalarySlipQueryDataTable" msprop:Generator_TableVarName="tableSalarySlipQuery" msprop:Generator_TablePropName="SalarySlipQuery" msprop:Generator_RowDeletingName="SalarySlipQueryRowDeleting" msprop:Generator_RowChangingName="SalarySlipQueryRowChanging" msprop:Generator_RowEvHandlerName="SalarySlipQueryRowChangeEventHandler" msprop:Generator_RowDeletedName="SalarySlipQueryRowDeleted" msprop:Generator_UserTableName="SalarySlipQuery" msprop:Generator_RowChangedName="SalarySlipQueryRowChanged" msprop:Generator_RowEvArgName="SalarySlipQueryRowChangeEvent" msprop:Generator_RowClassName="SalarySlipQueryRow">
+        <xs:element name="SalarySlipQuery" msprop:Generator_TableClassName="SalarySlipQueryDataTable" msprop:Generator_TableVarName="tableSalarySlipQuery" msprop:Generator_RowChangedName="SalarySlipQueryRowChanged" msprop:Generator_TablePropName="SalarySlipQuery" msprop:Generator_RowDeletingName="SalarySlipQueryRowDeleting" msprop:Generator_RowChangingName="SalarySlipQueryRowChanging" msprop:Generator_RowEvHandlerName="SalarySlipQueryRowChangeEventHandler" msprop:Generator_RowDeletedName="SalarySlipQueryRowDeleted" msprop:Generator_RowClassName="SalarySlipQueryRow" msprop:Generator_UserTableName="SalarySlipQuery" msprop:Generator_RowEvArgName="SalarySlipQueryRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="EmpID" msprop:Generator_ColumnVarNameInTable="columnEmpID" msprop:Generator_ColumnPropNameInRow="EmpID" msprop:Generator_ColumnPropNameInTable="EmpIDColumn" msprop:Generator_UserColumnName="EmpID" minOccurs="0">
@@ -906,6 +929,32 @@ FROM            (EmployeeMaster INNER JOIN
               <xs:element name="ProfTax" msprop:Generator_ColumnVarNameInTable="columnProfTax" msprop:Generator_ColumnPropNameInRow="ProfTax" msprop:Generator_ColumnPropNameInTable="ProfTaxColumn" msprop:Generator_UserColumnName="ProfTax" type="xs:decimal" minOccurs="0" />
               <xs:element name="SalaryToPay" msprop:Generator_ColumnVarNameInTable="columnSalaryToPay" msprop:Generator_ColumnPropNameInRow="SalaryToPay" msprop:Generator_ColumnPropNameInTable="SalaryToPayColumn" msprop:Generator_UserColumnName="SalaryToPay" type="xs:decimal" minOccurs="0" />
               <xs:element name="SalaryPaid" msprop:Generator_ColumnVarNameInTable="columnSalaryPaid" msprop:Generator_ColumnPropNameInRow="SalaryPaid" msprop:Generator_ColumnPropNameInTable="SalaryPaidColumn" msprop:Generator_UserColumnName="SalaryPaid" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AttendanceQuery" msprop:Generator_TableClassName="AttendanceQueryDataTable" msprop:Generator_TableVarName="tableAttendanceQuery" msprop:Generator_TablePropName="AttendanceQuery" msprop:Generator_RowDeletingName="AttendanceQueryRowDeleting" msprop:Generator_RowChangingName="AttendanceQueryRowChanging" msprop:Generator_RowEvHandlerName="AttendanceQueryRowChangeEventHandler" msprop:Generator_RowDeletedName="AttendanceQueryRowDeleted" msprop:Generator_UserTableName="AttendanceQuery" msprop:Generator_RowChangedName="AttendanceQueryRowChanged" msprop:Generator_RowEvArgName="AttendanceQueryRowChangeEvent" msprop:Generator_RowClassName="AttendanceQueryRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" minOccurs="0" />
+              <xs:element name="EmpID" msprop:Generator_ColumnVarNameInTable="columnEmpID" msprop:Generator_ColumnPropNameInRow="EmpID" msprop:Generator_ColumnPropNameInTable="EmpIDColumn" msprop:Generator_UserColumnName="EmpID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EmpName" msprop:Generator_ColumnVarNameInTable="columnEmpName" msprop:Generator_ColumnPropNameInRow="EmpName" msprop:Generator_ColumnPropNameInTable="EmpNameColumn" msprop:Generator_UserColumnName="EmpName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AttdDate" msprop:Generator_ColumnVarNameInTable="columnAttdDate" msprop:Generator_ColumnPropNameInRow="AttdDate" msprop:Generator_ColumnPropNameInTable="AttdDateColumn" msprop:Generator_UserColumnName="AttdDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="StartTime" msprop:Generator_ColumnVarNameInTable="columnStartTime" msprop:Generator_ColumnPropNameInRow="StartTime" msprop:Generator_ColumnPropNameInTable="StartTimeColumn" msprop:Generator_UserColumnName="StartTime" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EndTime" msprop:Generator_ColumnVarNameInTable="columnEndTime" msprop:Generator_ColumnPropNameInRow="EndTime" msprop:Generator_ColumnPropNameInTable="EndTimeColumn" msprop:Generator_UserColumnName="EndTime" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TotalHours" msprop:Generator_ColumnVarNameInTable="columnTotalHours" msprop:Generator_ColumnPropNameInRow="TotalHours" msprop:Generator_ColumnPropNameInTable="TotalHoursColumn" msprop:Generator_UserColumnName="TotalHours" type="xs:double" minOccurs="0" />
+              <xs:element name="OvertimeHours" msprop:Generator_ColumnVarNameInTable="columnOvertimeHours" msprop:Generator_ColumnPropNameInRow="OvertimeHours" msprop:Generator_ColumnPropNameInTable="OvertimeHoursColumn" msprop:Generator_UserColumnName="OvertimeHours" type="xs:double" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
