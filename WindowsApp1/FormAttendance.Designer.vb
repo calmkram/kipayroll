@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Attendance
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,8 +20,9 @@ Partial Class Attendance
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.lblSelectMonth = New System.Windows.Forms.Label()
         Me.cmbViewMonth = New System.Windows.Forms.ComboBox()
         Me.grpAddAttdRecords = New System.Windows.Forms.GroupBox()
@@ -42,9 +43,16 @@ Partial Class Attendance
         Me.KIPayrollDataSet = New KIPayroll.KIPayrollDataSet()
         Me.AttendanceTableAdapter = New KIPayroll.KIPayrollDataSetTableAdapters.AttendanceTableAdapter()
         Me.EmployeeMasterTableAdapter = New KIPayroll.KIPayrollDataSetTableAdapters.EmployeeMasterTableAdapter()
+        Me.grpViewAttdRecords = New System.Windows.Forms.GroupBox()
+        Me.dgvViewAttdRecords = New System.Windows.Forms.DataGridView()
+        Me.AttendanceQueryBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.AttendanceQueryTableAdapter = New KIPayroll.KIPayrollDataSetTableAdapters.AttendanceQueryTableAdapter()
         Me.grpAddAttdRecords.SuspendLayout()
         CType(Me.dgvRecordAttendance, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.KIPayrollDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpViewAttdRecords.SuspendLayout()
+        CType(Me.dgvViewAttdRecords, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AttendanceQueryBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblSelectMonth
@@ -58,6 +66,7 @@ Partial Class Attendance
         '
         'cmbViewMonth
         '
+        Me.cmbViewMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbViewMonth.FormattingEnabled = True
         Me.cmbViewMonth.Location = New System.Drawing.Point(92, 10)
         Me.cmbViewMonth.Name = "cmbViewMonth"
@@ -191,11 +200,40 @@ Partial Class Attendance
         '
         Me.EmployeeMasterTableAdapter.ClearBeforeFill = True
         '
+        'grpViewAttdRecords
+        '
+        Me.grpViewAttdRecords.Controls.Add(Me.dgvViewAttdRecords)
+        Me.grpViewAttdRecords.Location = New System.Drawing.Point(678, 37)
+        Me.grpViewAttdRecords.Name = "grpViewAttdRecords"
+        Me.grpViewAttdRecords.Size = New System.Drawing.Size(640, 340)
+        Me.grpViewAttdRecords.TabIndex = 6
+        Me.grpViewAttdRecords.TabStop = False
+        Me.grpViewAttdRecords.Text = "View Attendance Records"
+        Me.grpViewAttdRecords.Visible = False
+        '
+        'dgvViewAttdRecords
+        '
+        Me.dgvViewAttdRecords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvViewAttdRecords.Location = New System.Drawing.Point(6, 19)
+        Me.dgvViewAttdRecords.Name = "dgvViewAttdRecords"
+        Me.dgvViewAttdRecords.Size = New System.Drawing.Size(628, 314)
+        Me.dgvViewAttdRecords.TabIndex = 0
+        '
+        'AttendanceQueryBindingSource
+        '
+        Me.AttendanceQueryBindingSource.DataMember = "AttendanceQuery"
+        Me.AttendanceQueryBindingSource.DataSource = Me.KIPayrollDataSet
+        '
+        'AttendanceQueryTableAdapter
+        '
+        Me.AttendanceQueryTableAdapter.ClearBeforeFill = True
+        '
         'Attendance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(670, 430)
+        Me.ClientSize = New System.Drawing.Size(669, 429)
+        Me.Controls.Add(Me.grpViewAttdRecords)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnViewAttdRecords)
         Me.Controls.Add(Me.btnRecordAttd)
@@ -207,6 +245,9 @@ Partial Class Attendance
         Me.grpAddAttdRecords.ResumeLayout(False)
         CType(Me.dgvRecordAttendance, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.KIPayrollDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpViewAttdRecords.ResumeLayout(False)
+        CType(Me.dgvViewAttdRecords, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AttendanceQueryBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -232,4 +273,8 @@ Partial Class Attendance
     Friend WithEvents KIPayrollDataSet As KIPayrollDataSet
     Friend WithEvents AttendanceTableAdapter As KIPayrollDataSetTableAdapters.AttendanceTableAdapter
     Friend WithEvents EmployeeMasterTableAdapter As KIPayrollDataSetTableAdapters.EmployeeMasterTableAdapter
+    Friend WithEvents grpViewAttdRecords As GroupBox
+    Friend WithEvents dgvViewAttdRecords As DataGridView
+    Friend WithEvents AttendanceQueryBindingSource As BindingSource
+    Friend WithEvents AttendanceQueryTableAdapter As KIPayrollDataSetTableAdapters.AttendanceQueryTableAdapter
 End Class
