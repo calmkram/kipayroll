@@ -1,11 +1,17 @@
 ﻿Imports System.ComponentModel
 
 Public Class AppMainWindow
-    Public p_sConnectionString As String
+    Friend p_myAppSettings As AppSettings
+    Public Const conAdminMode As String = "Admin Mode"
+    Public Const conUserMode As String = "User Mode"
 
     Private Sub AttendanceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AttendanceToolStripMenuItem.Click
-        Attendance.MdiParent = AppMainWindow.ActiveForm
-        Attendance.Show()
+        If p_myAppSettings.GetAppMode() = conAdminMode Or p_myAppSettings.GetAppMode() = conUserMode Then
+            Attendance.MdiParent = AppMainWindow.ActiveForm
+            Attendance.Show()
+        Else
+            MessageBox.Show("This option is not available in this mode!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        End If
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
@@ -13,29 +19,34 @@ Public Class AppMainWindow
     End Sub
 
     Private Sub EmployeeMasterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmployeeMasterToolStripMenuItem.Click
-        EmpMaster.MdiParent = AppMainWindow.ActiveForm
-        EmpMaster.Show()
+        If p_myAppSettings.GetAppMode() = conAdminMode Then
+            EmpMaster.MdiParent = AppMainWindow.ActiveForm
+            EmpMaster.Show()
+        Else
+            MessageBox.Show("This option is not available in this mode!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        End If
     End Sub
 
     Private Sub SalaryAdvancesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalaryAdvancesToolStripMenuItem.Click
-        SalaryAdvances.MdiParent = AppMainWindow.ActiveForm
-        SalaryAdvances.Show()
+        If p_myAppSettings.GetAppMode() = conAdminMode Then
+            SalaryAdvances.MdiParent = AppMainWindow.ActiveForm
+            SalaryAdvances.Show()
+        Else
+            MessageBox.Show("This option is not available in this mode!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        End If
     End Sub
 
     Private Sub AppMainWindow_Load(sender As Object, e As EventArgs) Handles Me.Load
-        'TODO: This line of code loads data into the 'KIPayrollDataSet.SalaryCalculation' table. You can move, or remove it, as needed.
+        'Load data into the 'KIPayrollDataSet.SalaryCalculation' table
         Me.SalaryCalculationTableAdapter.Fill(Me.KIPayrollDataSet.SalaryCalculation)
-        p_sConnectionString = My.Settings.KIPayrollConnectionString
+
+        'Loading the Global Application Settings
+        p_myAppSettings.SetConnectionString(My.Settings.KIPayrollConnectionString)
+        p_myAppSettings.SetAppMode(My.Settings.AppMode)
 
         Me.DateTimeStatusLabel.Text = DateTime.Now.ToString("dd-MMM-yyyy hh:mm:ss tt")
         Me.DateTimeStatusLabel.BorderStyle = BorderStyle.Fixed3D
-        'Me.StatusBarLabel1.Width = Me.Size.Width * 0.835
         Me.DateTimeStatusLabel.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        'DisablePrintMenuItems()
-    End Sub
-
-    Private Sub AppMainWindow_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        ' add code to copy database from the Debug or Release folders back into the main project folder
     End Sub
 
     Public Function DisablePrintMenuItems()
@@ -51,8 +62,12 @@ Public Class AppMainWindow
     End Function
 
     Private Sub GeneratePayrollToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeneratePayrollToolStripMenuItem.Click
-        PayrollCalc.MdiParent = AppMainWindow.ActiveForm
-        PayrollCalc.Show()
+        If p_myAppSettings.GetAppMode() = conAdminMode Then
+            PayrollCalc.MdiParent = AppMainWindow.ActiveForm
+            PayrollCalc.Show()
+        Else
+            MessageBox.Show("This option is not available in this mode!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        End If
     End Sub
 
     Private Sub AppMainWindow_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -72,18 +87,25 @@ Public Class AppMainWindow
     End Function
 
     Private Sub PrintSalaryAbstractToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintSalaryAbstractToolStripMenuItem.Click
-        If Application.OpenForms().OfType(Of PayrollCalc).Any Then
-            If PayrollCalc.IsPayrollMonthSelected() Then
-                Dim sPayrollForMonth As String, dtPayrollForMonth As DateTime
+        If p_myAppSettings.GetAppMode() = conAdminMode Then
+            If Application.OpenForms().OfType(Of PayrollCalc).Any Then
+                If PayrollCalc.IsPayrollMonthSelected() Then
+                    Dim sPayrollForMonth As String, dtPayrollForMonth As DateTime
 
-                sPayrollForMonth = PayrollCalc.GetPayrollForMonth()
-                dtPayrollForMonth = DateTime.Parse(sPayrollForMonth)
+                    sPayrollForMonth = PayrollCalc.GetPayrollForMonth()
+                    dtPayrollForMonth = DateTime.Parse(sPayrollForMonth)
 
-                ReportsContainer.MdiParent = AppMainWindow.ActiveForm
-                ReportsContainer.SetPayrollFormStatus(True)
-                ReportsContainer.SetLoadSalaryAbstractReport(True)
-                ReportsContainer.SetReportName("Salary Abstract for " & dtPayrollForMonth.ToString("MMMM yyyy"))
-                ReportsContainer.Show()
+                    ReportsContainer.MdiParent = AppMainWindow.ActiveForm
+                    ReportsContainer.SetPayrollFormStatus(True)
+                    ReportsContainer.SetLoadSalaryAbstractReport(True)
+                    ReportsContainer.SetReportName("Salary Abstract for " & dtPayrollForMonth.ToString("MMMM yyyy"))
+                    ReportsContainer.Show()
+                Else
+                    ReportsContainer.MdiParent = AppMainWindow.ActiveForm
+                    ReportsContainer.SetPayrollFormStatus(False)
+                    ReportsContainer.SetLoadSalaryAbstractReport(True)
+                    ReportsContainer.Show()
+                End If
             Else
                 ReportsContainer.MdiParent = AppMainWindow.ActiveForm
                 ReportsContainer.SetPayrollFormStatus(False)
@@ -91,10 +113,7 @@ Public Class AppMainWindow
                 ReportsContainer.Show()
             End If
         Else
-            ReportsContainer.MdiParent = AppMainWindow.ActiveForm
-            ReportsContainer.SetPayrollFormStatus(False)
-            ReportsContainer.SetLoadSalaryAbstractReport(True)
-            ReportsContainer.Show()
+            MessageBox.Show("This option is not available in this mode!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
     End Sub
 
@@ -107,17 +126,24 @@ Public Class AppMainWindow
     End Sub
 
     Private Sub PrintSalarySlipsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintSalarySlipsToolStripMenuItem.Click
-        If Application.OpenForms().OfType(Of PayrollCalc).Any Then
-            If PayrollCalc.IsPayrollMonthSelected() Then
-                Dim dtPayrollForMonth As DateTime
+        If p_myAppSettings.GetAppMode() = conAdminMode Then
+            If Application.OpenForms().OfType(Of PayrollCalc).Any Then
+                If PayrollCalc.IsPayrollMonthSelected() Then
+                    Dim dtPayrollForMonth As DateTime
 
-                dtPayrollForMonth = DateTime.Parse(PayrollCalc.GetPayrollForMonth())
+                    dtPayrollForMonth = DateTime.Parse(PayrollCalc.GetPayrollForMonth())
 
-                ReportsContainer.MdiParent = AppMainWindow.ActiveForm
-                ReportsContainer.SetPayrollFormStatus(True)
-                ReportsContainer.SetLoadSalarySlipReport(True)
-                ReportsContainer.SetReportName("Salary Abstract for " & dtPayrollForMonth.ToString("MMMM yyyy"))
-                ReportsContainer.Show()
+                    ReportsContainer.MdiParent = AppMainWindow.ActiveForm
+                    ReportsContainer.SetPayrollFormStatus(True)
+                    ReportsContainer.SetLoadSalarySlipReport(True)
+                    ReportsContainer.SetReportName("Salary Abstract for " & dtPayrollForMonth.ToString("MMMM yyyy"))
+                    ReportsContainer.Show()
+                Else
+                    ReportsContainer.MdiParent = AppMainWindow.ActiveForm
+                    ReportsContainer.SetPayrollFormStatus(False)
+                    ReportsContainer.SetLoadSalarySlipReport(True)
+                    ReportsContainer.Show()
+                End If
             Else
                 ReportsContainer.MdiParent = AppMainWindow.ActiveForm
                 ReportsContainer.SetPayrollFormStatus(False)
@@ -125,15 +151,7 @@ Public Class AppMainWindow
                 ReportsContainer.Show()
             End If
         Else
-            ReportsContainer.MdiParent = AppMainWindow.ActiveForm
-            ReportsContainer.SetPayrollFormStatus(False)
-            ReportsContainer.SetLoadSalarySlipReport(True)
-            ReportsContainer.Show()
+            MessageBox.Show("This option is not available in this mode!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
-    End Sub
-
-    Private Sub TestDataGridViewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestDataGridViewToolStripMenuItem.Click
-        Form1.MdiParent = AppMainWindow.ActiveForm
-        Form1.Show()
     End Sub
 End Class

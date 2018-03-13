@@ -47,6 +47,9 @@ Partial Class Attendance
         Me.dgvViewAttdRecords = New System.Windows.Forms.DataGridView()
         Me.AttendanceQueryBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.AttendanceQueryTableAdapter = New KIPayroll.KIPayrollDataSetTableAdapters.AttendanceQueryTableAdapter()
+        Me.lblEmpName = New System.Windows.Forms.Label()
+        Me.cmbEmpName = New System.Windows.Forms.ComboBox()
+        Me.btnClearSelections = New System.Windows.Forms.Button()
         Me.grpAddAttdRecords.SuspendLayout()
         CType(Me.dgvRecordAttendance, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.KIPayrollDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -228,11 +231,41 @@ Partial Class Attendance
         '
         Me.AttendanceQueryTableAdapter.ClearBeforeFill = True
         '
+        'lblEmpName
+        '
+        Me.lblEmpName.AutoSize = True
+        Me.lblEmpName.Location = New System.Drawing.Point(265, 13)
+        Me.lblEmpName.Name = "lblEmpName"
+        Me.lblEmpName.Size = New System.Drawing.Size(89, 13)
+        Me.lblEmpName.TabIndex = 7
+        Me.lblEmpName.Text = "Select Employee:"
+        '
+        'cmbEmpName
+        '
+        Me.cmbEmpName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbEmpName.FormattingEnabled = True
+        Me.cmbEmpName.Location = New System.Drawing.Point(360, 10)
+        Me.cmbEmpName.Name = "cmbEmpName"
+        Me.cmbEmpName.Size = New System.Drawing.Size(136, 21)
+        Me.cmbEmpName.TabIndex = 8
+        '
+        'btnClearSelections
+        '
+        Me.btnClearSelections.Location = New System.Drawing.Point(550, 8)
+        Me.btnClearSelections.Name = "btnClearSelections"
+        Me.btnClearSelections.Size = New System.Drawing.Size(100, 23)
+        Me.btnClearSelections.TabIndex = 9
+        Me.btnClearSelections.Text = "Clear Selections"
+        Me.btnClearSelections.UseVisualStyleBackColor = True
+        '
         'Attendance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(669, 429)
+        Me.Controls.Add(Me.btnClearSelections)
+        Me.Controls.Add(Me.cmbEmpName)
+        Me.Controls.Add(Me.lblEmpName)
         Me.Controls.Add(Me.grpViewAttdRecords)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnViewAttdRecords)
@@ -277,4 +310,7 @@ Partial Class Attendance
     Friend WithEvents dgvViewAttdRecords As DataGridView
     Friend WithEvents AttendanceQueryBindingSource As BindingSource
     Friend WithEvents AttendanceQueryTableAdapter As KIPayrollDataSetTableAdapters.AttendanceQueryTableAdapter
+    Friend WithEvents lblEmpName As Label
+    Friend WithEvents cmbEmpName As ComboBox
+    Friend WithEvents btnClearSelections As Button
 End Class

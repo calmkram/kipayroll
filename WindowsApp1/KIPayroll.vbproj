@@ -113,12 +113,7 @@
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="CalendarColumn.vb" />
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form1.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="MyHourGlass.vb" />
     <Compile Include="FormAttendance.Designer.vb">
       <DependentUpon>FormAttendance.vb</DependentUpon>
     </Compile>
@@ -161,6 +156,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>KIPayrollDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="MyCustomModule.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -186,9 +182,6 @@
   <ItemGroup>
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAttendance.resx">
       <DependentUpon>FormAttendance.vb</DependentUpon>

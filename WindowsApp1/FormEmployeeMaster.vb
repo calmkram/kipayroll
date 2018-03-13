@@ -6,6 +6,9 @@
 
         p_iEditState = 1
 
+        lstbxCurrentEmpList.SelectedIndex = -1
+        lstbxCurrentEmpList_SelectedIndexChanged(lstbxCurrentEmpList, e)
+
         ' Retrieve current max emp id and auto calculate new emp ID
         sEmpIDMax = Me.EmployeeMasterTableAdapter.EmpIDMaxQuery()
         sEmpIDTemp = sEmpIDMax.Substring(sEmpIDMax.IndexOf("-") + 1)
@@ -34,7 +37,7 @@
         Me.dtpDOD.ResetText()
         Me.txtBasicSalary.Text = ""
         Me.dtpSalaryEffDate.ResetText()
-        Me.txtEmpStatus.Text = ""
+        Me.txtEmpStatus.Text = "Active"
 
         ' Enable controls for data entry
         Me.txtEmpName.Enabled = True
@@ -49,6 +52,11 @@
         Me.txtEmpStatus.Enabled = False
         Me.btnSave.Visible = True
         Me.btnCancel.Visible = True
+        Me.btnAddEmpInfo.Enabled = False
+        Me.btnModEmpInfo.Enabled = False
+        Me.btnUpdateEmpResign.Enabled = False
+        Me.btnClose.Enabled = False
+        Me.lstbxCurrentEmpList.Enabled = False
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -61,8 +69,28 @@
         Me.txtBasicSalary.Enabled = False
         Me.dtpSalaryEffDate.Enabled = False
         Me.txtEmpStatus.Enabled = False
+
+        Me.txtEmpID.Text = ""
+        Me.txtEmpName.Text = ""
+        Me.txtEmpAddress.Text = ""
+        Me.txtCity.Text = ""
+        Me.txtPincode.Text = ""
+        Me.dtpDOB.ResetText()
+        Me.dtpDOJ.ResetText()
+        Me.txtBasicSalary.Text = ""
+        Me.dtpSalaryEffDate.ResetText()
+        Me.txtEmpStatus.Text = ""
+
+        Me.lstbxCurrentEmpList.SelectedIndex = -1
+        Me.lstbxCurrentEmpList_SelectedIndexChanged(Me.lstbxCurrentEmpList, e)
+
         Me.btnSave.Visible = False
         Me.btnCancel.Visible = False
+        Me.btnAddEmpInfo.Enabled = True
+        Me.btnModEmpInfo.Enabled = True
+        Me.btnUpdateEmpResign.Enabled = True
+        Me.btnClose.Enabled = True
+        Me.lstbxCurrentEmpList.Enabled = True
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -78,6 +106,12 @@
         Me.txtEmpStatus.Enabled = False
         Me.btnSave.Visible = False
         Me.btnCancel.Visible = False
+        Me.lstbxCurrentEmpList.Enabled = False
+        Me.btnAddEmpInfo.Enabled = True
+        Me.btnModEmpInfo.Enabled = True
+        Me.btnUpdateEmpResign.Enabled = True
+        Me.btnClose.Enabled = True
+        Me.lstbxCurrentEmpList.Enabled = True
 
         If p_iEditState = 1 Then          ' if we are adding a new record, save changes to the recordset to add the record
             Me.EmployeeMasterTableAdapter.Insert(txtEmpID.Text, txtEmpName.Text, txtEmpAddress.Text, txtCity.Text, txtPincode.Text, dtpDOB.Value,
@@ -97,6 +131,17 @@
             Me.EmployeeMasterTableAdapter.Update(Me.KIPayrollDataSet.EmployeeMaster)
             Me.KIPayrollDataSet.AcceptChanges()
         End If
+        Me.txtEmpID.Text = ""
+        Me.txtEmpName.Text = ""
+        Me.txtEmpAddress.Text = ""
+        Me.txtCity.Text = ""
+        Me.txtPincode.Text = ""
+        Me.dtpDOB.ResetText()
+        Me.dtpDOJ.ResetText()
+        Me.txtBasicSalary.Text = ""
+        Me.dtpSalaryEffDate.ResetText()
+        Me.txtEmpStatus.Text = ""
+        Me.lstbxCurrentEmpList.SelectedIndex = -1
     End Sub
 
     Private Sub EmpMaster_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -121,7 +166,8 @@
             dtpDOD.Format = DateTimePickerFormat.Custom
             dtpDOD.CustomFormat = "dd-MMM-yyyy"
         End If
-        lstbxCurrentEmpList.SelectedIndex = -1
+        'lstbxCurrentEmpList.SelectedIndex = -1
+        'lstbxCurrentEmpList.SelectedIndex = rCurrentRow.Table.Rows.IndexOf(rCurrentRow)
         btnModEmpInfo.Enabled = False
         btnUpdateEmpResign.Enabled = False
     End Sub
@@ -149,6 +195,11 @@
         Me.txtEmpStatus.Enabled = True
         Me.btnSave.Visible = True
         Me.btnCancel.Visible = True
+        Me.btnAddEmpInfo.Enabled = False
+        Me.btnModEmpInfo.Enabled = False
+        Me.btnUpdateEmpResign.Enabled = False
+        Me.btnClose.Enabled = False
+        Me.lstbxCurrentEmpList.Enabled = False
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -156,22 +207,25 @@
     End Sub
 
     Private Sub lstbxCurrentEmpList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstbxCurrentEmpList.SelectedIndexChanged
-        If lstbxCurrentEmpList.Items.Count > 0 Then
-            Dim rCurrentRow As KIPayrollDataSet.EmployeeMasterRow
-            rCurrentRow = Me.KIPayrollDataSet.EmployeeMaster.FindByEmpID(Me.txtEmpID.Text)
+        If lstbxCurrentEmpList.SelectedIndex > -1 Then
+            Dim rCurrentRow As KIPayrollDataSet.EmployeeMasterRow, sEmpID As String, sEmpName As String
+            Me.KIPayrollDataSet.EmployeeMaster.DefaultView.RowFilter = "EmpName = '" & lstbxCurrentEmpList.GetItemText(lstbxCurrentEmpList.SelectedItem) & "'"
+            If Me.KIPayrollDataSet.EmployeeMaster.DefaultView.Count > 0 Then
+                rCurrentRow = Me.KIPayrollDataSet.EmployeeMaster.FindByEmpID(Me.KIPayrollDataSet.EmployeeMaster.DefaultView.Item(0)("EmpID").ToString)
 
-            If rCurrentRow.EmpStatus = "Active" Then
-                btnModEmpInfo.Enabled = True
-                btnUpdateEmpResign.Enabled = True
+                If rCurrentRow.EmpStatus = "Active" Then
+                    btnModEmpInfo.Enabled = True
+                    btnUpdateEmpResign.Enabled = True
 
-                dtpDOD.Format = DateTimePickerFormat.Custom
-                dtpDOD.CustomFormat = " "
-            ElseIf rCurrentRow.EmpStatus = "Inactive" Then
-                btnModEmpInfo.Enabled = False
-                btnUpdateEmpResign.Enabled = False
+                    dtpDOD.Format = DateTimePickerFormat.Custom
+                    dtpDOD.CustomFormat = " "
+                ElseIf rCurrentRow.EmpStatus = "Inactive" Then
+                    btnModEmpInfo.Enabled = False
+                    btnUpdateEmpResign.Enabled = False
 
-                dtpDOD.Format = DateTimePickerFormat.Custom
-                dtpDOD.CustomFormat = "dd-MMM-yyyy"
+                    dtpDOD.Format = DateTimePickerFormat.Custom
+                    dtpDOD.CustomFormat = "dd-MMM-yyyy"
+                End If
             End If
         End If
     End Sub
@@ -191,6 +245,7 @@
         Me.txtEmpStatus.Enabled = True
         Me.btnSave.Visible = True
         Me.btnCancel.Visible = True
+        Me.lstbxCurrentEmpList.Enabled = False
     End Sub
 
     Private Sub dtpDOD_ValueChanged(sender As Object, e As EventArgs) Handles dtpDOD.ValueChanged

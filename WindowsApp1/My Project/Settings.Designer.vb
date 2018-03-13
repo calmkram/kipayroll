@@ -63,6 +63,15 @@ Namespace My
                 Return CType(Me("KIPayrollConnectionString"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Admin Mode")>  _
+        Public ReadOnly Property AppMode() As String
+            Get
+                Return CType(Me("AppMode"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

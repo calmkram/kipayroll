@@ -56,13 +56,10 @@
 
         iPayrollGenerated = 0
 
-        'TODO: This line of code loads data into the 'KIPayrollDataSet.EmployeeMaster' table. You can move, or remove it, as needed.
+        'Loading data into the required tables.
         Me.EmployeeMasterTableAdapter.Fill(Me.KIPayrollDataSet.EmployeeMaster)
-        'TODO: This line of code loads data into the 'KIPayrollDataSet.Attendance' table. You can move, or remove it, as needed.
         Me.AttendanceTableAdapter.Fill(Me.KIPayrollDataSet.Attendance)
-        'TODO: This line of code loads data into the 'KIPayrollDataSet.SalaryAdvances' table. You can move, or remove it, as needed.
         Me.SalaryAdvancesTableAdapter.Fill(Me.KIPayrollDataSet.SalaryAdvances)
-        'TODO: This line of code loads data into the 'KIPayrollDataSet.SalaryCalculation' table. You can move, or remove it, as needed.
         Me.SalaryCalculationTableAdapter.Fill(Me.KIPayrollDataSet.SalaryCalculation)
 
         cmbPayrollForMonth.Items.Clear()
@@ -82,6 +79,7 @@
         Dim dvEmpMaster As DataView, dvEmpRow As DataRowView, dvSalAdvances() As DataView, dvSalAdvRow As DataRowView
         Dim dtCurrentSelection As DateTime, dtPrevSelection As DateTime
         Dim sRowFilterCriteria As String, dtFirstDay As Date, dtLastDay As Date
+        Dim dNetPay As Double = 0, dESIDedn As Double = 0, dProfTax As Double = 0, dSalToPay As Double = 0, dESIEmplContr As Double = 0
 
         dtCurrentSelection = DateTime.Parse(cmbPayrollForMonth.SelectedItem.ToString)
         dtPrevSelection = dtPayrollForMonth
@@ -253,7 +251,7 @@
                                         .TextAlign = HorizontalAlignment.Right}
             ' execute query to filter and retrieve matching records for breakfast & night shift allowances
             Try
-                Using myConnection As New OleDb.OleDbConnection(AppMainWindow.p_sConnectionString)
+                Using myConnection As New OleDb.OleDbConnection(AppMainWindow.p_myAppSettings.GetConnectionString())
                     myConnection.Open()
 
                     sQuery = "SELECT * FROM ATTENDANCE WHERE TimeValue(StartTime) < #08:00:00 AM# AND EmpID=@EmpID AND (AttdDate >= @FirstDay AND AttdDate <= @LastDay)"
@@ -280,6 +278,7 @@
                         iNSAllowance = dsAttd.Tables("Attendance").Rows.Count
                     End Using
                 End Using
+                dsAttd.Clear()
             Catch localException As Exception
                 MsgBox(localException.ToString)
             End Try
@@ -290,7 +289,6 @@
                                         .Size = New Size(60, 20),
                                         .Location = New Point(iNetPayXLocation, iYLocation),
                                         .TextAlign = HorizontalAlignment.Right}
-            Dim dNetPay As Double = 0
             dNetPay = CDbl(txtGrossPay(iEmpIndex).Text) + CDbl(txtAttdBonus(iEmpIndex).Text) + CDbl(txtNSBFAllow(iEmpIndex).Text)
             txtNetPay(iEmpIndex).Text = FormatCurrency(dNetPay)
             dTotalNetPay += dNetPay
@@ -300,7 +298,6 @@
                                         .Size = New Size(50, 20),
                                         .Location = New Point(iESIDednXLocation, iYLocation),
                                         .TextAlign = HorizontalAlignment.Right}
-            Dim dESIDedn As Double = 0
             If (CDbl(txtNetPay(iEmpIndex).Text) > 0) And (CDbl(txtNetPay(iEmpIndex).Text) < 15000) Then
                 dESIDedn = -(Me.Ceiling(dNetPay * 0.0175))
             Else
@@ -343,7 +340,6 @@
                                         .Size = New Size(50, 20),
                                         .Location = New Point(iProfTaxXLocation, iYLocation),
                                         .TextAlign = HorizontalAlignment.Right}
-            Dim dProfTax As Double = 0
             If (CDbl(txtNetPay(iEmpIndex).Text) > 9999) And (CDbl(txtNetPay(iEmpIndex).Text) < 15000) Then
                 dProfTax = -(150)
             ElseIf (CDbl(txtNetPay(iEmpIndex).Text) > 14999) Then
@@ -359,7 +355,6 @@
                                         .Size = New Size(60, 20),
                                         .Location = New Point(iSalToPayXLocation, iYLocation),
                                         .TextAlign = HorizontalAlignment.Right}
-            Dim dSalToPay As Double = 0
             dSalToPay = (CDbl(txtNetPay(iEmpIndex).Text) + CDbl(txtESIDedn(iEmpIndex).Text) + CDbl(txtSalAdvDedn(iEmpIndex).Text) + CDbl(txtProfTax(iEmpIndex).Text))
             dSalToPay = Math.Round(dSalToPay, 0, MidpointRounding.AwayFromZero)
             txtSalaryToPay(iEmpIndex).Text = FormatCurrency(dSalToPay)
@@ -378,7 +373,6 @@
                                         .Size = New Size(60, 20),
                                         .Location = New Point(iESIEmplContrXLocation, iYLocation),
                                         .TextAlign = HorizontalAlignment.Right}
-            Dim dESIEmplContr As Double = 0
             dESIEmplContr = -(Me.Ceiling(dNetPay * 0.0475, 1))
             If dNetPay <= 0 Then
                 txtESIEmployerContrib(iEmpIndex).Text = FormatCurrency(0)
