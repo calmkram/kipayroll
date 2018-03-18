@@ -1,5 +1,5 @@
 ﻿Public Class EmpMaster
-    Dim p_iEditState As Integer, p_dBasicSalary As Double, p_dtSalEffDate As DateTime
+    Dim p_iEditState As Integer = 0, p_dBasicSalary As Double = 0, p_dtSalEffDate As DateTime
 
     Private Sub btnAddEmpInfo_Click(sender As Object, e As EventArgs) Handles btnAddEmpInfo.Click
         Dim sEmpIDMax As String, iNewEmpID As Integer, iMaxEmpID As Integer, sEmpIDTemp As String, sNewEmpID As String
@@ -37,7 +37,8 @@
         Me.dtpDOD.ResetText()
         Me.txtBasicSalary.Text = ""
         Me.dtpSalaryEffDate.ResetText()
-        Me.txtEmpStatus.Text = "Active"
+        Me.cmbEmpStatus.SelectedIndex = 0
+        Me.txtOutstandingAdv.Text = FormatCurrency(0, 2)
 
         ' Enable controls for data entry
         Me.txtEmpName.Enabled = True
@@ -49,7 +50,7 @@
         Me.dtpDOD.Enabled = False
         Me.txtBasicSalary.Enabled = True
         Me.dtpSalaryEffDate.Enabled = True
-        Me.txtEmpStatus.Enabled = False
+        Me.cmbEmpStatus.Enabled = False
         Me.btnSave.Visible = True
         Me.btnCancel.Visible = True
         Me.btnAddEmpInfo.Enabled = False
@@ -66,23 +67,18 @@
         Me.txtPincode.Enabled = False
         Me.dtpDOB.Enabled = False
         Me.dtpDOJ.Enabled = False
+        Me.dtpDOD.Enabled = False
         Me.txtBasicSalary.Enabled = False
         Me.dtpSalaryEffDate.Enabled = False
-        Me.txtEmpStatus.Enabled = False
+        Me.cmbEmpStatus.Enabled = False
+        Me.txtOutstandingAdv.Enabled = False
 
-        Me.txtEmpID.Text = ""
-        Me.txtEmpName.Text = ""
-        Me.txtEmpAddress.Text = ""
-        Me.txtCity.Text = ""
-        Me.txtPincode.Text = ""
-        Me.dtpDOB.ResetText()
-        Me.dtpDOJ.ResetText()
-        Me.txtBasicSalary.Text = ""
-        Me.dtpSalaryEffDate.ResetText()
-        Me.txtEmpStatus.Text = ""
-
-        Me.lstbxCurrentEmpList.SelectedIndex = -1
-        Me.lstbxCurrentEmpList_SelectedIndexChanged(Me.lstbxCurrentEmpList, e)
+        If lstbxCurrentEmpList.Items.Count > 0 Then
+            Me.lstbxCurrentEmpList.SelectedIndex = 0
+            Me.lstbxCurrentEmpList_SelectedIndexChanged(sender, e)
+        Else
+            Me.lstbxCurrentEmpList.SelectedIndex = -1
+        End If
 
         Me.btnSave.Visible = False
         Me.btnCancel.Visible = False
@@ -91,6 +87,7 @@
         Me.btnUpdateEmpResign.Enabled = True
         Me.btnClose.Enabled = True
         Me.lstbxCurrentEmpList.Enabled = True
+        p_iEditState = 0
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -103,7 +100,8 @@
         Me.dtpDOD.Enabled = False
         Me.txtBasicSalary.Enabled = False
         Me.dtpSalaryEffDate.Enabled = False
-        Me.txtEmpStatus.Enabled = False
+        Me.cmbEmpStatus.Enabled = False
+        Me.txtOutstandingAdv.Enabled = False
         Me.btnSave.Visible = False
         Me.btnCancel.Visible = False
         Me.lstbxCurrentEmpList.Enabled = False
@@ -115,7 +113,7 @@
 
         If p_iEditState = 1 Then          ' if we are adding a new record, save changes to the recordset to add the record
             Me.EmployeeMasterTableAdapter.Insert(txtEmpID.Text, txtEmpName.Text, txtEmpAddress.Text, txtCity.Text, txtPincode.Text, dtpDOB.Value,
-                                                 dtpDOJ.Value, dtpDOD.Value, txtBasicSalary.Text, dtpSalaryEffDate.Value, 0, txtEmpStatus.Text)
+                                                 dtpDOJ.Value, dtpDOD.Value, txtBasicSalary.Text, dtpSalaryEffDate.Value, 0, cmbEmpStatus.SelectedItem.ToString)
             Me.EmployeeMasterTableAdapter.Fill(Me.KIPayrollDataSet.EmployeeMaster)
         ElseIf p_iEditState = 2 Then      ' if we are modifying an existing record, save changes after the edits are completed
             ' Check if the Basic Salary and Salary Effective Dates were changed and if they are, insert an archive record into 'EmpInfoArchive'
@@ -131,17 +129,12 @@
             Me.EmployeeMasterTableAdapter.Update(Me.KIPayrollDataSet.EmployeeMaster)
             Me.KIPayrollDataSet.AcceptChanges()
         End If
-        Me.txtEmpID.Text = ""
-        Me.txtEmpName.Text = ""
-        Me.txtEmpAddress.Text = ""
-        Me.txtCity.Text = ""
-        Me.txtPincode.Text = ""
-        Me.dtpDOB.ResetText()
-        Me.dtpDOJ.ResetText()
-        Me.txtBasicSalary.Text = ""
-        Me.dtpSalaryEffDate.ResetText()
-        Me.txtEmpStatus.Text = ""
-        Me.lstbxCurrentEmpList.SelectedIndex = -1
+        If Me.lstbxCurrentEmpList.Items.Count > 0 Then
+            Me.lstbxCurrentEmpList.SelectedIndex = 0
+        Else
+            Me.lstbxCurrentEmpList.SelectedIndex = -1
+        End If
+        p_iEditState = 0
     End Sub
 
     Private Sub EmpMaster_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -149,16 +142,13 @@
 
         'TODO: This line of code loads data into the 'KIPayrollDataSet.EmployeeMaster' table. You can move, or remove it, as needed.
         Me.EmployeeMasterTableAdapter.Fill(Me.KIPayrollDataSet.EmployeeMaster)
-        'TODO: This line of code loads data into the 'KIPayrollDataSet.EmpInfoArchive' table. You can move, or remove it, as needed.
         Me.EmpInfoArchiveTableAdapter.Fill(Me.KIPayrollDataSet.EmpInfoArchive)
-
-        p_iEditState = 0
 
         ' force the formatting to be set to Currency for the Basic Salary textbox
         txtBasicSalary.DataBindings(0).FormatString = "c"
+        txtOutstandingAdv.DataBindings(0).FormatString = "c"
 
         rCurrentRow = Me.KIPayrollDataSet.EmployeeMaster.FindByEmpID(Me.txtEmpID.Text)
-
         If rCurrentRow.EmpStatus = "Active" Then
             dtpDOD.Format = DateTimePickerFormat.Custom
             dtpDOD.CustomFormat = " "
@@ -166,8 +156,6 @@
             dtpDOD.Format = DateTimePickerFormat.Custom
             dtpDOD.CustomFormat = "dd-MMM-yyyy"
         End If
-        'lstbxCurrentEmpList.SelectedIndex = -1
-        'lstbxCurrentEmpList.SelectedIndex = rCurrentRow.Table.Rows.IndexOf(rCurrentRow)
         btnModEmpInfo.Enabled = False
         btnUpdateEmpResign.Enabled = False
     End Sub
@@ -177,29 +165,31 @@
     End Sub
 
     Private Sub btnModEmpInfo_Click(sender As Object, e As EventArgs) Handles btnModEmpInfo.Click
-        p_iEditState = 2
+        If lstbxCurrentEmpList.SelectedIndex > -1 Then
+            p_iEditState = 2
 
-        ' Save the current Basic Salary and Salary Effective Date before a change is made
-        p_dBasicSalary = txtBasicSalary.Text
-        p_dtSalEffDate = dtpSalaryEffDate.Value
+            ' Save the current Basic Salary and Salary Effective Date before a change is made
+            p_dBasicSalary = txtBasicSalary.Text
+            p_dtSalEffDate = dtpSalaryEffDate.Value
 
-        Me.txtEmpName.Enabled = True
-        Me.txtEmpAddress.Enabled = True
-        Me.txtCity.Enabled = True
-        Me.txtPincode.Enabled = True
-        Me.dtpDOB.Enabled = True
-        Me.dtpDOJ.Enabled = True
-        Me.dtpDOD.Enabled = False
-        Me.txtBasicSalary.Enabled = True
-        Me.dtpSalaryEffDate.Enabled = True
-        Me.txtEmpStatus.Enabled = True
-        Me.btnSave.Visible = True
-        Me.btnCancel.Visible = True
-        Me.btnAddEmpInfo.Enabled = False
-        Me.btnModEmpInfo.Enabled = False
-        Me.btnUpdateEmpResign.Enabled = False
-        Me.btnClose.Enabled = False
-        Me.lstbxCurrentEmpList.Enabled = False
+            Me.txtEmpName.Enabled = True
+            Me.txtEmpAddress.Enabled = True
+            Me.txtCity.Enabled = True
+            Me.txtPincode.Enabled = True
+            Me.dtpDOB.Enabled = True
+            Me.dtpDOJ.Enabled = True
+            Me.dtpDOD.Enabled = False
+            Me.txtBasicSalary.Enabled = True
+            Me.dtpSalaryEffDate.Enabled = True
+            Me.cmbEmpStatus.Enabled = True
+            Me.btnSave.Visible = True
+            Me.btnCancel.Visible = True
+            Me.btnAddEmpInfo.Enabled = False
+            Me.btnModEmpInfo.Enabled = False
+            Me.btnUpdateEmpResign.Enabled = False
+            Me.btnClose.Enabled = False
+            Me.lstbxCurrentEmpList.Enabled = False
+        End If
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -208,7 +198,7 @@
 
     Private Sub lstbxCurrentEmpList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstbxCurrentEmpList.SelectedIndexChanged
         If lstbxCurrentEmpList.SelectedIndex > -1 Then
-            Dim rCurrentRow As KIPayrollDataSet.EmployeeMasterRow, sEmpID As String, sEmpName As String
+            Dim rCurrentRow As KIPayrollDataSet.EmployeeMasterRow
             Me.KIPayrollDataSet.EmployeeMaster.DefaultView.RowFilter = "EmpName = '" & lstbxCurrentEmpList.GetItemText(lstbxCurrentEmpList.SelectedItem) & "'"
             If Me.KIPayrollDataSet.EmployeeMaster.DefaultView.Count > 0 Then
                 rCurrentRow = Me.KIPayrollDataSet.EmployeeMaster.FindByEmpID(Me.KIPayrollDataSet.EmployeeMaster.DefaultView.Item(0)("EmpID").ToString)
@@ -231,21 +221,23 @@
     End Sub
 
     Private Sub btnUpdateEmpResign_Click(sender As Object, e As EventArgs) Handles btnUpdateEmpResign.Click
-        p_iEditState = 2
+        If lstbxCurrentEmpList.SelectedIndex > -1 Then
+            p_iEditState = 2
 
-        Me.txtEmpName.Enabled = False
-        Me.txtEmpAddress.Enabled = False
-        Me.txtCity.Enabled = False
-        Me.txtPincode.Enabled = False
-        Me.dtpDOB.Enabled = False
-        Me.dtpDOJ.Enabled = False
-        Me.dtpDOD.Enabled = True
-        Me.txtBasicSalary.Enabled = False
-        Me.dtpSalaryEffDate.Enabled = False
-        Me.txtEmpStatus.Enabled = True
-        Me.btnSave.Visible = True
-        Me.btnCancel.Visible = True
-        Me.lstbxCurrentEmpList.Enabled = False
+            Me.txtEmpName.Enabled = False
+            Me.txtEmpAddress.Enabled = False
+            Me.txtCity.Enabled = False
+            Me.txtPincode.Enabled = False
+            Me.dtpDOB.Enabled = False
+            Me.dtpDOJ.Enabled = False
+            Me.dtpDOD.Enabled = True
+            Me.txtBasicSalary.Enabled = False
+            Me.dtpSalaryEffDate.Enabled = False
+            Me.cmbEmpStatus.Enabled = True
+            Me.btnSave.Visible = True
+            Me.btnCancel.Visible = True
+            Me.lstbxCurrentEmpList.Enabled = False
+        End If
     End Sub
 
     Private Sub dtpDOD_ValueChanged(sender As Object, e As EventArgs) Handles dtpDOD.ValueChanged

@@ -26,10 +26,10 @@ Partial Class SalaryAdvances
         Me.lstbxEmpList = New System.Windows.Forms.ListBox()
         Me.lblSelectEmp = New System.Windows.Forms.Label()
         Me.grpbxAddSalAdvInfo = New System.Windows.Forms.GroupBox()
+        Me.txtAdvanceAmt = New System.Windows.Forms.TextBox()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.txtPaybackAmt = New System.Windows.Forms.MaskedTextBox()
-        Me.txtAdvanceAmt = New System.Windows.Forms.MaskedTextBox()
         Me.cmbEmpName = New System.Windows.Forms.ComboBox()
         Me.txtAdvStatus = New System.Windows.Forms.TextBox()
         Me.lblAdvStatus = New System.Windows.Forms.Label()
@@ -72,6 +72,7 @@ Partial Class SalaryAdvances
         Me.TableAdapterManager = New KIPayroll.KIPayrollDataSetTableAdapters.TableAdapterManager()
         Me.RetrieveEmpNameBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.RetrieveEmpNameTableAdapter = New KIPayroll.KIPayrollDataSetTableAdapters.RetrieveEmpNameTableAdapter()
+        Me.EmployeeMasterTableAdapter = New KIPayroll.KIPayrollDataSetTableAdapters.EmployeeMasterTableAdapter()
         Me.grpbxAddSalAdvInfo.SuspendLayout()
         Me.grpbxViewSalAdvInfo.SuspendLayout()
         CType(Me.KIPayrollDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -86,7 +87,7 @@ Partial Class SalaryAdvances
         Me.lstbxEmpList.MaximumSize = New System.Drawing.Size(150, 225)
         Me.lstbxEmpList.Name = "lstbxEmpList"
         Me.lstbxEmpList.Size = New System.Drawing.Size(145, 212)
-        Me.lstbxEmpList.TabIndex = 0
+        Me.lstbxEmpList.TabIndex = 1
         '
         'lblSelectEmp
         '
@@ -100,10 +101,10 @@ Partial Class SalaryAdvances
         '
         'grpbxAddSalAdvInfo
         '
+        Me.grpbxAddSalAdvInfo.Controls.Add(Me.txtAdvanceAmt)
         Me.grpbxAddSalAdvInfo.Controls.Add(Me.btnCancel)
         Me.grpbxAddSalAdvInfo.Controls.Add(Me.btnSave)
         Me.grpbxAddSalAdvInfo.Controls.Add(Me.txtPaybackAmt)
-        Me.grpbxAddSalAdvInfo.Controls.Add(Me.txtAdvanceAmt)
         Me.grpbxAddSalAdvInfo.Controls.Add(Me.cmbEmpName)
         Me.grpbxAddSalAdvInfo.Controls.Add(Me.txtAdvStatus)
         Me.grpbxAddSalAdvInfo.Controls.Add(Me.lblAdvStatus)
@@ -124,12 +125,19 @@ Partial Class SalaryAdvances
         Me.grpbxAddSalAdvInfo.Text = "Salary Advance Information:"
         Me.grpbxAddSalAdvInfo.Visible = False
         '
+        'txtAdvanceAmt
+        '
+        Me.txtAdvanceAmt.Location = New System.Drawing.Point(171, 96)
+        Me.txtAdvanceAmt.Name = "txtAdvanceAmt"
+        Me.txtAdvanceAmt.Size = New System.Drawing.Size(77, 20)
+        Me.txtAdvanceAmt.TabIndex = 5
+        '
         'btnCancel
         '
         Me.btnCancel.Location = New System.Drawing.Point(369, 195)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnCancel.TabIndex = 40
+        Me.btnCancel.TabIndex = 10
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
@@ -138,7 +146,7 @@ Partial Class SalaryAdvances
         Me.btnSave.Location = New System.Drawing.Point(369, 164)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
-        Me.btnSave.TabIndex = 39
+        Me.btnSave.TabIndex = 9
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
@@ -148,14 +156,7 @@ Partial Class SalaryAdvances
         Me.txtPaybackAmt.Location = New System.Drawing.Point(171, 164)
         Me.txtPaybackAmt.Name = "txtPaybackAmt"
         Me.txtPaybackAmt.Size = New System.Drawing.Size(77, 20)
-        Me.txtPaybackAmt.TabIndex = 38
-        '
-        'txtAdvanceAmt
-        '
-        Me.txtAdvanceAmt.Location = New System.Drawing.Point(171, 96)
-        Me.txtAdvanceAmt.Name = "txtAdvanceAmt"
-        Me.txtAdvanceAmt.Size = New System.Drawing.Size(77, 20)
-        Me.txtAdvanceAmt.TabIndex = 37
+        Me.txtPaybackAmt.TabIndex = 7
         '
         'cmbEmpName
         '
@@ -164,7 +165,7 @@ Partial Class SalaryAdvances
         Me.cmbEmpName.Location = New System.Drawing.Point(308, 28)
         Me.cmbEmpName.Name = "cmbEmpName"
         Me.cmbEmpName.Size = New System.Drawing.Size(136, 21)
-        Me.cmbEmpName.TabIndex = 36
+        Me.cmbEmpName.TabIndex = 3
         '
         'txtAdvStatus
         '
@@ -172,7 +173,7 @@ Partial Class SalaryAdvances
         Me.txtAdvStatus.Location = New System.Drawing.Point(171, 195)
         Me.txtAdvStatus.Name = "txtAdvStatus"
         Me.txtAdvStatus.Size = New System.Drawing.Size(77, 20)
-        Me.txtAdvStatus.TabIndex = 35
+        Me.txtAdvStatus.TabIndex = 8
         '
         'lblAdvStatus
         '
@@ -200,7 +201,7 @@ Partial Class SalaryAdvances
         Me.cmbPaybackDuration.Location = New System.Drawing.Point(171, 129)
         Me.cmbPaybackDuration.Name = "cmbPaybackDuration"
         Me.cmbPaybackDuration.Size = New System.Drawing.Size(77, 21)
-        Me.cmbPaybackDuration.TabIndex = 9
+        Me.cmbPaybackDuration.TabIndex = 6
         '
         'lblPaybackDur
         '
@@ -260,7 +261,7 @@ Partial Class SalaryAdvances
         Me.txtEmpID.Location = New System.Drawing.Point(94, 28)
         Me.txtEmpID.Name = "txtEmpID"
         Me.txtEmpID.Size = New System.Drawing.Size(76, 20)
-        Me.txtEmpID.TabIndex = 0
+        Me.txtEmpID.TabIndex = 2
         '
         'btnAddSalAdvance
         '
@@ -536,6 +537,10 @@ Partial Class SalaryAdvances
         '
         Me.RetrieveEmpNameTableAdapter.ClearBeforeFill = True
         '
+        'EmployeeMasterTableAdapter
+        '
+        Me.EmployeeMasterTableAdapter.ClearBeforeFill = True
+        '
         'SalaryAdvances
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -608,8 +613,9 @@ Partial Class SalaryAdvances
     Friend WithEvents lblAdvStatus As Label
     Friend WithEvents cmbEmpName As ComboBox
     Friend WithEvents txtPaybackAmt As MaskedTextBox
-    Friend WithEvents txtAdvanceAmt As MaskedTextBox
     Friend WithEvents btnCancel As Button
     Friend WithEvents btnSave As Button
     Friend WithEvents btnCancelView As Button
+    Friend WithEvents EmployeeMasterTableAdapter As KIPayrollDataSetTableAdapters.EmployeeMasterTableAdapter
+    Friend WithEvents txtAdvanceAmt As TextBox
 End Class

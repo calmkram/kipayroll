@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*"
+           Name="Krithika Industries Payroll" 
+           Language="1033"
+           Version="1.0.0.0"
+           Manufacturer="Karthik Ramadas"
+           UpgradeCode="d7ea558b-8ae0-497e-a92a-915f12fff3ce">
+		
+    <Package Id="*"
+             Keywords="Installer"
+             Description="A Windows Installer for the KI Payroll application"
+             Manufacturer="Karthik Ramadas"
+             InstallerVersion="100"
+             Languages="1033"
+             Compressed="yes"
+             InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+
+		<Feature Id="ProductFeature" Title="KI Payroll" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+
+    <!-- <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+    <UIRef Id="WixUI_Mondo"/>
+    <UIRef Id="WixUI_ErrorProgressText"/>
+     -->
+
+    <UI Id="MyWixUI_Mondo">
+      <UIRef Id="WixUI_Mondo" />
+
+      <DialogRef Id="AppInstallModeDlg" />
+
+      <Publish Dialog="LicenseAgreementDlg" Control="Next" Event="NewDialog" Value="AppInstallModeDlg" Order="2">LicenseAccepted = "1"</Publish>
+      <Publish Dialog="SetupTypeDlg" Control="Back" Event="NewDialog" Value="AppInstallModeDlg">1</Publish>
+
+    </UI>
+    <UIRef Id="WixUI_ErrorProgressText" />
+
+    <Property Id="PIDTemplate"><![CDATA[12345<### ###>@@@@@]]></Property>
+    <WixVariable Id="WixUILicenseRtf" Value="..\License.rtf" />
+
+    <!-- <Icon Id="KIPayroll.exe" SourceFile="KIPayroll.exe" /> -->
+    
+    
+    <!-- <WixVariable Id="WixUIBannerBmp" Value="path\banner.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="path\dialog.bmp" />
+    <WixVariable Id="WixUIExclamationIco" Value="path\exclamation.ico" />
+    <WixVariable Id="WixUIInfoIco" Value="path\information.ico" />
+    <WixVariable Id="WixUINewIco" Value="path\new.ico" />
+    <WixVariable Id="WixUIUpIco" Value="path\up.ico" /> 
+    
+    WixUIBannerBmp 493 by 58 pixels, this bitmap will appear at the top of all but the first page of the installer.
+    WixUIDialogBmp 493 by 312 pixels, this bitmap will appear on the first page of the installer.
+    WixUIExclamationIco 32 by 32 pixels, exclamation mark icon.
+    WixUIInfoIco 32 by 32 pixels, information sign icon.
+    WixUINewIco 16 by 16 pixels, new folder icon.
+    WixUIUpIco 16 by 16 pixels, parent folder icon.
+    WixUILicenseRtf Preferably, use a simple editor like Wordpad to create it, or if you insist on overly complex applications like Word, consider resaving the final version from Wordpad, anyway. The RTF will be less complicated and smaller.
+
+    -->
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="KR" Name="Karthik Ramadas">
+          <Directory Id="INSTALLDIR" Name="KI Payroll"/>
+        </Directory>
+      </Directory>
+    </Directory>
+  </Fragment>
+  
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLDIR">
+      <Component Id="MainExecutable" Guid="ccf870d7-d32f-409c-ad9c-43536307ee27">
+        <File Source="$(var.KIPayroll.TargetPath)" />
+      </Component>
+      <Component Id="Database" Guid="df4f4f6b-0262-4921-9451-191989e216b6">
+        <File Source="..\WindowsApp1\bin\Release\KIPayroll.accdb" KeyPath="yes" />
+      </Component>
+      <Component Id="ConfigFiles" Guid="6c46df2d-94ea-40d0-9b78-800157cc2654">
+        <File Source="..\WindowsApp1\App.config" KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

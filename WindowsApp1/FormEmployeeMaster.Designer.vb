@@ -34,7 +34,6 @@ Partial Class EmpMaster
         Me.txtBasicSalary = New System.Windows.Forms.MaskedTextBox()
         Me.dtpDOD = New System.Windows.Forms.DateTimePicker()
         Me.lblDOD = New System.Windows.Forms.Label()
-        Me.txtEmpStatus = New System.Windows.Forms.TextBox()
         Me.lblEmpStatus = New System.Windows.Forms.Label()
         Me.txtEmpID = New System.Windows.Forms.MaskedTextBox()
         Me.btnCancel = New System.Windows.Forms.Button()
@@ -58,6 +57,9 @@ Partial Class EmpMaster
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnUpdateEmpResign = New System.Windows.Forms.Button()
         Me.EmpInfoArchiveTableAdapter = New KIPayroll.KIPayrollDataSetTableAdapters.EmpInfoArchiveTableAdapter()
+        Me.cmbEmpStatus = New System.Windows.Forms.ComboBox()
+        Me.txtOutstandingAdv = New System.Windows.Forms.TextBox()
+        Me.lblOutAdv = New System.Windows.Forms.Label()
         CType(Me.EmployeeMasterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.KIPayrollDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpEmpInfo.SuspendLayout()
@@ -121,10 +123,12 @@ Partial Class EmpMaster
         '
         'grpEmpInfo
         '
+        Me.grpEmpInfo.Controls.Add(Me.lblOutAdv)
+        Me.grpEmpInfo.Controls.Add(Me.txtOutstandingAdv)
+        Me.grpEmpInfo.Controls.Add(Me.cmbEmpStatus)
         Me.grpEmpInfo.Controls.Add(Me.txtBasicSalary)
         Me.grpEmpInfo.Controls.Add(Me.dtpDOD)
         Me.grpEmpInfo.Controls.Add(Me.lblDOD)
-        Me.grpEmpInfo.Controls.Add(Me.txtEmpStatus)
         Me.grpEmpInfo.Controls.Add(Me.lblEmpStatus)
         Me.grpEmpInfo.Controls.Add(Me.txtEmpID)
         Me.grpEmpInfo.Controls.Add(Me.btnCancel)
@@ -178,15 +182,6 @@ Partial Class EmpMaster
         Me.lblDOD.Size = New System.Drawing.Size(95, 13)
         Me.lblDOD.TabIndex = 25
         Me.lblDOD.Text = "Date of Departure:"
-        '
-        'txtEmpStatus
-        '
-        Me.txtEmpStatus.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.EmployeeMasterBindingSource, "EmpStatus", True))
-        Me.txtEmpStatus.Enabled = False
-        Me.txtEmpStatus.Location = New System.Drawing.Point(539, 165)
-        Me.txtEmpStatus.Name = "txtEmpStatus"
-        Me.txtEmpStatus.Size = New System.Drawing.Size(60, 20)
-        Me.txtEmpStatus.TabIndex = 23
         '
         'lblEmpStatus
         '
@@ -356,7 +351,7 @@ Partial Class EmpMaster
         '
         'btnAddEmpInfo
         '
-        Me.btnAddEmpInfo.Location = New System.Drawing.Point(38, 325)
+        Me.btnAddEmpInfo.Location = New System.Drawing.Point(62, 325)
         Me.btnAddEmpInfo.Name = "btnAddEmpInfo"
         Me.btnAddEmpInfo.Size = New System.Drawing.Size(147, 23)
         Me.btnAddEmpInfo.TabIndex = 12
@@ -366,7 +361,7 @@ Partial Class EmpMaster
         'btnModEmpInfo
         '
         Me.btnModEmpInfo.Enabled = False
-        Me.btnModEmpInfo.Location = New System.Drawing.Point(294, 325)
+        Me.btnModEmpInfo.Location = New System.Drawing.Point(318, 325)
         Me.btnModEmpInfo.Name = "btnModEmpInfo"
         Me.btnModEmpInfo.Size = New System.Drawing.Size(147, 23)
         Me.btnModEmpInfo.TabIndex = 13
@@ -379,7 +374,7 @@ Partial Class EmpMaster
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(825, 325)
+        Me.btnClose.Location = New System.Drawing.Point(849, 325)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 14
@@ -388,7 +383,7 @@ Partial Class EmpMaster
         '
         'btnUpdateEmpResign
         '
-        Me.btnUpdateEmpResign.Location = New System.Drawing.Point(550, 325)
+        Me.btnUpdateEmpResign.Location = New System.Drawing.Point(574, 325)
         Me.btnUpdateEmpResign.Name = "btnUpdateEmpResign"
         Me.btnUpdateEmpResign.Size = New System.Drawing.Size(166, 23)
         Me.btnUpdateEmpResign.TabIndex = 15
@@ -398,6 +393,36 @@ Partial Class EmpMaster
         'EmpInfoArchiveTableAdapter
         '
         Me.EmpInfoArchiveTableAdapter.ClearBeforeFill = True
+        '
+        'cmbEmpStatus
+        '
+        Me.cmbEmpStatus.DataBindings.Add(New System.Windows.Forms.Binding("SelectedItem", Me.EmployeeMasterBindingSource, "EmpStatus", True))
+        Me.cmbEmpStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbEmpStatus.Enabled = False
+        Me.cmbEmpStatus.FormattingEnabled = True
+        Me.cmbEmpStatus.Items.AddRange(New Object() {"Active", "Inactive"})
+        Me.cmbEmpStatus.Location = New System.Drawing.Point(538, 165)
+        Me.cmbEmpStatus.Name = "cmbEmpStatus"
+        Me.cmbEmpStatus.Size = New System.Drawing.Size(101, 21)
+        Me.cmbEmpStatus.TabIndex = 27
+        '
+        'txtOutstandingAdv
+        '
+        Me.txtOutstandingAdv.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.EmployeeMasterBindingSource, "PendingAdvBalance", True))
+        Me.txtOutstandingAdv.Enabled = False
+        Me.txtOutstandingAdv.Location = New System.Drawing.Point(539, 202)
+        Me.txtOutstandingAdv.Name = "txtOutstandingAdv"
+        Me.txtOutstandingAdv.Size = New System.Drawing.Size(100, 20)
+        Me.txtOutstandingAdv.TabIndex = 28
+        '
+        'lblOutAdv
+        '
+        Me.lblOutAdv.AutoSize = True
+        Me.lblOutAdv.Location = New System.Drawing.Point(417, 205)
+        Me.lblOutAdv.Name = "lblOutAdv"
+        Me.lblOutAdv.Size = New System.Drawing.Size(113, 13)
+        Me.lblOutAdv.TabIndex = 29
+        Me.lblOutAdv.Text = "Outstanding Advance:"
         '
         'EmpMaster
         '
@@ -454,7 +479,6 @@ Partial Class EmpMaster
     Friend WithEvents EmployeeMasterBindingSource As BindingSource
     Friend WithEvents EmployeeMasterTableAdapter As KIPayrollDataSetTableAdapters.EmployeeMasterTableAdapter
     Friend WithEvents txtEmpID As MaskedTextBox
-    Friend WithEvents txtEmpStatus As TextBox
     Friend WithEvents lblEmpStatus As Label
     Friend WithEvents btnClose As Button
     Friend WithEvents dtpDOD As DateTimePicker
@@ -462,4 +486,7 @@ Partial Class EmpMaster
     Friend WithEvents btnUpdateEmpResign As Button
     Friend WithEvents txtBasicSalary As MaskedTextBox
     Friend WithEvents EmpInfoArchiveTableAdapter As KIPayrollDataSetTableAdapters.EmpInfoArchiveTableAdapter
+    Friend WithEvents cmbEmpStatus As ComboBox
+    Friend WithEvents lblOutAdv As Label
+    Friend WithEvents txtOutstandingAdv As TextBox
 End Class

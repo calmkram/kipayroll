@@ -5,22 +5,33 @@ VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "KIPayroll", "WindowsApp1\KIPayroll.vbproj", "{FAB3976F-85F4-4B7C-9C62-BA434C49D068}"
 EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "PayrollInstaller", "SetupProject1\PayrollInstaller.wixproj", "{0FD600C2-7B60-4B63-BBC7-D1ABDD9AF87D}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SetAppInstallMode", "SetAppInstallMode\SetAppInstallMode.vbproj", "{A9B78E8F-E0AB-40A6-9203-B2B48D3FBCD6}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WindowsApp2", "WindowsApp2\WindowsApp2.vbproj", "{32483F96-B674-4DE2-938E-A1283697C669}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Debug|Default = Debug|Default
 		Release|Any CPU = Release|Any CPU
-		Release|Default = Release|Default
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{FAB3976F-85F4-4B7C-9C62-BA434C49D068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FAB3976F-85F4-4B7C-9C62-BA434C49D068}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FAB3976F-85F4-4B7C-9C62-BA434C49D068}.Debug|Default.ActiveCfg = Debug|Any CPU
-		{FAB3976F-85F4-4B7C-9C62-BA434C49D068}.Debug|Default.Build.0 = Debug|Any CPU
 		{FAB3976F-85F4-4B7C-9C62-BA434C49D068}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAB3976F-85F4-4B7C-9C62-BA434C49D068}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FAB3976F-85F4-4B7C-9C62-BA434C49D068}.Release|Default.ActiveCfg = Release|Any CPU
-		{FAB3976F-85F4-4B7C-9C62-BA434C49D068}.Release|Default.Build.0 = Release|Any CPU
+		{0FD600C2-7B60-4B63-BBC7-D1ABDD9AF87D}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{0FD600C2-7B60-4B63-BBC7-D1ABDD9AF87D}.Release|Any CPU.ActiveCfg = Release|x86
+		{0FD600C2-7B60-4B63-BBC7-D1ABDD9AF87D}.Release|Any CPU.Build.0 = Release|x86
+		{A9B78E8F-E0AB-40A6-9203-B2B48D3FBCD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9B78E8F-E0AB-40A6-9203-B2B48D3FBCD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9B78E8F-E0AB-40A6-9203-B2B48D3FBCD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9B78E8F-E0AB-40A6-9203-B2B48D3FBCD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32483F96-B674-4DE2-938E-A1283697C669}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32483F96-B674-4DE2-938E-A1283697C669}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32483F96-B674-4DE2-938E-A1283697C669}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32483F96-B674-4DE2-938E-A1283697C669}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -31,8 +42,10 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Default = Debug|Default
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
 		Release|Default = Release|Default
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

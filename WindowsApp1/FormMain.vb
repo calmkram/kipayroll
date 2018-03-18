@@ -2,8 +2,8 @@
 
 Public Class AppMainWindow
     Friend p_myAppSettings As AppSettings
-    Public Const conAdminMode As String = "Admin Mode"
-    Public Const conUserMode As String = "User Mode"
+    Public Const conAdminMode As Integer = 1
+    Public Const conUserMode As Integer = 2
 
     Private Sub AttendanceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AttendanceToolStripMenuItem.Click
         If p_myAppSettings.GetAppMode() = conAdminMode Or p_myAppSettings.GetAppMode() = conUserMode Then
@@ -101,16 +101,24 @@ Public Class AppMainWindow
                     ReportsContainer.SetReportName("Salary Abstract for " & dtPayrollForMonth.ToString("MMMM yyyy"))
                     ReportsContainer.Show()
                 Else
+                    If Me.KIPayrollDataSet.SalaryCalculation.Rows.Count > 0 Then
+                        ReportsContainer.MdiParent = AppMainWindow.ActiveForm
+                        ReportsContainer.SetPayrollFormStatus(False)
+                        ReportsContainer.SetLoadSalaryAbstractReport(True)
+                        ReportsContainer.Show()
+                    Else
+                        MessageBox.Show("No payroll has been generated yet and hence, no Salary Abstract is available to be printed!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                    End If
+                End If
+            Else
+                If Me.KIPayrollDataSet.SalaryCalculation.Rows.Count > 0 Then
                     ReportsContainer.MdiParent = AppMainWindow.ActiveForm
                     ReportsContainer.SetPayrollFormStatus(False)
                     ReportsContainer.SetLoadSalaryAbstractReport(True)
                     ReportsContainer.Show()
+                Else
+                    MessageBox.Show("No payroll has been generated yet and hence, no Salary Abstract is available to be printed!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 End If
-            Else
-                ReportsContainer.MdiParent = AppMainWindow.ActiveForm
-                ReportsContainer.SetPayrollFormStatus(False)
-                ReportsContainer.SetLoadSalaryAbstractReport(True)
-                ReportsContainer.Show()
             End If
         Else
             MessageBox.Show("This option is not available in this mode!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -139,16 +147,24 @@ Public Class AppMainWindow
                     ReportsContainer.SetReportName("Salary Abstract for " & dtPayrollForMonth.ToString("MMMM yyyy"))
                     ReportsContainer.Show()
                 Else
+                    If Me.KIPayrollDataSet.SalaryCalculation.Rows.Count > 0 Then
+                        ReportsContainer.MdiParent = AppMainWindow.ActiveForm
+                        ReportsContainer.SetPayrollFormStatus(False)
+                        ReportsContainer.SetLoadSalarySlipReport(True)
+                        ReportsContainer.Show()
+                    Else
+                        MessageBox.Show("No payroll has been generated yet and hence, no Salary Slips can be printed at this time!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                    End If
+                End If
+            Else
+                If Me.KIPayrollDataSet.SalaryCalculation.Rows.Count > 0 Then
                     ReportsContainer.MdiParent = AppMainWindow.ActiveForm
                     ReportsContainer.SetPayrollFormStatus(False)
                     ReportsContainer.SetLoadSalarySlipReport(True)
                     ReportsContainer.Show()
+                Else
+                    MessageBox.Show("No payroll has been generated yet and hence, no Salary Slips can be printed at this time!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 End If
-            Else
-                ReportsContainer.MdiParent = AppMainWindow.ActiveForm
-                ReportsContainer.SetPayrollFormStatus(False)
-                ReportsContainer.SetLoadSalarySlipReport(True)
-                ReportsContainer.Show()
             End If
         Else
             MessageBox.Show("This option is not available in this mode!", My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
