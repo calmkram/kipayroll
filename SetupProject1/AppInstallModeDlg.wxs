@@ -18,8 +18,8 @@
         </Control>
         
         <Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="&amp;Next">
+          <Publish Event="DoAction" Value="SetAppFilePath">1</Publish>
           <Publish Event="DoAction" Value="SetAppModeAction">1</Publish>
-          <Publish Event="SpawnWaitDialog" Value="WaitForCostingDlg">CostingComplete = 1</Publish>
           <Publish Event="NewDialog" Value="SetupTypeDlg">APPINSTMODE</Publish>
         </Control>
         

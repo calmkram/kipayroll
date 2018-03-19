@@ -15,7 +15,8 @@ Public Class CustomActions
         Try
             session.Log("Begin ConfigureAppInstallMode")
 
-            session.Log("Value for AppInstaMode is {0}", session("APPINSTMODE"))
+            session.Log("Value for AppInstallMode is {0}", session("APPINSTMODE"))
+            MsgBox("Value for AppInstallMode is " & session("APPINSTMODE"))
 
             ' Retrieve App Config from the application's app.config file
             session.Log("Value for AppFilePath is {0}", session("APPFILEPATH"))
@@ -41,6 +42,7 @@ Public Class CustomActions
             session.Log("End ConfigureAppInstallMode")
         Catch ex As Exception
             session.Log("ERROR in custom action ConfigureAppInstallMode {0}", ex.ToString)
+            MsgBox("ERROR in custom action ConfigureAppInstall Mode - " & ex.ToString)
             Return ActionResult.Failure
         End Try
 

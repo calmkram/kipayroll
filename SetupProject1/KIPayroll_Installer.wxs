@@ -41,11 +41,12 @@
 
     <WixVariable Id="WixUILicenseRtf" Value="..\License.rtf" />
 
-    <Property Id="APPFILEPATH" Secure="yes" Hidden="yes" Value="$(var.KIPayroll.TargetPath)" />
-    
-    <CustomAction Id='SetAppModeAction' BinaryKey='SetInstallMode' DllEntry='ConfigureAppInstallMode' Execute='immediate'
-                    Return='check'/>
-    <Binary Id='SetInstallMode' SourceFile='..\CustomAction.AppMode\bin\Debug\CustomAction.AppMode.CA.dll'/>
+    <!-- <Property Id="APPFILEPATH" Secure="yes" Hidden="yes" Value="[INSTALLDIR]" /> -->
+    <CustomAction Id="SetAppModeAction" BinaryKey="SetInstallMode" DllEntry="ConfigureAppInstallMode" Execute='immediate'
+                    Return="check"/>
+    <CustomAction Id="SetAppFilePath" Property="APPFILEPATH" Value="[INSTALLDIR]KIPayroll.exe" />
+
+    <Binary Id='SetInstallMode' SourceFile='$(var.CustomAction.AppMode.TargetDir)CustomAction.AppMode.CA.dll'/>
     
     <!-- <Icon Id="KIPayroll.exe" SourceFile="KIPayroll.exe" /> -->
     
@@ -71,7 +72,7 @@
   <Fragment>
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
-        <Directory Id="KR" Name="Karthik Ramadas">
+        <Directory Id="CompanyDirectory" Name="Karthik Ramadas">
           <Directory Id="INSTALLDIR" Name="KI Payroll"/>
         </Directory>
       </Directory>
