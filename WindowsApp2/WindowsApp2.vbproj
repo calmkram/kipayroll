@@ -118,11 +118,5 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SetAppInstallMode\SetAppInstallMode.vbproj">
-      <Project>{a9b78e8f-e0ab-40a6-9203-b2b48d3fbcd6}</Project>
-      <Name>SetAppInstallMode</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

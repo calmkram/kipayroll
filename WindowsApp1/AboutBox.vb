@@ -16,7 +16,11 @@
         Me.LabelVersion.Text = String.Format("Version {0}", My.Application.Info.Version.ToString)
         Me.LabelCopyright.Text = My.Application.Info.Copyright
         Me.LabelCompanyName.Text = My.Application.Info.CompanyName
-        Me.LabelAppMode.Text = My.Settings.AppMode
+        If My.Settings.AppMode = 1 Then
+            Me.LabelAppMode.Text = "Admin Mode"
+        ElseIf My.Settings.AppMode = 2 Then
+            Me.LabelAppMode.Text = "User Mode"
+        End If
         Me.TextBoxDescription.Text = My.Application.Info.Description
     End Sub
 

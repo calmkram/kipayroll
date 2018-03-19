@@ -39,9 +39,14 @@
     </UI>
     <UIRef Id="WixUI_ErrorProgressText" />
 
-    <Property Id="PIDTemplate"><![CDATA[12345<### ###>@@@@@]]></Property>
     <WixVariable Id="WixUILicenseRtf" Value="..\License.rtf" />
 
+    <Property Id="APPFILEPATH" Secure="yes" Hidden="yes" Value="$(var.KIPayroll.TargetPath)" />
+    
+    <CustomAction Id='SetAppModeAction' BinaryKey='SetInstallMode' DllEntry='ConfigureAppInstallMode' Execute='immediate'
+                    Return='check'/>
+    <Binary Id='SetInstallMode' SourceFile='..\CustomAction.AppMode\bin\Debug\CustomAction.AppMode.CA.dll'/>
+    
     <!-- <Icon Id="KIPayroll.exe" SourceFile="KIPayroll.exe" /> -->
     
     
@@ -79,10 +84,10 @@
         <File Source="$(var.KIPayroll.TargetPath)" />
       </Component>
       <Component Id="Database" Guid="df4f4f6b-0262-4921-9451-191989e216b6">
-        <File Source="..\WindowsApp1\bin\Release\KIPayroll.accdb" KeyPath="yes" />
+        <File Source="$(var.KIPayroll.TargetDir)KIPayroll.accdb" KeyPath="yes" />
       </Component>
       <Component Id="ConfigFiles" Guid="6c46df2d-94ea-40d0-9b78-800157cc2654">
-        <File Source="..\WindowsApp1\App.config" KeyPath="yes" />
+        <File Source="$(var.KIPayroll.TargetPath).config" KeyPath="yes" />
       </Component>
     </ComponentGroup>
   </Fragment>
