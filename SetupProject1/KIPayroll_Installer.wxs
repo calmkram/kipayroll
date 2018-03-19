@@ -21,12 +21,9 @@
 
 		<Feature Id="ProductFeature" Title="KI Payroll" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
+      <ComponentRef Id="ApplicationShortcut" />
+      <ComponentRef Id="ApplicationShortcutDesktop" />
 		</Feature>
-
-    <!-- <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
-    <UIRef Id="WixUI_Mondo"/>
-    <UIRef Id="WixUI_ErrorProgressText"/>
-     -->
 
     <UI Id="MyWixUI_Mondo">
       <UIRef Id="WixUI_Mondo" />
@@ -39,17 +36,22 @@
     </UI>
     <UIRef Id="WixUI_ErrorProgressText" />
 
+    <!-- Including my License file to be displayed in the Installer 
+    ** TODO - Need to reduce font size of the text in License.rtf ** -->
     <WixVariable Id="WixUILicenseRtf" Value="..\License.rtf" />
 
-    <!-- <Property Id="APPFILEPATH" Secure="yes" Hidden="yes" Value="[INSTALLDIR]" /> -->
-    <CustomAction Id="SetAppModeAction" BinaryKey="SetInstallMode" DllEntry="ConfigureAppInstallMode" Execute='immediate'
+    <InstallExecuteSequence>
+      <Custom Action="SetAppFilePathAndInstallMode" Before="SetAppModeAction">NOT Installed</Custom>
+      <Custom Action="SetAppModeAction" After="PublishProduct">NOT Installed</Custom>
+    </InstallExecuteSequence>
+
+    <CustomAction Id="SetAppFilePathAndInstallMode" Property="SetAppModeAction" Value="APPFILEPATH=[INSTALLDIR]KIPayroll.exe;APPMODE=[APPINSTMODE]" Execute="immediate" Return="check" />
+    <CustomAction Id="SetAppModeAction" BinaryKey="SetInstallMode" DllEntry="ConfigureAppInstallMode" Execute='deferred' Impersonate='no'
                     Return="check"/>
-    <CustomAction Id="SetAppFilePath" Property="APPFILEPATH" Value="[INSTALLDIR]KIPayroll.exe" />
 
     <Binary Id='SetInstallMode' SourceFile='$(var.CustomAction.AppMode.TargetDir)CustomAction.AppMode.CA.dll'/>
     
     <!-- <Icon Id="KIPayroll.exe" SourceFile="KIPayroll.exe" /> -->
-    
     
     <!-- <WixVariable Id="WixUIBannerBmp" Value="path\banner.bmp" />
     <WixVariable Id="WixUIDialogBmp" Value="path\dialog.bmp" />
@@ -76,9 +78,30 @@
           <Directory Id="INSTALLDIR" Name="KI Payroll"/>
         </Directory>
       </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="KI Payroll" />
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop"></Directory>
     </Directory>
   </Fragment>
   
+  <Fragment>
+    <DirectoryRef Id="ApplicationProgramsFolder">
+     <Component Id="ApplicationShortcut" Guid="5ba55d99-c662-44fa-8e9e-9b179a2e93d1">
+       <Shortcut Id="ApplicationStartMenuShortcut" Name="KI Payroll" Description="A customized payroll application developed specifically for Krithika Industries" Target="[INSTALLDIR]KIPayroll.exe" WorkingDirectory="INSTALLDIR" />
+       <RemoveFolder Id="RemoveApplicationProgramsFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
+       <RegistryValue Root="HKCU" Key="Software\KI Payroll" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+     </Component>
+   </DirectoryRef>
+   <DirectoryRef Id="DesktopFolder">
+     <Component Id="ApplicationShortcutDesktop" Guid="8588e44a-b261-4633-9731-cd3849ad2dad">
+       <Shortcut Id="ApplicationDesktopShortcut" Name="KI Payroll" Description="A customized payroll application developed specifically for Krithika Industries" Target="[INSTALLDIR]KIPayroll.exe" WorkingDirectory="INSTALLDIR" />
+       <RemoveFolder Id="RemoveDesktopFolder" Directory="DesktopFolder" On="uninstall" />
+       <RegistryValue Root="HKCU" Key="Software\KI Payroll" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+     </Component>
+   </DirectoryRef>
+  </Fragment>
+    
   <Fragment>
     <ComponentGroup Id="ProductComponents" Directory="INSTALLDIR">
       <Component Id="MainExecutable" Guid="ccf870d7-d32f-409c-ad9c-43536307ee27">
@@ -89,6 +112,13 @@
       </Component>
       <Component Id="ConfigFiles" Guid="6c46df2d-94ea-40d0-9b78-800157cc2654">
         <File Source="$(var.KIPayroll.TargetPath).config" KeyPath="yes" />
+      </Component>
+      <Component Id="ReportsDependencies" Guid="8d4a9d94-ee7c-427f-959f-096f2007b45b" KeyPath="yes">
+        <File Source="$(var.KIPayroll.TargetDir)Microsoft.ReportViewer.Common.dll" />
+        <File Source="$(var.KIPayroll.TargetDir)Microsoft.ReportViewer.DataVisualization.dll" />
+        <File Source="$(var.KIPayroll.TargetDir)Microsoft.ReportViewer.Design.dll" />
+        <File Source="$(var.KIPayroll.TargetDir)Microsoft.ReportViewer.ProcessingObjectModel.dll" />
+        <File Source="$(var.KIPayroll.TargetDir)Microsoft.ReportViewer.WinForms.dll" />
       </Component>
     </ComponentGroup>
   </Fragment>

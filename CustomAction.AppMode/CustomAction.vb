@@ -11,17 +11,20 @@ Public Class CustomActions
     Public Shared Function ConfigureAppInstallMode(ByVal session As Session) As ActionResult
         Dim bReturnResult As Boolean = False, cAppConfig As Configuration, sAppFilePath As String = ""
         Dim secGroup As ConfigurationSectionGroup, applicationSec As ClientSettingsSection, applicationSettingCol As SettingElementCollection
+        Dim myCustomData As CustomActionData, sAppInstMode As String
 
         Try
             session.Log("Begin ConfigureAppInstallMode")
 
-            session.Log("Value for AppInstallMode is {0}", session("APPINSTMODE"))
-            MsgBox("Value for AppInstallMode is " & session("APPINSTMODE"))
+            myCustomData = session.CustomActionData
+            sAppInstMode = myCustomData.Item("APPMODE").ToString
+            sAppFilePath = myCustomData.Item("APPFILEPATH").ToString
+
+            session.Log("Value for AppInstallMode is {0}", sAppInstMode)
 
             ' Retrieve App Config from the application's app.config file
-            session.Log("Value for AppFilePath is {0}", session("APPFILEPATH"))
-            MsgBox("Value for AppFilePath is " & session("APPFILEPATH"))
-            sAppFilePath = session("APPFILEPATH")
+            session.Log("Value for AppFilePath is {0}", sAppFilePath)
+
             cAppConfig = ConfigurationManager.OpenExeConfiguration(sAppFilePath)
             secGroup = cAppConfig.SectionGroups(CONST_APPSETTINGS)
             applicationSec = CType(secGroup.Sections(CONST_MYAPPSETTINGS), ClientSettingsSection)
@@ -29,9 +32,9 @@ Public Class CustomActions
 
             For Each element As SettingElement In applicationSettingCol
                 If element.Name = CONST_APPMODESETTING Then
-                    element.Value.ValueXml.InnerText = CInt(session("APPINSTMODE"))
+                    element.Value.ValueXml.InnerText = CInt(sAppInstMode)
                     bReturnResult = True
-                    Debug.Print("The new value for " & element.Name & " is " & CInt(session("APPINSTMODE")))
+                    Debug.Print("The new value for " & element.Name & " is " & CInt(sAppInstMode))
                 End If
             Next
             If bReturnResult = True Then
@@ -42,7 +45,6 @@ Public Class CustomActions
             session.Log("End ConfigureAppInstallMode")
         Catch ex As Exception
             session.Log("ERROR in custom action ConfigureAppInstallMode {0}", ex.ToString)
-            MsgBox("ERROR in custom action ConfigureAppInstall Mode - " & ex.ToString)
             Return ActionResult.Failure
         End Try
 
