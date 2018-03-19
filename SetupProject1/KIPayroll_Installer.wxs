@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*"
+	<!-- Defining the Product information for the KI Payroll application -->
+  <Product Id="*"
            Name="Krithika Industries Payroll" 
            Language="1033"
            Version="1.0.0.0"
            Manufacturer="Karthik Ramadas"
            UpgradeCode="d7ea558b-8ae0-497e-a92a-915f12fff3ce">
-		
+
+    <!-- Defining the Package information for the MSI/Windows installer used to install the KI Payroll application -->
     <Package Id="*"
              Keywords="Installer"
              Description="A Windows Installer for the KI Payroll application"
@@ -18,13 +20,18 @@
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
     <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
-
+    
+    <!-- Defining the Product features that need to be installed -->
 		<Feature Id="ProductFeature" Title="KI Payroll" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="ApplicationShortcutDesktop" />
 		</Feature>
 
+    <!-- This section customizes the default WIX Mondo Installer UI workflow to include 
+         a new dialog to capture the Application Install Mode from the user. The AppInstallModeDlg
+         is sequenced after the LicenseAgreementDlg
+         -->
     <UI Id="MyWixUI_Mondo">
       <UIRef Id="WixUI_Mondo" />
 
@@ -40,20 +47,30 @@
     ** TODO - Need to reduce font size of the text in License.rtf ** -->
     <WixVariable Id="WixUILicenseRtf" Value="..\License.rtf" />
 
+    <!-- Adding the Custom Actions to the InstallExecuteSequence after PublishProduct is completed -->
     <InstallExecuteSequence>
+      <!-- This executes the SetAppFilePathandInstallMode CA before SetAppModeAction is executed -->
       <Custom Action="SetAppFilePathAndInstallMode" Before="SetAppModeAction">NOT Installed</Custom>
+      <!-- This executes the SetAppModeAction CA after PublishProduct is executed in the Execute Sequence -->
       <Custom Action="SetAppModeAction" After="PublishProduct">NOT Installed</Custom>
     </InstallExecuteSequence>
 
+    <!-- This Custom Action sets the APPFILEPATH variable to the installed application path including the application filename
+         and the APPMODE variable to the selected App Install Mode by the user in the customized AppInstallModeDlg screen -->
     <CustomAction Id="SetAppFilePathAndInstallMode" Property="SetAppModeAction" Value="APPFILEPATH=[INSTALLDIR]KIPayroll.exe;APPMODE=[APPINSTMODE]" Execute="immediate" Return="check" />
+    <!-- This Custom Action sets the app install mode in the application configuration file (KIPayroll.exe.config)
+         through the CustomAction.AppMode.CA.DLL -->
     <CustomAction Id="SetAppModeAction" BinaryKey="SetInstallMode" DllEntry="ConfigureAppInstallMode" Execute='deferred' Impersonate='no'
                     Return="check"/>
-
+    <!-- Creating a BinaryKey reference to the CustomAction DLL -->
     <Binary Id='SetInstallMode' SourceFile='$(var.CustomAction.AppMode.TargetDir)CustomAction.AppMode.CA.dll'/>
     
+    <!-- ** TODO - Enable this section when I've incorporated the KI logo into
+                   an icon file -->
     <!-- <Icon Id="KIPayroll.exe" SourceFile="KIPayroll.exe" /> -->
     
-    <!-- <WixVariable Id="WixUIBannerBmp" Value="path\banner.bmp" />
+    <!-- Reference to the WixVariables for Banner, Dialog and Icons
+    <WixVariable Id="WixUIBannerBmp" Value="path\banner.bmp" />
     <WixVariable Id="WixUIDialogBmp" Value="path\dialog.bmp" />
     <WixVariable Id="WixUIExclamationIco" Value="path\exclamation.ico" />
     <WixVariable Id="WixUIInfoIco" Value="path\information.ico" />
@@ -67,15 +84,15 @@
     WixUINewIco 16 by 16 pixels, new folder icon.
     WixUIUpIco 16 by 16 pixels, parent folder icon.
     WixUILicenseRtf Preferably, use a simple editor like Wordpad to create it, or if you insist on overly complex applications like Word, consider resaving the final version from Wordpad, anyway. The RTF will be less complicated and smaller.
-
     -->
   </Product>
 
   <Fragment>
+    <!-- Creating the target directory structure for the installation -->
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
         <Directory Id="CompanyDirectory" Name="Karthik Ramadas">
-          <Directory Id="INSTALLDIR" Name="KI Payroll"/>
+          <Directory Id="INSTALLDIR" Name="KI Payroll"/> <!-- This is the target directory where the application and dependent files will be installed -->
         </Directory>
       </Directory>
       <Directory Id="ProgramMenuFolder">
@@ -86,33 +103,40 @@
   </Fragment>
   
   <Fragment>
+    <!-- Creating the Directory references to the application shortcuts to be installed in a StartMenu
+         folder as well as the Desktop -->
     <DirectoryRef Id="ApplicationProgramsFolder">
-     <Component Id="ApplicationShortcut" Guid="5ba55d99-c662-44fa-8e9e-9b179a2e93d1">
-       <Shortcut Id="ApplicationStartMenuShortcut" Name="KI Payroll" Description="A customized payroll application developed specifically for Krithika Industries" Target="[INSTALLDIR]KIPayroll.exe" WorkingDirectory="INSTALLDIR" />
-       <RemoveFolder Id="RemoveApplicationProgramsFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
-       <RegistryValue Root="HKCU" Key="Software\KI Payroll" Name="installed" Type="integer" Value="1" KeyPath="yes" />
-     </Component>
-   </DirectoryRef>
-   <DirectoryRef Id="DesktopFolder">
-     <Component Id="ApplicationShortcutDesktop" Guid="8588e44a-b261-4633-9731-cd3849ad2dad">
-       <Shortcut Id="ApplicationDesktopShortcut" Name="KI Payroll" Description="A customized payroll application developed specifically for Krithika Industries" Target="[INSTALLDIR]KIPayroll.exe" WorkingDirectory="INSTALLDIR" />
-       <RemoveFolder Id="RemoveDesktopFolder" Directory="DesktopFolder" On="uninstall" />
-       <RegistryValue Root="HKCU" Key="Software\KI Payroll" Name="installed" Type="integer" Value="1" KeyPath="yes" />
-     </Component>
-   </DirectoryRef>
+      <Component Id="ApplicationShortcut" Guid="5ba55d99-c662-44fa-8e9e-9b179a2e93d1">
+        <Shortcut Id="ApplicationStartMenuShortcut" Name="KI Payroll" Description="A customized payroll application developed specifically for Krithika Industries" Target="[INSTALLDIR]KIPayroll.exe" WorkingDirectory="INSTALLDIR" />
+        <RemoveFolder Id="RemoveApplicationProgramsFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\KI Payroll" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="ApplicationShortcutDesktop" Guid="8588e44a-b261-4633-9731-cd3849ad2dad">
+        <Shortcut Id="ApplicationDesktopShortcut" Name="KI Payroll" Description="A customized payroll application developed specifically for Krithika Industries" Target="[INSTALLDIR]KIPayroll.exe" WorkingDirectory="INSTALLDIR" />
+        <RemoveFolder Id="RemoveDesktopFolder" Directory="DesktopFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\KI Payroll" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
   </Fragment>
     
   <Fragment>
+    <!-- Defining the Product Components to be included in the installation -->
     <ComponentGroup Id="ProductComponents" Directory="INSTALLDIR">
-      <Component Id="MainExecutable" Guid="ccf870d7-d32f-409c-ad9c-43536307ee27">
+      <!-- Defining the application executable and file source for the installation -->
+      <Component Id="AppExecutable" Guid="ccf870d7-d32f-409c-ad9c-43536307ee27">
         <File Source="$(var.KIPayroll.TargetPath)" />
       </Component>
+      <!-- Defining the application database and file source for the installation -->
       <Component Id="Database" Guid="df4f4f6b-0262-4921-9451-191989e216b6">
         <File Source="$(var.KIPayroll.TargetDir)KIPayroll.accdb" KeyPath="yes" />
       </Component>
+      <!-- Defining the application configuration file and file source for the installation -->
       <Component Id="ConfigFiles" Guid="6c46df2d-94ea-40d0-9b78-800157cc2654">
         <File Source="$(var.KIPayroll.TargetPath).config" KeyPath="yes" />
       </Component>
+      <!-- Defining the application dependency files required for the Reporting functions and file source for the installation -->
       <Component Id="ReportsDependencies" Guid="8d4a9d94-ee7c-427f-959f-096f2007b45b" KeyPath="yes">
         <File Source="$(var.KIPayroll.TargetDir)Microsoft.ReportViewer.Common.dll" />
         <File Source="$(var.KIPayroll.TargetDir)Microsoft.ReportViewer.DataVisualization.dll" />

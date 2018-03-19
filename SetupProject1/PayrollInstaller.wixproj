@@ -6,7 +6,7 @@
     <ProductVersion>3.10</ProductVersion>
     <ProjectGuid>0fd600c2-7b60-4b63-bbc7-d1abdd9af87d</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>KIPayroll Installer</OutputName>
+    <OutputName>KIPayrollInstaller</OutputName>
     <OutputType>Package</OutputType>
     <Name>PayrollInstaller</Name>
   </PropertyGroup>
@@ -18,7 +18,9 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <Cultures>en-US</Cultures>
+    <Cultures>
+    </Cultures>
+    <SuppressPdbOutput>False</SuppressPdbOutput>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AppInstallModeDlg.wxs" />

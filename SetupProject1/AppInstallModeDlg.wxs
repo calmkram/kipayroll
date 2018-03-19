@@ -41,6 +41,6 @@
       </Dialog>
     </UI>
 
-    <Property Id="APPINSTMODE" Secure="yes" Hidden="yes" Value="1" />
+    <Property Id="APPINSTMODE" Value="1" />
   </Fragment>
 </Wix>

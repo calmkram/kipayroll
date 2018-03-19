@@ -33,6 +33,7 @@ Partial Class AboutBox
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AboutBox))
         Me.TableLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
+        Me.LabelAppMode = New System.Windows.Forms.Label()
         Me.LogoPictureBox = New System.Windows.Forms.PictureBox()
         Me.LabelProductName = New System.Windows.Forms.Label()
         Me.LabelVersion = New System.Windows.Forms.Label()
@@ -40,7 +41,6 @@ Partial Class AboutBox
         Me.LabelCompanyName = New System.Windows.Forms.Label()
         Me.TextBoxDescription = New System.Windows.Forms.TextBox()
         Me.OKButton = New System.Windows.Forms.Button()
-        Me.LabelAppMode = New System.Windows.Forms.Label()
         Me.TableLayoutPanel.SuspendLayout()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -72,6 +72,18 @@ Partial Class AboutBox
         Me.TableLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel.Size = New System.Drawing.Size(396, 258)
         Me.TableLayoutPanel.TabIndex = 0
+        '
+        'LabelAppMode
+        '
+        Me.LabelAppMode.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.LabelAppMode.Location = New System.Drawing.Point(136, 100)
+        Me.LabelAppMode.Margin = New System.Windows.Forms.Padding(6, 0, 3, 0)
+        Me.LabelAppMode.MaximumSize = New System.Drawing.Size(0, 17)
+        Me.LabelAppMode.Name = "LabelAppMode"
+        Me.LabelAppMode.Size = New System.Drawing.Size(257, 17)
+        Me.LabelAppMode.TabIndex = 1
+        Me.LabelAppMode.Text = "Application Mode"
+        Me.LabelAppMode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'LogoPictureBox
         '
@@ -156,18 +168,6 @@ Partial Class AboutBox
         Me.OKButton.Size = New System.Drawing.Size(75, 23)
         Me.OKButton.TabIndex = 0
         Me.OKButton.Text = "&OK"
-        '
-        'LabelAppMode
-        '
-        Me.LabelAppMode.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LabelAppMode.Location = New System.Drawing.Point(136, 100)
-        Me.LabelAppMode.Margin = New System.Windows.Forms.Padding(6, 0, 3, 0)
-        Me.LabelAppMode.MaximumSize = New System.Drawing.Size(0, 17)
-        Me.LabelAppMode.Name = "LabelAppMode"
-        Me.LabelAppMode.Size = New System.Drawing.Size(257, 17)
-        Me.LabelAppMode.TabIndex = 1
-        Me.LabelAppMode.Text = "Application Mode"
-        Me.LabelAppMode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'AboutBox
         '
